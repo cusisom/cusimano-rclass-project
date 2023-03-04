@@ -1,27 +1,19 @@
 ---
-title: "An example cleaning script with code pulled in from R script"
-author: "Marguerite Butler"
+title: "Cleaning the Palmer Penguins Raw Data"
+author: "Daniel Cusimano"
 date: "2023-02-15"
 output: html_document
 ---
 
 
-# Processing script (data cleaning) with code pulled in from script
-
-This is essentially the same as the other Quarto file, but now the code is not inside this file. Instead, it is pulled in from the R script using the code chunk labels.
-
-
 # Setup
 
-This needs to run to load the R script so we can include the code chunks below.
-
-Note that you can pull in more than one R script if you want.
 
 ```{r, include=FALSE, cache=FALSE}
-knitr::read_chunk('processingcode.R')
+knitr::read_chunk('Processingcode.R')
 ```
 
-Load needed packages. Instead of having R commands here, we can have R do it by pulls in the code from the R script according to the labels. Here the code chuck below is replaced with the `packages` code chunk from `processingcode.R`. 
+Load needed packages. 
 
 
 ```{r, packages, message = FALSE, warning = FALSE}
@@ -29,19 +21,13 @@ Load needed packages. Instead of having R commands here, we can have R do it by 
 
 # Data loading
 
-Start R in the same directory that this script resides in `project_root/Code/Processing_code`.  If you need to check your working directory, use `getwd()`.
-
-Either restart R in the correct directory, or navigate to it 
-with `setwd(...relative path to the correct directory...)`. 
-
-**NEVER** put a `setwd()` inside your code, it is bad ettiquite as it probably wonʻt work for anyone else. 
 
 ```{r, loaddata}
 ```
 
-# Explore Data
+# Data Under Examination
 
-### There are several ways of looking at the data
+I am working with the Palmer Penguins dataset. After establishing the correct path and working directory, I used skimr to examine the state of the data. For clarity, I have added the data dictionary at the end of this summary. 
 
 ```{r, exploredata}
 ```
@@ -49,122 +35,145 @@ with `setwd(...relative path to the correct directory...)`.
 
 # Cleaning
 
-Inspecting the data, we find some problems that need addressing. 
+Taking a moment to examine the skimr summary, a couple of problems become apparent. Under the character variables, I can see that the number of unique species is wrong (listed as 9 whereas the Palmer Penguins dataset is based on 3) and that the Culmen Length (mm), which should be listed as numeric, is present. This is is where I begin the data cleaning process. 
+
+I started with an examination of species. 
 
 ###  Species names
 
-First, we know that this is a dataset for three species of penguin, but we notice that there are 9 unique species.
+Knowing that the Palmer Penguins set assesses only 3 species, I wanted see why my data lists 9. In calling for the unique variables it is apparent that the discrepancy comes from typos in the data set. 
 
 ```{r, cleandata1}
 ```
 
-Fix all of the errors. 
+To solve this problem I used the gsub() and sub() functions. 
 
-Also, letʻs shorten Species just keeping the three common names "Adelie", "Gentoo", and "Chinstrap" and delete the rest of the Species character string. 
+```{r, cleandata1.2}
+```
+With the typos fixed I decided to shorten the species names to their common names. 
 
-NOTE: Check your work with each change.  Debug as you go, never all at once. Make sure that the code you save in your script works without error. 
+```{r, cleandata1.3}
+```
+### Shortening the Dataset
 
+After a couple rounds of skimr I decided to cut down on some of the unnecessary variables for this analysis. This cleaned things up a bit and saved space. 
 
-### Continuous data
+For this task I first shortened the variable names followed by subsetting out columns that were not needed. I also decided to change Species, Island, and Sex to Factors here instead of later. This not only really cleaned up the data summary but highlighted the misdesignation of Culmen Length as a character value. 
 
-There is an entry for `Culmen Length (mm)` which says "missing" instead of a number or NA. 
-Should we delete this record (and all of the variables)?
-This "missing" entry also turned all culmen length entries into characters instead of numeric.
-That conversion to character also means that our summary function isn't very meaningful.
+```{r, dropcolumns}
+```
 
-So let's fix that first.
+## Continuous data
+### Culmen Length
+
+The next apparent issue is the classification of Culmen Length as a character value. I first examined the Culmen Length dataset to see why this might be listed as such. 
 
 ```{r, cleandata2}
 ```
 
-Notice anything funny? 
+The issue appeared to be the value designated as "missing". This transformed the value (and all others) into character values. The solution was to change "missing" to NA and then coerce all values for Culmen Length to numeric. 
 
-Now we see that there are three penguins with really really long culmens (300+mm) that could be typos. If we don't know, we might need to remove these penguins. But let's suppose that we somehow know that this is because of a misplaced decimal point (for example if we could verify with field records), and letʻs fix this:
 
-```{r, cleandata3.1}
-```
 
-Notice that NAʻs will match the condition `cl>300`, because we donʻt really know, so R returns it to be conservative. We donʻt want NAs, so letʻs exclude them with 
-!is.na()  where the ! is "not" or the opposite of is.na. 
-The logical & which requires both conditions to be true (i.e., I want to be rich AND famous):
-
-```{r, cleandata3.2}
+```{r, cleandata2.2}
 ```
 
 
-Look better?
+When I skimr again it is clear that this value is now classified appropriately. In the data summary, however, something seemed strange about the distribution of values within Culmen Length. I examined this distribution with a histogram and a bivariate plot with Body Mass. 
 
-### Now let's look at body mass.
 
-There are penguins with body mass of <100g when the others are over 3000. 
-Perhaps these are new chicks? But they are supposed to be adults. Letʻs remove them.
+```{r, cleandata2.3}
+```
+There are two noticable issues with the bivariate plot. When examining both plots, it is apparent that there are three major outliers in Culmen Length. Additionally, the bivariate plot shows Body Mass outliers. I tackled the issues with Culmen Length first. In handling the problematic data, I am told that the outliers represent a missed decimal point. Thus, my goal is to remedy the data points instead of removing them. 
+
+```{r, cleandata3}
+```
+Culmen Length looks much better. Next task was Body Mass. 
+
+### Body Mass
 
 ```{r, cleandata4.1}
 ```
 
+There are penguins with body mass of <100g with all others are over 3000g. With no evidence of this being a typo, the best course of action is to remove the values. Given that Mass is the main size variable I needed to also remove any missing values. This simplified the work a bit as I was able to replace the outlier values with NA and then remove all missing values. 
 
-Mass is the main size variable, so we will probably need to remove the individuals with missing masses in order to  be able to analyze the data. 
-
-Note: Some analysis methods can deal with missing values, so it's not always necessary. Or it may be fine to have it in some of the variables but probably not the size variable. 
-This should be adjusted based on your planned analysis approach. 
 
 ```{r, cleandata4.2}
 ```
 
-Does it look better?
 
-### Factors
+# Culmen Depth
 
-We also want to have Species, Sex, and Island coded as a categorical/factor variable:
+The next variable I looked at was Culmen Depth. I start here with a histogram.
 
-```{r, cleandata5}
+
+```{r, Culmendepth}
 ```
 
-# Bivariate Plots
+This doesn't look too bad but I'll plot it with Body Mass to be sure. 
 
-Make bivariate plots for any remaining continous data to ensure there are no further errors. It is a good check on the distribution of the data as well. 
-
-Make histograms or densities of at least mass by discrete category, to check for any potential category errors, extra categories, etc.  
-
-You should look through all of the data, variable by variable, or by pairs of variables.
-
-
-# Finalize your cleaned dataset. 
-
-Drop any variables (columns) that you wonʻt analyze.  If you have extra levels after dropping some values, you may want to relevel your factors (this may or may not happen). 
-
-To specify new levels or orders of levels:
-
-```{r, finalizedata}
-```
-# Save data
-
-All done, data is clean now. 
-Let's assign at the end to some final variable
-makes it easier to add steps above
-
-```{r, savedata}
+```{r, Culmendepth1}
 ```
 
-Finally, we save the clean data as RDS file. I suggest you save your processed and cleaned data as RDS or RDA/Rdata files, as well as a copy as .csv
+This is an interesting distribution. It didn't strike me as an error, but I decided to check why the data looks this way. To do so, my first instinct was to differentiate between the species. For this I used ggplot.
 
-RDS/Rdata preserves coding like factors, characters, numeric, etc.  If you save as CSV, that information would get lost.
-However, CSV is better for sharing with others since it's plain text. If you do CSV, you might want to write down somewhere what each variable is (i.e. a data dictionary).
+```{r, Culmendepth2}
+```
+
+My instincts were on point. The distribution makes much more sense when you can see the groups. I don't believe there is anything that needs editing here. 
+
+Though not surprising, it is also interesting to see that this distribution correlates with species diversity on different islands. 
+
+```{r, Culmendepth3}
+```
+
+# Flipper Length
+
+The last morphological variable is Flipper Length. I began again with a histogram and bivariate plot with Body Mass to check the distribution. 
+
+```{r, Flipperlength}
+```
+
+This data shows a pretty normal scaling of Flipper Length with Body Mass. There is no need to investigate any further. That said, the histogram does show an interesting dip in the median range. This again can be explained by mapping the species distribution for these values. 
+
+```{r, Flipperlength2}
+```
+
+## Isotopic Data
+
+# Nitrogen
+
+The last sets of continuous data in the Palmer Penguins dataset compiles isotopic measures from the three species. 
+
+Beginning with the Nitrogen data, I set a histogram to observe the distribution. Though I didn't expect this metric to scale with Body Mass like the morphological data, I set the bivariate plot to check. This plot, interestingly, revealed a negative correlation with Body Mass.
+
+```{r, Nitrogen}
+```
 
 
-# Notes 
+My next thought was that this correlation will more strongly reflect habitat/dietary differences in the populations. Thus, I decided to plot the data with Species instead of Mass.
 
--  Anything you don't want loaded into the Quarto file but 
-keep in the R file, just give it its own label and then just leave that label out of the Quarto file. For example, you may try excluding some of the excessive comments. 
+```{r, Nitrogen2}
+```
 
--  Dealing with NA or "bad" data:
-Removing anyone who had "faulty" or missing data is one approach, but it's often not the best. Based on your question and your analysis approach, you might want to do cleaning differently (e.g. keep individuals with some missing information)
+This data seems to make sense. No editing needed. 
 
--  Saving data as RDS:
-I suggest you save your processed and cleaned data as RDS or RDA/Rdata files.  This preserves coding like factors, characters, numeric, etc.  If you save as CSV, that information would get lost.
-However, CSV is better for sharing with others since it's plain text. 
+# Carbon
 
--  If you do CSV, you must to write down somewhere what each variable is (i.e. in a data dictionary).
+Finally, I ran the same set of tests with the Carbon data as I did the Nitrogen data. 
 
--  See here for some suggestions on how to store your processed data:
-<http://www.sthda.com/english/wiki/saving-data-into-r-data-format-rds-and-rdata>
+```{r, Carbon}
+```
+
+It was, again, difficult for me to see if this data was behaving in a logical way. To make sure that it was, I again decided to represent it as grouped by species. When plotting it this way, the distribution of data looks normal and therefore required no editing. 
+
+```{r, Carbon2}
+```
+
+## Data is Clean
+
+With the last of the variables tested, I believe this data is good to go. 
+
+```{r, Final}
+```
+

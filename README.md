@@ -1,5 +1,8 @@
 # Overview
 
+I am intentionally keeping the original version of this document until the project is completed. 
+
+
 A template file and folder structure for a data analysis project/paper done with R/Quarto/Github. The structure promotes a data science pipeline for reproducibility in research. 
 
 ![Data science pipeline](https://github.com/mbutler808/rclass/blob/main/images/dspipeline.png)

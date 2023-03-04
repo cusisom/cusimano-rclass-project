@@ -1,5 +1,7 @@
 # Code Folder
 
+I am intentionally keeping this file in it's original form until the second part of the project. 
+
 ## Code Location:
 
 Place your various `.R` or `.qmd` scripts in the appropriate folders:

@@ -1,5 +1,8 @@
 # Data Folder
 
+I am intentionally keeping the original version of this document until the project is completed. 
+
+
 The folders in Data should contain all of the data used in this project. Subfolders are used for the various stages. 
 
 The `Data` is being loaded/manipulated/reshaped/saved using code from the `Code` folder. 
