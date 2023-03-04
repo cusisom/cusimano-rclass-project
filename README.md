@@ -1,12 +1,7 @@
 # Overview
 
-I am intentionally keeping the original version of this document until the project is completed. 
+I am intentionally keeping most of the original content in here until the project is completed. 
 
-
-A template file and folder structure for a data analysis project/paper done with R/Quarto/Github. The structure promotes a data science pipeline for reproducibility in research. 
-
-![Data science pipeline](https://github.com/mbutler808/rclass/blob/main/images/dspipeline.png)
-[Figure: The Data Science Pipeline from RD Peng](https://rdpeng.github.io/Biostat776/lecture-the-data-science-pipeline.html)
 
 # History
 
@@ -52,13 +47,4 @@ Please see the `README.md` files in each folder for more details.
 **For the first project, we only have Data and Code folders.**
 The rest will come soon. 
 
-# Getting started
-
-This is a Github template repository. The best way to get it and start using it is [by following these steps.](https://help.github.com/en/articles/creating-a-repository-from-a-template)
-
-Once you got the repository, you can check out the examples by executing them in order. 
-
-1.  First run the processing code, which will produce the processed data. 
-2.  Then run the analysis scripts, which will take the processed data and produce some results. 
-3.  Then you can run the manuscript, poster and slides example files in any order. Those files pull in the generated results and display them. These files also pull in references from the `bibtex` file and format them according to the CSL style.
 
