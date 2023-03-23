@@ -237,5 +237,8 @@ dictionary <- read.csv(paste(data_path, "datadictionary2.0.csv", sep=""))
 print(dictionary)
 
 
+save_data_location <- "../../Data/Processed_data/penguins.rds"
+saveRDS(processeddata, file = save_data_location)
 
-
+save_data_location_csv <- "../../Data/Processed_data/penguins.csv"
+write.csv(processeddata, file = save_data_location_csv, row.names=FALSE)
