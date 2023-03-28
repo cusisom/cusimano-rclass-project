@@ -226,6 +226,7 @@ plot(d3$'Body Mass', d3$'Delta 13 C')
 
 p <- d3 |> ggplot() +
   geom_point(aes(x= d3$'Body Mass', y = d3$'Delta 13 C', col=Species)) +
+  facet_wrap(~Island)+
 labs(
  title="Body Mass by Carbon 13",
  subtitle="Distribution by Species",
