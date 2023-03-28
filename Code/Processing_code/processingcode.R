@@ -228,6 +228,29 @@ p <- d3 |> ggplot() +
   geom_point(aes(x= d3$'Body Mass', y = d3$'Delta 13 C', col=Species))
 p
 
+## ---- Distribution --------
+
+#This plot is mostly a means for me to looks at the species distribution across the three islands
+#The key component here is the facet_wrap() function
+#The variables and labels are interchangeable
+#I chose a colorscheme that worked for me in the moment but this is interchangeable as well
+
+ggplot(d1, aes(d1$'Body Mass', d1$'Culmen Depth', color=Species, fill=Species)) +
+ geom_point() +
+ facet_wrap(~Island)+
+labs(
+ title="Body Mass by Culmen Depth",
+ subtitle="Dimensions by Species",
+ x='Body mass (mm)', y='Culmen Depth (mm)',
+ color='Species'
+ ) +
+  scale_color_brewer(palette="Dark2")
+ 
+ #My first research question will concern the penguins of Dream Island. 
+ #From this initial analysis (plot above) there seems to be geographic and morphological overlap between Adelie and Chinstrap Penguins.
+ #How, then, can they be differentiated at the species level by using this data?
+ #To figure this out I will need to plot different variables specific to these two species. This is a matter of subsetting out the Gentoo dataset
+
 ## ---- Final --------
 #Final review of data and edited data dictionary
 
