@@ -225,7 +225,15 @@ plot(d3$'Body Mass', d3$'Delta 13 C')
 ## ---- Carbon2 --------
 
 p <- d3 |> ggplot() +
-  geom_point(aes(x= d3$'Body Mass', y = d3$'Delta 13 C', col=Species))
+  geom_point(aes(x= d3$'Body Mass', y = d3$'Delta 13 C', col=Species)) +
+labs(
+ title="Body Mass by Carbon 13",
+ subtitle="Distribution by Species",
+ x="Body Mass (mm)", y="Culmen Depth (mm)",
+ color='Species'
+ ) +
+ scale_color_brewer(palette="Dark2")
+
 p
 
 ## ---- Distribution --------
