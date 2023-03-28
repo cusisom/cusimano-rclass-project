@@ -172,6 +172,9 @@ It was, again, difficult for me to see if this data was behaving in a logical wa
 
 ## Data is Clean
 
+```{r, Distribution}
+```
+
 With the last of the variables tested, I believe this data is good to go. 
 
 ```{r, Final}
