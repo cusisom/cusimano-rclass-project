@@ -235,8 +235,8 @@ p
 #The variables and labels are interchangeable
 #I chose a colorscheme that worked for me in the moment but this is interchangeable as well
 
-p <- d1 |> ggplot() +
- geom_point(aes(d1$'Body Mass', d1$'Culmen Depth', color=Species, fill=Species)) +
+p <- d3 |> ggplot() +
+ geom_point(aes(d3$'Body Mass', d3$'Culmen Depth', color=Species, fill=Species)) +
  facet_wrap(~Island)+
 labs(
  title="Body Mass by Culmen Depth",
@@ -266,3 +266,5 @@ saveRDS(processeddata, file = save_data_location)
 
 save_data_location_csv <- "../../Data/Processed_data/penguins.csv"
 write.csv(processeddata, file = save_data_location_csv, row.names=FALSE)
+
+
