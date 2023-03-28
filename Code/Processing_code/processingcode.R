@@ -235,8 +235,8 @@ p
 #The variables and labels are interchangeable
 #I chose a colorscheme that worked for me in the moment but this is interchangeable as well
 
-ggplot(d1, aes(d1$'Body Mass', d1$'Culmen Depth', color=Species, fill=Species)) +
- geom_point() +
+p <- d1 |> ggplot() +
+ geom_point(aes(d1$'Body Mass', d1$'Culmen Depth', color=Species, fill=Species)) +
  facet_wrap(~Island)+
 labs(
  title="Body Mass by Culmen Depth",
@@ -245,6 +245,7 @@ labs(
  color='Species'
  ) +
   scale_color_brewer(palette="Dark2")
+p
  
  #My first research question will concern the penguins of Dream Island. 
  #From this initial analysis (plot above) there seems to be geographic and morphological overlap between Adelie and Chinstrap Penguins.
