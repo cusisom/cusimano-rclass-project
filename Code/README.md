@@ -1,15 +1,8 @@
 # Code Folder
 
-I am intentionally keeping this file in it's original form until the second part of the project. 
+There are two folders associated with Code. These correspond with the projects assigned in class. Project 1 focused on data cleaning. The code used to clean the penguins_raw_dirty file (found in the Data folder) can be found in the Processing_code folder. Project 2 focuses on data analysis. The code used for this assignment will be found in the Analysis_code folder. 
 
-## Code Location:
-
-Place your various `.R` or `.qmd` scripts in the appropriate folders:
-
-- Processing_code for cleaning raw data to processed data
-- Analysis_code or your analyses on cleaned data. 
-
-Depending on your specific project, you might want to have further sub-folders.
+Users exploring this data are encouraged to follow the structure of the assignment by reviewing the Project 1 material before that of Project 2. 
 
 ## Code Design:
 
