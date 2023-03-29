@@ -1,12 +1,12 @@
-#Processed_data folder
+# Processed_data folder
 
 This folder contains the resulting data from the cleaning objective of Project 1. 
 
-#Processed_data folder contents
+# Processed_data folder contents
 
 The three files in this folder pertaining to the cleaned data include both the .csv and .rds files containing the data as well as an updated data dictionary outlining the variables used for analysis. 
 
-#History 
+# History 
 
 Data Cleaned through R on 2023-03-03
 Daniel Cusimano
