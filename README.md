@@ -6,6 +6,7 @@ I am intentionally keeping most of the original content in here until the projec
 # History
 
 2023-02-16 First release with Data and Code folders with materials for data cleaning and initial exploration.
+
 2023-03-13 Data cleaning submitted to satsify Project 1. Results can be seen in the Data/Processed Data folder and the Code/Processing Code folder. 
 
 # Acknowledgement

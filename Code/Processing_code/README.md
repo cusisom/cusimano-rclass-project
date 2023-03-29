@@ -9,8 +9,11 @@ The material found in this folder details the work for Project 1. The goal of th
 This folder contains code for processing the penguins_raw_dirty data.
 
 Included in this folder is the:
+
 -Processing code in R (processingcode.R)
+
 -The Quarto file for publishing the data cleaning process (processingfile_v2.qmd)
+
 -The rendered Quarto .html file.
 
 For a quick review of the data cleaning process, users are urged to follow the .html link
