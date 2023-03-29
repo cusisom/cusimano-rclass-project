@@ -2,7 +2,7 @@
 
 This folder contains code to do some simple analysis on the processed/cleaned data.
 
-An R script will do some simple statistical model fitting.
+`statistical_analysis.R` is an R script that does some simple statistical model fitting and plotting.
 
-There will be a Quarto file which does some exploratory data analysis by pulling in code to create a few tables and figures.
+`exploratory_analysis.qmd` is a Quarto file that adds commentary to this analysis. The quarto file pulls in code from the R script, so that only one code file needs to be maintained. 
 
