@@ -165,16 +165,6 @@ Finally, I ran the same set of tests with the Carbon data as I did the Nitrogen 
 ```{r, Carbon}
 ```
 
-It was, again, difficult for me to see if this data was behaving in a logical way. To make sure that it was, I again decided to represent it as grouped by species. When plotting it this way, the distribution of data looks normal and therefore required no editing. 
-
-```{r, Carbon2}
-```
-
-## Data is Clean
-
-```{r, Distribution}
-```
-
 With the last of the variables tested, I believe this data is good to go. 
 
 ```{r, Final}
