@@ -21,4 +21,6 @@ The data altered by code throughout this project have been piped into the Proces
 ## Cleaned Data
 
 `Processed_data` contains the cleaned version of the data. 
-
+	- `penguins.rda` is the cleaned version of the data (R format)
+	- `penguins.csv` is the cleaned version of the data (.csv format)
+	- `datadictionary2.0.csv` is the updated data dictionary for the cleaned   data
