@@ -230,7 +230,7 @@ plot(d3$'Body Mass', d3$'Delta 13 C')
 
 processeddata <- d3
 skim(processeddata)
-dictionary <- read.csv(paste(data_path, "datadictionary2.0.csv", sep="")) 
+dictionary <- read.csv(paste("../../Data/Processed_data/datadictionary2.0.csv", sep="")) 
 print(dictionary)
 
 save_data_location_csv <- "../../Data/Processed_data/datadictionary2.0.csv"
