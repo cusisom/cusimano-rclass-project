@@ -166,7 +166,7 @@ ggsave(filename=addpath("Penguins_Body_Mass_Dimorphism_violin.png", dimorphism_p
 
 # For the Adelie Penguins I first subset the species and remove NA values
 
-## ---- Adelie T-test1 --------
+## ---- Adelie_T-test1 --------
 
 #Subset the Species
 d1 <- dat[dat$Species=="Adelie", ]
@@ -177,7 +177,7 @@ d1 <- d1[ !is.na(d1$"Sex"), ]
 
 #To test the means of each population (Male and Female) I need to filter the population into individual vectors
 
-## ---- Adelie T-test2 --------
+## ---- Adelie_T-test2 --------
 
 female <- d1 %>%
  filter(Sex == "FEMALE")
