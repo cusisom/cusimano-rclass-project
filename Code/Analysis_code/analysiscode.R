@@ -283,3 +283,46 @@ print(t.test.Cs)
 ## ---- Save_table2 --------
 
 saveRDS(t.test.Cs, file = addpath("Chinstrap_Dimorphism_ttest.rds", results_path))
+
+###############################################
+#                                             #
+#Question 2 Adelie and Chinstrap Distinction  #
+#                                             #
+###############################################
+
+# Start by removing Gentoo Penguins from your analysis
+
+## ---- nogentoo --------
+
+#Subset out Gentoo
+
+b1 <- dat[!dat$Species == "Gentoo", ] 
+
+#Drop unused levels from analysis (otherwise Gentoo continues to appear, just with no data)
+
+b1 <- droplevels(b1)
+
+#Run a summary to get a quick look at the data means for each species
+
+ b1 %>%
+select(-starts_with("Delta")) %>%
+group_by(Species) %>%
+report(exclude = "b1$Gentoo") %>%
+summary()
+
+#Before I star plotting each variable, I wanted to get a broad graphical look at the interspecific variation in the variables I hadn't yet tested. 
+
+#This task was accomplished by installing the GGally package 
+
+## ---- Ad~Cs1 ---------
+
+require(GGally)
+
+# Using GGally, I established that I wanted to create bivariate plots for all of the variables ending with "th". These include Culmen Length, Culmen Depth, and Flipper Length. 
+
+b1 %>%
+  select(Species, ends_with("th")) %>% 
+  GGally::ggpairs(aes(color = Species)) +
+  scale_color_brewer(palette="Dark2") +
+  scale_fill_brewer(palette="Dark2")
+

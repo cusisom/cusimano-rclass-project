@@ -166,12 +166,30 @@ It's looking like a much narrower size difference.
 
 It looks like the data supports my assumptions. The Chinstrap Penguins present much differently than the other species in terms of Sexual Dimorphism. Both the p- and t- values noticebly differed. I wanted to test the statistical difference between the t-test results, but I am not sure how to do that and I am too short on time for this assignment to figure it out. 
 
-# Differentiating between Adelie and Chinstrap Penguins on Dream Island
+# Differentiating between Adelie and Chinstrap penguins on Dream Island
 
 Despite the differences in sexual dimorphism, the Chinstrap and Adelie Penguins seem to cluster closely in Body Mass. With their geographic overlap on Dream island, my next question concerns the morphological distinction between the two species. I wonder if, with the current available data, I can see the justification for differentiating the two populations as different species. 
 
 In examining photos of the two birds, the phenotypic differences are distinct. As a paleontologists, however, I do not often have the ability to examine soft tissue (including feathers). Thus, for my own purposes, I'd like to see just how vague physical measurements can be in phylogenitic pursuits. I will acknowledge here that the measurements provided to us here were taken from specimens in the flesh, and so the results of this inquiry will not directly translate to my interests, but it is a starting point. 
 
 ::: {layout-ncol=2}
-![Chinstrap Penguin](Chinstrap.jpg){width=65%}
+![Chinstrap Penguin](Chinstrap.jpg){Width=30%}
+
+![Adelie Penguin](Adelie.jpg){Width=50%}
 :::
+
+## Bivariate Plots
+
+As we did in the first part of the project, I begin testing this question by plotting the different morphological data I am given against Body Mass. This time around, however, I specify the species and island of interest. I mightloosen the geographic constraints as I progress but it seems best to start with where the occur sympatrically. 
+
+I Begin this process by removing Gentoo Penguins from the analysis. The additional morphological data includes Culmen Length, Culmen Depth, and Flipper Length. 
+
+
+```{r, nogentoo}
+```
+Before plotting each variable, I wanted to get a broad graphical look at the interspecific variation in the variables I hadn't yet tested. 
+
+This task was accomplished by installing the GGally package 
+
+```{r, Ad~Cs1}
+```
