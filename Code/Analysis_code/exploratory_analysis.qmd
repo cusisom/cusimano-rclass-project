@@ -110,33 +110,52 @@ The plot shows clear dimorphism with Gentoo Penguins. It also illustrates strong
 ## Analysis of Sexual Size Dimorphism
 
 
-I need to represent this Sexual Size Dimorphism statistically.
-This can be done by means of a Welch Two Sample T-test.
-I run the test for each species.
+To get a better idea of this discrepancy in Body Mass, I want to test the degree of sexual size dimorphism statistically. The goals here are to 1) illustrate that each of these three penguin species is Sexually Dimorphic in Body Mass and 2) illustrate the relatively lower degree of dimorphism in the Chinstrap penguins. This second point will support the idea of the narrower body mass distribution in Chinstrap penguins reflecting reduced sexual size dimorphism. While this point might be self-evident, it is still interesting to note the correlation between sexual size dimorphism within a species and overall range in body mass.
+
+To support my hypotheses,I first illustrate summary data on the differences in Body Mass and then test the significance of this difference with a Welch's T-test. I replicate this process for each species.
 
 ### Adelie Penguins
 
-For the Adelie Penguins I first subset the species and remove NA values
+For the Adelie Penguins I first subset the species and remove NA values. 
 
 
 ```{r, Adelie_T-test1}
 ```
-To test the means of each population (Male and Female) I need to filter the population into individual vectors
+To test the means of each population (Male and Female) I need to filter the population into individual vectors. From there I can test the means through a t-test. 
 
 ```{r, Adelie_T-test2}
 ```
 
-It seems that the statistics support a distinct difference in Male and Female Body Mass.
+The p-value supports the significance of Sexual Size Dimorphism in Adelie Penguins. I will pay attention to the t-value (-13.126) for comparison with the other species'. 
+
+### Gentoo Penguins 
+
+As noted above, the Gentoo penguins are subjected to the same round of tests as the Adelie penguins. 
+
+#### Summary
 
 ```{r, Gentoo_T-test1}
 ```
+#### T-test
 
 ```{r, Gentoo_T-test2}
 ```
 
+Just as above, the p-value corroborates the violin plot distribution for Secual Size Dimorphism. The t-value here is greater than that of Adelie (-14.638).
+
+*(I suggest that the value is greater despite the number actually being smaller. I have very little background in statistics but, from what I have gathered, negative and positive values do not weigh on the interpretation of t-values.)* 
+
+### Chinstrap Penguins
+
+The final round of tests is run on the Chinstrap Penguins. Wy assumption is that both the p- and t- values will be smaller than those of the other two species. 
+
+#### Summary
+
 ```{r, Chinstrap_T-test1}
 ```
 
+It's looking like a much narrower size difference.
+
 ```{r, Chinstrap_T-test2}
 ```
-
+Looks like the data supports my assumptions. 

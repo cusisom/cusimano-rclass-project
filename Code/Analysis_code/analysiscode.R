@@ -172,15 +172,15 @@ ggsave(filename=addpath("Penguins_Body_Mass_Dimorphism_violin.png", dimorphism_p
 ## ---- Adelie_T-test1 --------
 
 #Subset the Species
-d1 <- dat[dat$Species=="Adelie", ]
+d2 <- dat[dat$Species=="Adelie", ]
 #Remove the NA values
-d1 <- d1[ !is.na(d1$"Sex"), ]
+d2 <- d2[ !is.na(d2$"Sex"), ]
 
 #I want to get a quick glimpse at the difference in Body Mass between Male and Female
 #I found that the report package is nice for this
 
 
-Adelie_report <- report_sample(d1, group_by = "Sex", select = "Body Mass")
+Adelie_report <- report_sample(d2, group_by = "Sex", select = "Body Mass")
 
 print(Adelie_report)
 
@@ -193,9 +193,9 @@ saveRDS(Adelie_report, file = addpath("Adelie_Dimorphism_Report.rds", results_pa
 
 ## ---- Adelie_T-test2 --------
 
-female <- d1 %>%
+female <- d2 %>%
  filter(Sex == "FEMALE")
-male <- d1 %>%
+male <- d2 %>%
  filter(Sex == "MALE")
 
 # Then I can run the analysis
@@ -209,11 +209,10 @@ saveRDS(t.test.Ad, file = addpath("Adelie_Dimorphism_ttest.rds", results_path))
 
 ## ---- Gentoo_T-test1 --------
 
-#Subset the Species
-d3 <- dat[dat$Species=="Gentoo", ]
+#Subset the Species and remove NA values 
 
-#I want to get a quick glimpse at the difference in Body Mass between Male and Female
-#I found that the report package is nice for this
+d3 <- dat[dat$Species=="Gentoo", ]
+d3 <- d3[ !is.na(d3$"Sex"), ]
 
 
 Gentoo_report <- report_sample(d3, group_by = "Sex", select = "Body Mass")
@@ -246,7 +245,13 @@ saveRDS(t.test.Gt, file = addpath("Gentoo_Dimorphism_ttest.rds", results_path))
 ## ---- Chinstrap_T-test1 --------
 
 #Subset the Species
+
 d4 <- dat[dat$Species=="Chinstrap", ]
+
+#There is no need to remove NA values for this species
+#Check by:
+
+d4$Sex
 
 #I want to get a quick glimpse at the difference in Body Mass between Male and Female
 #I found that the report package is nice for this
