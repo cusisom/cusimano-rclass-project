@@ -159,6 +159,31 @@ p
 ggsave(filename=addpath("Penguins_Body_Mass_Dimorphism_violin.png", dimorphism_path), plot=p)
 #
 
-# I want to know how much the Body Mass distribution is effected by Sexual Dimorphism
-# I start by looking at Sexual Dimorphism across the entire penguin sample
-#
+#I need to represent this Sexual Size Dimorphism statistically.
+#This can be done by menas of a Welch's Two Sample T-test
+# I run the test for each species
+
+
+# For the Adelie Penguins I first subset the species and remove NA values
+
+## ---- Adelie T-test1 --------
+
+#Subset the Species
+d1 <- dat[dat$Species=="Adelie", ]
+#Remove the NA values
+d1 <- d1[ !is.na(d1$"Sex"), ]
+
+## ---- comment1 --------
+
+#To test the means of each population (Male and Female) I need to filter the population into individual vectors
+
+## ---- Adelie T-test2 --------
+
+female <- d1 %>%
+ filter(Sex == "FEMALE")
+male <- d1 %>%
+ filter(Sex == "MALE")
+
+# Then I can run the analysis
+
+t.test(female$'Body Mass', male$'Body Mass')
