@@ -95,7 +95,14 @@ I like this plot. It illustrates that Adelie and Gentoo penguins have a wider ra
 
 My question is whether these wider ranges in Body Mass reflect stronger Sexual Size Dimorphism in Adelie and Gentoo Penguins than in Chinstrap Penguins. Thus, I set up a plot that differentiates by Species and Sex.
 
-```{Dimorphism4}
+First I need to remove the NA values. 
+
+```{r, subsetting1}
+```
+
+Now I can plot. 
+
+```{r, Dimorphism4}
 ```
 
 The plot shows clear dimorphism with Gentoo Penguins. It also illustrates stronger dimorphism in Adelie than Chinstrap populations but it is more subtle.

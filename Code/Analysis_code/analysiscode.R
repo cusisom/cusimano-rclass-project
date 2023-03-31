@@ -133,6 +133,7 @@ color='Species'
 scale_fill_brewer(palette="Dark2")
 p
 
+## ---- subsetting1 --------
 #The NA values add an extra variable that complicates the image. Subset out NA's.
 d1 <- dat[ !is.na(dat$"Sex"), ]
 
