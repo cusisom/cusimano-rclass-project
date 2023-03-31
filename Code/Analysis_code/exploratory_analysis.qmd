@@ -1,10 +1,12 @@
 ---
-title: "An example draft analysis script"
-author: "Marguerite Butler"
-date: "03/21/2023"
+title: "Palmer Penguins Analysis"
+author: "Daniel Cusimano"
+date: "03/30/2023"
 output: html_document
 ---
-
+This is going to be a working process that will ultimately trim a lot of fat along the way (including this explanation). The goal is for me to set up the webpage with the needed stats and images and then to edit by adding text content and removing the template content. 
+  
+All of the original content will be below my workstream until I am ready to remove it. 
   
 This Quarto file loads the cleaned Palmer Penguins data and does some initial analysis. I find this step very helpful for seeing what results you have to work with for your talk or paper/final report. 
 
@@ -31,11 +33,11 @@ For this part of the project, develop three questions and use your R skills to a
 
 # Setup
 
-This needs to run to load the R script so we can include the code chunks below.
+The setup has mostly remained the same except that I am adding dplyr and various new files paths
 
 ```{r }
 #| cache = FALSE
-knitr::read_chunk('statistical_analysis.R')
+knitr::read_chunk('analysiscode.R')
 ```
 
 Load needed packages and filepaths.  
@@ -45,7 +47,7 @@ Load needed packages and filepaths.
 #| warning: FALSE
 ```
 
-Load custom functions.
+Load custom functions. I haven't messed with this mostly because I don't fully understand it. 
 
 ```{r functions}
 ```
@@ -76,47 +78,28 @@ Note: The `results="asis"` is an option for `knitr` to layout the the results wi
 ```
 
 
-# Do species differ in size?
+# Body Mass Distribution
+##Species Interspecific and Intraspecific Varition
 
-As an example, letʻs ask the question _Do species differ in size?_ Our first try is a boxplot of mass by species:
+I am first interested in the size distribution of the Palmer Penguins. I begin by examining the Interspecific variation in Body Mass. 
 
-```{r mass_species_boxplot}
+
+```{r, Dimorphism1}
+```
+I chose to change this to a violin plot to get a clearer illustration of size distribution. 
+
+```{r, Dimorphism2}
 ```
 
-The results were created by the `statistical_analysis.R` script and to the `Results` folder. Depending on how many tables/figures and workflow steps you have, it might make sense to have subfoldersf. Just choose a setup that makes sense for your project and works for you, and provide enough documentation that someone can understand what you are doing.
+I like this plot. It illustrates that Adelie and Gentoo penguins have a wider range in Body Mass than do Chinstrap Penguins.
 
-Now letʻs try a density plot
+My question is whether these wider ranges in Body Mass reflect stronger Sexual Size Dimorphism in Adelie and Gentoo Penguins than in Chinstrap Penguins. Thus, I set up a plot that differentiates by Species and Sex.
 
-```{r mass_species_demsotu}
+```{Dimorphism4}
 ```
 
-Provide a brief diescription of your results. To test the statistical significance of this result we can use ANOVA. We see that species do differ in size and this is a very robust statistical result. 
-
-```{r mass_species_aov}
-```
-
-# Does the island have an affect on size?
-
-What about an island effect? Since we know that species differ, we can include a two-way ANOVA and test both factors. 
+The plot shows clear dimorphism with Gentoo Penguins. It also illustrates stronger dimorphism in Adelie than Chinstrap populations but it is more subtle.
 
 
-When we add island to the model _after_ we account for species, it is not significant. 
-
-```{r mass_species_island_aov}
-```
-
-However, if we add island _first, before_ species, it is signficant! We interpret this as islands differing in mass as well, but islands are not as different as species are in mass. 
-
-```{r mass_island_species_aov}
-```
-Letʻs plot both factors together to see whatʻs going on. 
-
-```{r mass_species_island_density}
-```
-
-
-# Notes
-
-For your own explorations, tables and figures can be "quick and dirty". As long as you can see what's going on, there is no need to polish them. That's in contrast to figures you'll produce for your final products (paper, report, presentation, website, etc.). Those should look as nice, polished and easy to understand as possible.
 
 
