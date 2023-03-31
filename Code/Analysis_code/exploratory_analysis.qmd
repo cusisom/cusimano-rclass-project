@@ -79,7 +79,7 @@ Note: The `results="asis"` is an option for `knitr` to layout the the results wi
 
 
 # Body Mass Distribution
-## Species Interspecific and Intraspecific Varition
+## Interspecific and Intraspecific Varition
 
 I am first interested in the size distribution of the Palmer Penguins. I begin by examining the Interspecific variation in Body Mass. 
 
@@ -165,4 +165,4 @@ It's looking like a much narrower size difference.
 ### Sexual Size Dimorphism Conclusions
 
 It looks like the data supports my assumptions. The Chinstrap Penguins present much differently than the other species in terms of Sexual Dimorphism. Both the p- and t- values noticebly differed. I wanted to test the statistical difference between the t-test results, but I am not sure how to do that and I am too short on time for this assignment to figure it out. 
-:grinning:
+!(frown.png)
