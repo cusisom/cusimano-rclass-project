@@ -1,4 +1,4 @@
-setwd("C:/Users/danny/Documents/git/cusimano-rclass-project/Code/Processing_code")
+
 
 ###############################
 # Penguin analysis script
