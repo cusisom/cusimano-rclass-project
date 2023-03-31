@@ -109,17 +109,34 @@ The plot shows clear dimorphism with Gentoo Penguins. It also illustrates strong
 
 ## Analysis of Sexual Size Dimorphism
 
+
 I need to represent this Sexual Size Dimorphism statistically.
-This can be done by menas of a Welch's Two Sample T-test.
+This can be done by means of a Welch Two Sample T-test.
 I run the test for each species.
+
+### Adelie Penguins
 
 For the Adelie Penguins I first subset the species and remove NA values
 
-To test the means of each population (Male and Female) I need to filter the population into individual vectors
 
 ```{r, Adelie_T-test1}
 ```
+To test the means of each population (Male and Female) I need to filter the population into individual vectors
 
 ```{r, Adelie_T-test2}
+```
+
+It seems that the statistics support a distinct difference in Male and Female Body Mass.
+
+```{r, Gentoo_T-test1}
+```
+
+```{r, Gentoo_T-test2}
+```
+
+```{r, Chinstrap_T-test1}
+```
+
+```{r, Chinstrap_T-test2}
 ```
 

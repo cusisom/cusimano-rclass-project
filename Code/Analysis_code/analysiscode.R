@@ -14,6 +14,7 @@ require(ggplot2) #for plotting
 require(magrittr) #for piping
 require(knitr) #for formatting output
 require(dplyr) 
+require(report)
 
 #path to data and results 
 data_path <- "../../Data/Processed_data/"
@@ -142,7 +143,7 @@ d1 <- dat[ !is.na(dat$"Sex"), ]
 ## ---- Dimorphism4 ---------
 
 p <- d1 %>%
-ggplot(aes(x=Sex, y=d1$'Body Mass', fill=Species)) +
+ggplot(aes(x=Species, y=d1$'Body Mass', fill=Sex)) +
 geom_violin(trim=FALSE) +
 labs(
 title="Body Mass by Species and Sex",
@@ -155,10 +156,11 @@ p
 # Plot shows clear dimorphism with Gentoo Penguins. It also illustrates stronger dimorphism in Adelie than Chinstrap populations but it is more subtle. 
 
 ## ---- SaveImage3 --------
-#Save Image
+
 ggsave(filename=addpath("Penguins_Body_Mass_Dimorphism_violin.png", dimorphism_path), plot=p)
-#
-#
+
+
+
 #
 #I need to represent this Sexual Size Dimorphism statistically.
 #This can be done by menas of a Welch's Two Sample T-test
@@ -178,13 +180,14 @@ d1 <- d1[ !is.na(d1$"Sex"), ]
 #I found that the report package is nice for this
 
 
-require(report)
-
 Adelie_report <- report_sample(d1, group_by = "Sex", select = "Body Mass")
 
 print(Adelie_report)
 
+saveRDS(Adelie_report, file = addpath("Adelie_Dimorphism_Report.rds", results_path))
+
 ## ---- comment1 --------
+
 
 #To test the means of each population (Male and Female) I need to filter the population into individual vectors
 
@@ -197,8 +200,81 @@ male <- d1 %>%
 
 # Then I can run the analysis
 
-t.test.Ad <- t.test(female$'Body Mass', male$'Body Mass')
+t.test.Ad <- t.test(female$'Body Mass', male$'Body Mass') 
 
 print(t.test.Ad)
+## ---- Save_table2 --------
 
 saveRDS(t.test.Ad, file = addpath("Adelie_Dimorphism_ttest.rds", results_path))
+
+## ---- Gentoo_T-test1 --------
+
+#Subset the Species
+d3 <- dat[dat$Species=="Gentoo", ]
+
+#I want to get a quick glimpse at the difference in Body Mass between Male and Female
+#I found that the report package is nice for this
+
+
+Gentoo_report <- report_sample(d3, group_by = "Sex", select = "Body Mass")
+
+print(Gentoo_report)
+
+saveRDS(Gentoo_report, file = addpath("Gentoo_Dimorphism_Report.rds", results_path))
+
+## ---- comment1 --------
+
+
+#To test the means of each population (Male and Female) I need to filter the population into individual vectors
+
+## ---- Gentoo_T-test2 --------
+
+female <- d3 %>%
+ filter(Sex == "FEMALE")
+male <- d3 %>%
+ filter(Sex == "MALE")
+
+# Then I can run the analysis
+
+t.test.Gt <- t.test(female$'Body Mass', male$'Body Mass') 
+
+print(t.test.Gt)
+## ---- Save_table2 --------
+
+saveRDS(t.test.Gt, file = addpath("Gentoo_Dimorphism_ttest.rds", results_path))
+
+## ---- Chinstrap_T-test1 --------
+
+#Subset the Species
+d4 <- dat[dat$Species=="Chinstrap", ]
+
+#I want to get a quick glimpse at the difference in Body Mass between Male and Female
+#I found that the report package is nice for this
+
+
+Chinstrap_report <- report_sample(d4, group_by = "Sex", select = "Body Mass")
+
+print(Chinstrap_report)
+
+saveRDS(Chinstrap_report, file = addpath("Chinstrap_Dimorphism_Report.rds", results_path))
+
+## ---- comment1 --------
+
+
+#To test the means of each population (Male and Female) I need to filter the population into individual vectors
+
+## ---- Chinstrap_T-test2 --------
+
+female <- d4 %>%
+ filter(Sex == "FEMALE")
+male <- d4 %>%
+ filter(Sex == "MALE")
+
+# Then I can run the analysis
+
+t.test.Cs <- t.test(female$'Body Mass', male$'Body Mass') 
+
+print(t.test.Cs)
+## ---- Save_table2 --------
+
+saveRDS(t.test.Cs, file = addpath("Chinstrap_Dimorphism_ttest.rds", results_path))
