@@ -189,3 +189,5 @@ male <- d1 %>%
 t.test.Ad <- t.test(female$'Body Mass', male$'Body Mass')
 
 print(t.test.Ad)
+
+saveRDS(t.test.Ad, file = addpath("Adelie_Dimorphism_ttest.rds", results_path))
