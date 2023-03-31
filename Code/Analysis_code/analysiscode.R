@@ -180,7 +180,7 @@ d1 <- d1[ !is.na(d1$"Sex"), ]
 ## ---- mass_species_aov ----
 # fit linear model using mass as outcome, species as predictor
 
-lm.fit.s <- lm(`Body Mass (g)` ~ Species, dat)  
+lm.fit.s <- lm(`Body Mass` ~ Species, dat)  
 anova.table.s <- anova(lm.fit.s)
 
 # print to screen the anova table
