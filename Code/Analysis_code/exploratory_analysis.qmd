@@ -119,7 +119,7 @@ For the Adelie Penguins I first subset the species and remove NA values
 ```
 To test the means of each population (Male and Female) I need to filter the population into individual vectors
 
-```{Adelie T-test2}
+```{mass_species_aov}
 ```
 
 
