@@ -158,7 +158,8 @@ p
 #Save Image
 ggsave(filename=addpath("Penguins_Body_Mass_Dimorphism_violin.png", dimorphism_path), plot=p)
 #
-
+#
+#
 #I need to represent this Sexual Size Dimorphism statistically.
 #This can be done by menas of a Welch's Two Sample T-test
 # I run the test for each species
@@ -172,6 +173,16 @@ ggsave(filename=addpath("Penguins_Body_Mass_Dimorphism_violin.png", dimorphism_p
 d1 <- dat[dat$Species=="Adelie", ]
 #Remove the NA values
 d1 <- d1[ !is.na(d1$"Sex"), ]
+
+#I want to get a quick glimpse at the difference in Body Mass between Male and Female
+#I found that the report package is nice for this
+
+
+require(report)
+
+Adelie_report <- report_sample(d1, group_by = "Sex", select = "Body Mass")
+
+print(Adelie_report)
 
 ## ---- comment1 --------
 
