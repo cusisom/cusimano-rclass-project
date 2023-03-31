@@ -186,4 +186,6 @@ male <- d1 %>%
 
 # Then I can run the analysis
 
-t.test(female$'Body Mass', male$'Body Mass')
+t.test.Ad <- t.test(female$'Body Mass', male$'Body Mass')
+
+print(t.test.Ad)
