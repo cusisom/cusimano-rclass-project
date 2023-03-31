@@ -177,14 +177,17 @@ d1 <- d1[ !is.na(d1$"Sex"), ]
 
 #To test the means of each population (Male and Female) I need to filter the population into individual vectors
 
-## ---- mass_species_aov ----
-# fit linear model using mass as outcome, species as predictor
+## ---- Adelie T-test2 --------
 
-lm.fit.s <- lm(`Body Mass` ~ Species, dat)  
-anova.table.s <- anova(lm.fit.s)
+female <- d1 %>%
+ filter(Sex == "FEMALE")
+male <- d1 %>%
+ filter(Sex == "MALE")
 
-# print to screen the anova table
-print(anova.table.s)
+# Then I can run the analysis
 
-# save anova table to file in Results folder  
-saveRDS(anova.table.s, file = addpath("mass_species_anova.rds", results_path))
+t.test.Ad <- t.test(female$'Body Mass', male$'Body Mass')
+
+print(t.test.Ad)
+
+saveRDS(t.test.Ad, file = addpath("Adelie_Dimorphism_ttest.rds", results_path))
