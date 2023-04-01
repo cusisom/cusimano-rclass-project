@@ -325,4 +325,43 @@ b1 %>%
   GGally::ggpairs(aes(color = Species)) +
   scale_color_brewer(palette="Dark2") +
   scale_fill_brewer(palette="Dark2")
+  
+## ----Ad~Cs2 --------
+
+#From this set of images it looks like the starkest difference between the two penguin species is represented by Culmen length
+
+#I should be able to test this against the other variables by running a principal components analysis.
+
+#I omit Body Mass as a variable because I am more interested in shape based data at the moment.
+
+b2 <- b1 %>%
+select("Culmen Length", "Culmen Depth", "Flipper Length") 
+b2.pc <- princomp(b2, scores=T)
+summary(b2.pc)
+
+pcsum <- summary(b2.pc)
+
+print(pcsum)
+
+## ---- Ad~Cs3 ---------
+
+#Shows pretty clearly that the most variation is found in pc1 (~77%) with a fairly steep drop with pc2 (~22%) and negligable scores for pc3.
+
+loadings(b2.pc)
+
+pcload <- loadings(b2.pc)
+print(pcload)
+
+
+## ---- Ad~Cs4 ---------
+#PC1 illustrates that most of the variation with the sample is found in Flipper Length. Second to that is the distribution of Culmen Length Values. Importantly, it does not seem from this that Culmen Depth factors into the variation within this population. 
+
+#Because Culmen Depth is a negligable variable in this analysis, I focus on pc1 and pc2.
+#The plot shows variation and when demarcating the species, shows distinct groupings.  
+
+pc1 <- b2.pc$scores[,1]
+pc2 <- b2.pc$scores[,2]
+pc3 <- b2.pc$scores[,3]
+plot(pc2 ~ pc1, col=b1$Species, cex=2, pch=16)
+
 

@@ -193,3 +193,19 @@ This task was accomplished by installing the GGally package
 
 ```{r, Ad~Cs1}
 ```
+From this set of images it looks like the starkest difference between the two penguin species is represented by Culmen length. I should be able to test this against the other variables by running a principal components analysis. I omit Body Mass as a variable because I am more interested in shape based data at the moment.
+
+```{r, Ad~Cs2}
+```
+
+Shows pretty clearly that the most variation is found in pc1 (~77%) with a fairly steep drop with pc2 (~22%) and negligable scores for pc3.
+
+```{r, Ad~Cs3}
+```
+PC1 illustrates that most of the variation with the sample is found in Flipper Length. Second to that is the distribution of Culmen Length Values. Importantly, it does not seem from this that Culmen Depth factors into the variation within this population. 
+
+Because Culmen Depth is a negligable variable in this analysis, I focus on pc1 and pc2.
+The plot shows variation and when demarcating the species, shows distinct groupings. 
+
+```{r, Ad~Cs4}
+```
