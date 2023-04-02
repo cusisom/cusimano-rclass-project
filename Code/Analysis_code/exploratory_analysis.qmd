@@ -81,19 +81,19 @@ Note: The `results="asis"` is an option for `knitr` to layout the the results wi
 # Body Mass Distribution
 ## Interspecific and Intraspecific Varition
 
-I am first interested in the size distribution of the Palmer Penguins. I begin by examining the Interspecific variation in Body Mass. 
+We closed out our first project by creating bivariate plots for all of the continuous variables in our dataset. Each of the morhpological data was specifically plotted against body mass to develop an idea of how these features correlated with overall size. This series of plots is designed to summarize that data.
 
+```{r, summary_plots}
+```
+
+I am first interested in the size distribution of the Palmer Penguins. I begin by examining the inter- and intraspecific variation in body mass. This is represented in the histogram in the bottom right of the above figure. 
+
+This distribution becomes much clearer with the violin plot below. Besides following the pattern seen in the summary plots where the Gentoo Penguins appear to be outliers, it is interesting to observe a seemingly smaller range in body mass for the Chinstrap relative to the Gentoo and Adelie Penguins. My first question concerns this apparent difference in body mass variation for each species. I explore this question by considering the role of sexual dimorphism. 
+
+A reasonable explanation for the narrower range in body mass for Chinstrap Penguins would that they reflect less sexual size dimorphism than the other two species. To first test the hypothesis that these three species are indeed sexually dimorphic in body mass I replot the data and distribute it by Sex. 
 
 ```{r, Dimorphism1}
 ```
-I chose to change this to a violin plot to get a clearer illustration of size distribution. 
-
-```{r, Dimorphism2}
-```
-
-I like this plot. It illustrates that Adelie and Gentoo penguins have a wider range in Body Mass than do Chinstrap Penguins.
-
-My question is whether these wider ranges in Body Mass reflect stronger Sexual Size Dimorphism in Adelie and Gentoo Penguins than in Chinstrap Penguins. Thus, I set up a plot that differentiates by Species and Sex.
 
 First I need to remove the NA values. 
 
@@ -105,14 +105,14 @@ Now I can plot.
 ```{r, Dimorphism4}
 ```
 
-The plot shows clear dimorphism with Gentoo Penguins. It also illustrates stronger dimorphism in Adelie than Chinstrap populations but it is more subtle.
+The plot shows clear dimorphism with Gentoo Penguins. It also illustrates stronger dimorphism in Adelie than Chinstrap populations but it is more subtle. After determining that the Palmers Penguins are sexually dimorphic, I want to know if the different species differ in the degree of mass specific Sexual Size Dimorphism. 
 
-## Analysis of Sexual Size Dimorphism
+# Analysis of Sexual Size Dimorphism
 
 
-To get a better idea of this discrepancy in Body Mass, I want to test the degree of sexual size dimorphism statistically. The goals here are to 1) illustrate that each of these three penguin species is Sexually Dimorphic in Body Mass and 2) illustrate the relatively lower degree of dimorphism in the Chinstrap penguins. This second point will support the idea of the narrower body mass distribution in Chinstrap penguins reflecting reduced sexual size dimorphism. While this point might be self-evident, it is still interesting to note the correlation between sexual size dimorphism within a species and overall range in body mass.
+To get a better idea of this discrepancy in Body Mass, I want to test the degree of sexual size dimorphism statistically. The goals here are to 1) illustrate that each of these three penguin species is significantly Sexually Dimorphic in body mass and 2) illustrate the relatively lower degree of dimorphism in the Chinstrap penguins. This second point will support the idea of the narrower body mass distribution in Chinstrap penguins reflecting reduced sexual size dimorphism. While this point might be self-evident, it is still interesting to note the correlation between sexual size dimorphism within a species and overall range in body mass.
 
-To support my hypotheses,I first illustrate summary data on the differences in Body Mass and then test the significance of this difference with a Welch's T-test. I replicate this process for each species.
+To support my hypotheses, I first illustrate summary data on the differences in Body Mass and then test the significance of this difference with a Welch's T-test. I replicate this process for each species.
 
 ### Adelie Penguins
 
@@ -120,8 +120,12 @@ For the Adelie Penguins I first subset the species and remove NA values.
 
 #### Summary
 
+With the NA values removed, I first get an idea of the mean size differences between females and males. I installed the *report* package to help me summarize the data.
+
 ```{r, Adelie_T-test1}
 ```
+
+These means seem to pretty clearly indicate sexual dimorphism but I will run it through a Welch's T-test to investigate statistical significance. 
 
 #### T-test
 To test the means of each population (Male and Female) I need to filter the population into individual vectors. From there I can test the means through a t-test. 
@@ -139,18 +143,21 @@ As noted above, the Gentoo penguins are subjected to the same round of tests as 
 
 ```{r, Gentoo_T-test1}
 ```
+
+This data seems to reflect an even greater degree of dimorphism than seen in Adelie Penguins. Next is the statstical test. 
+
 #### T-test
 
 ```{r, Gentoo_T-test2}
 ```
 
-Just as above, the p-value corroborates the violin plot distribution for Secual Size Dimorphism. The t-value here is greater than that of Adelie (-14.638).
+Just as above, the p-value corroborates the violin plot distribution for Sexual Size Dimorphism. The t-value here (-14.638) is greater than that of Adelie (-13.126).
 
-*(I suggest that the value is greater despite the number actually being smaller. I have very little background in statistics but, from what I have gathered, negative and positive values do not weigh on the interpretation of t-values).* 
+*(I suggest that the value is greater despite the number actually being smaller. I have very little background in statistics but from what I have gathered, negative and positive values do not weigh on the interpretation of t-values).* 
 
 ### Chinstrap Penguins
 
-The final round of tests is run on the Chinstrap Penguins. Wy assumption is that both the p- and t- values will be smaller than those of the other two species. 
+The final round of tests is run on the Chinstrap Penguins. My assumption is that both the p- and t- values will be smaller than those of the other two species. 
 
 #### Summary
 
@@ -159,18 +166,25 @@ The final round of tests is run on the Chinstrap Penguins. Wy assumption is that
 
 It's looking like a much narrower size difference.
 
+### T-test
 ```{r, Chinstrap_T-test2}
 ```
 
+The Chinstrap data represented here, while still showing a significance in dimorphism, shows a much lower t-value (-5.2077) than the two other species tested.
+
 ### Sexual Size Dimorphism Conclusions
 
-It looks like the data supports my assumptions. The Chinstrap Penguins present much differently than the other species in terms of Sexual Dimorphism. Both the p- and t- values noticebly differed. I wanted to test the statistical difference between the t-test results, but I am not sure how to do that and I am too short on time for this assignment to figure it out. 
+It looks like the data supports my assumptions. The Chinstrap Penguins present much differently than the other species in terms of Sexual Dimorphism. Both the p- and t- values noticebly differed. I wanted to test the statistical difference between the t-test results, but I am not sure how to do that and I am too short on time for this assignment to figure it out. Regardless, suggesting that the overall reduced body mass range in Chinstrap Penguins relative to Adelie and Gentoo Penguins as an outcome of reduced sexual dimorphism seems like a plausible explanation. 
 
 # Differentiating between Adelie and Chinstrap penguins on Dream Island
 
-Despite the differences in sexual dimorphism, the Chinstrap and Adelie Penguins seem to cluster closely in Body Mass. With their geographic overlap on Dream island, my next question concerns the morphological distinction between the two species. I wonder if, with the current available data, I can see the justification for differentiating the two populations as different species. 
+Despite the differences in sexual dimorphism, the Chinstrap and Adelie Penguins seem to cluster closely in body mass. With their geographic overlap on Dream island, my next question concerns the morphological distinction between the two species. I consider whether, with the current available data, I can see the justification for differentiating the two populations as different species. 
 
-In examining photos of the two birds, the phenotypic differences are distinct. As a paleontologists, however, I do not often have the ability to examine soft tissue (including feathers). Thus, for my own purposes, I'd like to see just how vague physical measurements can be in phylogenitic pursuits. I will acknowledge here that the measurements provided to us here were taken from specimens in the flesh, and so the results of this inquiry will not directly translate to my interests, but it is a starting point. 
+In examining photos of the two birds, the phenotypic differences are distinct. As a paleontologists, however, I do not often have the ability to examine soft tissue. Thus, for my own purposes, I'd like to see just how vague physical measurements can be in phylogenetic pursuits. I will acknowledge here that the measurements provided to us here were taken from specimens in the flesh, and so the results of this inquiry will not directly translate to my interests, but it is a starting point. 
+
+This final question seeks to determin if there are proportional differences in Flipper and Culmen dimensions for the two penguin species that might help to differentiate them.
+
+*I will note here that I did not come into this class with a statistics background. This is on the docket for next term. With that said, it seemed like one potential means of answering this question was to run a principal components analysis for each of the morphological variables given but omitting body mass. And so, this became my agenda.*
 
 ::: {layout-ncol=2}
 ![Chinstrap Penguin](Chinstrap.jpg){Width=30%}
@@ -178,27 +192,24 @@ In examining photos of the two birds, the phenotypic differences are distinct. A
 ![Adelie Penguin](Adelie.jpg){Width=50%}
 :::
 
-## Bivariate Plots
+## Summary Data for Adelie and Chinstrap Penguins
 
-As we did in the first part of the project, I begin testing this question by plotting the different morphological data I am given against Body Mass. This time around, however, I specify the species and island of interest. I mightloosen the geographic constraints as I progress but it seems best to start with where the occur sympatrically. 
-
-I Begin this process by removing Gentoo Penguins from the analysis. The additional morphological data includes Culmen Length, Culmen Depth, and Flipper Length. 
-
+I begin this process by removing Gentoo Penguins from the analysis.
 
 ```{r, nogentoo}
 ```
 Before plotting each variable, I wanted to get a broad graphical look at the interspecific variation in the variables I hadn't yet tested. 
 
-This task was accomplished by installing the GGally package 
+This task was accomplished by installing the GGally package. Using GGally, I generated bivariate plots for all morphological variables other than Body Mass.
 
 ```{r, Ad~Cs1}
 ```
-From this set of images it looks like the starkest difference between the two penguin species is represented by Culmen length. I should be able to test this against the other variables by running a principal components analysis. I omit Body Mass as a variable because I am more interested in shape based data at the moment.
+From this set of images it looks like the starkest differences between the two penguin species are the Culmen Length and the Flipper Length, with Culmen Depth being fairly negligable. I want to be sure that these figures represent statistically powerful data though and so I run the Principal Components analysis to determine which variables are most significant.
 
 ```{r, Ad~Cs2}
 ```
 
-Shows pretty clearly that the most variation is found in pc1 (~77%) with a fairly steep drop with pc2 (~22%) and negligable scores for pc3.
+This analysis shows pretty clearly that the most variation is found in pc1 (~77%) with a fairly steep drop with pc2 (~22%) and negligable scores for pc3.
 
 ```{r, Ad~Cs3}
 ```
@@ -209,3 +220,5 @@ The plot shows variation and when demarcating the species, shows distinct groupi
 
 ```{r, Ad~Cs4}
 ```
+This illustrates that there are distinct proportional differences in Culmen Length and Flipper Length between the two species. Finally, I will run an ANOVA for these variables. 
+

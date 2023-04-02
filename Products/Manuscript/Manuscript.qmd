@@ -1,7 +1,7 @@
 ---
-title: "Example Manuscript Template for a Data Analysis Project"
+title: "Palmer Penguins Analysis"
 subtitle: ""
-author: Marguerite Butler
+author: Daniel Cusimano
 date: "`r Sys.Date()`"
 format:
   docx:
@@ -94,6 +94,29 @@ _Note the data is loaded using a **relative** path indicated by the `../../` not
 options(knitr.kable.NA = "")  # supresses printing of NAs
 resulttable=readRDS("../../Results/summary_table.rds")
 knitr::kable(resulttable, digits=2)
+```
+
+```{r}
+#| label: cor_plots
+#| fig-cap: "Body Mass Correlations"
+#| echo: FALSE
+knitr::include_graphics("../../Results/Figures/Dimorphism/cor_plots.png")
+```
+
+
+
+```{r}
+#| label: penguins_MassV
+#| fig-cap: "Species Body Mass Distribution"
+#| echo: FALSE
+knitr::include_graphics("../../Results/Figures/Dimorphism/penguins_MassV.png")
+```
+
+```{r}
+#| label: Dimorphism_violin
+#| fig-cap: "Body Mass Dimorphism~Species"
+#| echo: FALSE
+knitr::include_graphics("../../Results/Figures/Dimorphism/Dimorphism_violin.png")
 ```
 
 ## Size

@@ -15,12 +15,17 @@ require(magrittr) #for piping
 require(knitr) #for formatting output
 require(dplyr) 
 require(report)
+require(patchwork) #for grouping plots together
+require(GGally)
+
 
 #path to data and results 
 data_path <- "../../Data/Processed_data/"
 results_path <- "../../Results/"
 figures_path <- "../../Results/Figures/"
 dimorphism_path <- "../../Results/Figures/Dimorphism/"
+stats_path <- "../../Results/Statistics/"
+PC_path <- "../../Results/Statistics/Princomp/"
 
 
 ## ---- functions ----
@@ -74,48 +79,81 @@ saveRDS(sk.table, file = addpath("summary_table.rds", results_path))
 # Distribution of Body Mass by Species
 #
 #
-# The following plot shows the distribution of Body Mass across Penguin Species
-#
-# I Begin with a density plot to show Species distribution of Body Mass
-## ---- Dimorphism1 --------
-p <- dat %>%
-  ggplot( aes(x=dat$'Body Mass', col=Species)) +
-  geom_density(linewidth=0.75) +
-  labs(
-  title="Body Mass by Species",
-  x='Body mass (mm)', y='Count',
-  color='Species'
+#We closed out our first project by creating bivariate plots for all of the continuous variables in our dataset.
+
+#Each of the morhpological data was specifically plotted against body mass to develop an idea of how these features correlated with overall size.
+
+#This series of plots is designed to summarize that data. 
+
+## ---- summary_plots --------
+
+x <- dat |> ggplot(aes(dat$'Body Mass', dat$'Culmen Depth', color=Species, fill=Species)) +
+ geom_point() +
+ geom_smooth(method=lm, se = FALSE) +
+labs(
+ subtitle="Body Mass by Culmen Depth",
+ x='Body mass (mm)', y='Culmen Depth (mm)',
  ) +
- scale_color_brewer(palette="Dark2")
-p
+  scale_color_brewer(palette="Dark2")
 
-## ---- saveImage1 --------
+x1 <- dat |> ggplot(aes(dat$'Body Mass', dat$'Culmen Length', color=Species, fill=Species)) +
+ geom_point() +
+ geom_smooth(method=lm, se = FALSE) +
+labs(
+ subtitle="Body Mass by Culmen Length",
+ x='Body mass (mm)', y='Culmen Length (mm)',
+ ) +
+  scale_color_brewer(palette="Dark2")
 
-#Save Image
+x2 <- dat |> ggplot(aes(dat$'Body Mass', dat$'Flipper Length', color=Species, fill=Species)) +
+ geom_point() +
+ geom_smooth(method=lm, se = FALSE) +
+labs(
+ subtitle="Body Mass by Flipper Length",
+ x='Body mass (mm)', y='Flipper Length (mm)',
+ ) +
+  scale_color_brewer(palette="Dark2")
 
-ggsave(filename=addpath("Penguins_Body_Mass_~Species.png", dimorphism_path), plot=p)
+x3 <- ggplot(data = dat, aes(x = dat$'Body Mass')) +
+geom_histogram( aes(fill=Species), alpha=.3) +
+  labs(
+  subtitle="Body Mass",
+  x='Body Mass (g)', y='Count',
+  color='Species'
+ ) 
 
-#I wanted a clearer illustration of the Body Mass in each species. Created a Violin Plot that separated the species along the x-axis and inserted a jitter to show the data points within. 
+require(patchwork)
 
-## ---- Dimorphism2 --------
+cor_plots <- x + x1 + x2 + x3 + plot_layout(ncol=2, guides = "collect")
 
-p <- dat %>%
+cor_plots
+
+ggsave(filename=addpath("cor_plots.png", dimorphism_path), plot= cor_plots)
+
+# The following plot shows the distribution of Body Mass across Penguin Species. 
+#
+# I Begin with a density plot to show Species distribution of Body Mass.
+## ---- Dimorphism1 --------
+
+
+p2 <- dat %>%
   ggplot( aes(x=Species, y=dat$'Body Mass', col=Species)) +
   geom_violin(trim=FALSE) +
   geom_jitter() +
   labs(
   title="Body Mass by Species",
-  x='Body mass (mm)', y='Count',
+  x='Species', y='Body Mass (g)',
   color='Species'
  ) +
  scale_color_brewer(palette="Dark2")
 
-p
+p2
+ggsave(filename=addpath("penguins_MassV.png", dimorphism_path), plot=p2)
 
 ## ---- saveImage2 --------
 #Save Image 
 
-ggsave(filename=addpath("Penguins_Body_Mass_~Species_violin.png", dimorphism_path), plot=p)
+ggsave(filename=addpath("Penguins_Body_Mass_~Species_violin.png", dimorphism_path), plot=p2)
 
 # I like this plot. It illustrates that Adelie and Gentoo penguins have a wider range in Body Mass than do Chinstrap Penguins.
 #My question is whether these wider ranges in Body Mass reflect stronger Sexual Size Dimorphism in Adelie and Gentoo Penguins than in Chinstrap Penguins. 
@@ -123,16 +161,16 @@ ggsave(filename=addpath("Penguins_Body_Mass_~Species_violin.png", dimorphism_pat
 #Create a plot that differentiates sample by sex and species
 
 ## ---- Dimorphism3 --------
-p <- dat %>%
+p3 <- dat %>%
 ggplot(aes(x=Sex, y=dat$'Body Mass', fill=Species)) +
 geom_violin(trim=FALSE) +
 labs(
 title="Body Mass by Species and Sex",
-x='Sex', y='Body Mass (g)',
+x='Species', y='Body Mass (g)',
 color='Species'
 ) +
 scale_fill_brewer(palette="Dark2")
-p
+p3
 
 ## ---- subsetting1 --------
 #The NA values add an extra variable that complicates the image. Subset out NA's.
@@ -142,7 +180,7 @@ d1 <- dat[ !is.na(dat$"Sex"), ]
 
 ## ---- Dimorphism4 ---------
 
-p <- d1 %>%
+p4 <- d1 %>%
 ggplot(aes(x=Species, y=d1$'Body Mass', fill=Sex)) +
 geom_violin(trim=FALSE) +
 labs(
@@ -151,43 +189,41 @@ x='Sex', y='Body Mass (g)',
 color='Species'
 ) +
 scale_fill_brewer(palette="Dark2")
-p
+p4
 
 # Plot shows clear dimorphism with Gentoo Penguins. It also illustrates stronger dimorphism in Adelie than Chinstrap populations but it is more subtle. 
 
 ## ---- SaveImage3 --------
 
-ggsave(filename=addpath("Penguins_Body_Mass_Dimorphism_violin.png", dimorphism_path), plot=p)
-
-
+ggsave(filename=addpath("Dimorphism_violin.png", dimorphism_path), plot=p4)
 
 #
 #I need to represent this Sexual Size Dimorphism statistically.
-#This can be done by menas of a Welch's Two Sample T-test
+#This can be done by means of a Welch's Two Sample T-test
 # I run the test for each species
-
-
 # For the Adelie Penguins I first subset the species and remove NA values
 
 ## ---- Adelie_T-test1 --------
 
 #Subset the Species
 d2 <- dat[dat$Species=="Adelie", ]
+
 #Remove the NA values
+
 d2 <- d2[ !is.na(d2$"Sex"), ]
 
-#I want to get a quick glimpse at the difference in Body Mass between Male and Female
-#I found that the report package is nice for this
-
+#report data grouping by Sex and Body Mass
 
 Adelie_report <- report_sample(d2, group_by = "Sex", select = "Body Mass")
 
 print(Adelie_report)
 
-saveRDS(Adelie_report, file = addpath("Adelie_Dimorphism_Report.rds", results_path))
+
+## ---- SaveTable --------
+
+saveRDS(Adelie_report, file = addpath("Adelie_Dimorphism_Report.rds", stats_path))
 
 ## ---- comment1 --------
-
 
 #To test the means of each population (Male and Female) I need to filter the population into individual vectors
 
@@ -198,14 +234,15 @@ female <- d2 %>%
 male <- d2 %>%
  filter(Sex == "MALE")
 
-# Then I can run the analysis
+# Run a two sample t-test after filtering the data
 
 t.test.Ad <- t.test(female$'Body Mass', male$'Body Mass') 
 
 print(t.test.Ad)
-## ---- Save_table2 --------
 
-saveRDS(t.test.Ad, file = addpath("Adelie_Dimorphism_ttest.rds", results_path))
+## ---- SaveTable2 --------
+
+saveRDS(t.test.Ad, file = addpath("Adelie_Dimorphism_ttest.rds", stats_path))
 
 ## ---- Gentoo_T-test1 --------
 
@@ -214,33 +251,35 @@ saveRDS(t.test.Ad, file = addpath("Adelie_Dimorphism_ttest.rds", results_path))
 d3 <- dat[dat$Species=="Gentoo", ]
 d3 <- d3[ !is.na(d3$"Sex"), ]
 
+#Same process as above
 
 Gentoo_report <- report_sample(d3, group_by = "Sex", select = "Body Mass")
 
 print(Gentoo_report)
 
-saveRDS(Gentoo_report, file = addpath("Gentoo_Dimorphism_Report.rds", results_path))
 
-## ---- comment1 --------
+## ---- SaveTable3 --------
 
+saveRDS(Gentoo_report, file = addpath("Gentoo_Dimorphism_Report.rds", stats_path))
 
-#To test the means of each population (Male and Female) I need to filter the population into individual vectors
 
 ## ---- Gentoo_T-test2 --------
 
+# Filter the data
 female <- d3 %>%
  filter(Sex == "FEMALE")
 male <- d3 %>%
  filter(Sex == "MALE")
 
-# Then I can run the analysis
+# Run the analysis
 
 t.test.Gt <- t.test(female$'Body Mass', male$'Body Mass') 
 
 print(t.test.Gt)
-## ---- Save_table2 --------
 
-saveRDS(t.test.Gt, file = addpath("Gentoo_Dimorphism_ttest.rds", results_path))
+## ---- SaveTable4 --------
+
+saveRDS(t.test.Gt, file = addpath("Gentoo_Dimorphism_ttest.rds", stats_path))
 
 ## ---- Chinstrap_T-test1 --------
 
@@ -253,40 +292,39 @@ d4 <- dat[dat$Species=="Chinstrap", ]
 
 d4$Sex
 
-#I want to get a quick glimpse at the difference in Body Mass between Male and Female
-#I found that the report package is nice for this
-
+#Report on the data
 
 Chinstrap_report <- report_sample(d4, group_by = "Sex", select = "Body Mass")
 
 print(Chinstrap_report)
 
-saveRDS(Chinstrap_report, file = addpath("Chinstrap_Dimorphism_Report.rds", results_path))
+## ---- SaveTable5 --------
 
-## ---- comment1 --------
+saveRDS(Chinstrap_report, file = addpath("Chinstrap_Dimorphism_Report.rds", stats_path))
 
-
-#To test the means of each population (Male and Female) I need to filter the population into individual vectors
 
 ## ---- Chinstrap_T-test2 --------
+
+#Filter the data
 
 female <- d4 %>%
  filter(Sex == "FEMALE")
 male <- d4 %>%
  filter(Sex == "MALE")
 
-# Then I can run the analysis
+# Run the analysis
 
 t.test.Cs <- t.test(female$'Body Mass', male$'Body Mass') 
 
 print(t.test.Cs)
-## ---- Save_table2 --------
 
-saveRDS(t.test.Cs, file = addpath("Chinstrap_Dimorphism_ttest.rds", results_path))
+## ---- SaveTable6 --------
+
+saveRDS(t.test.Cs, file = addpath("Chinstrap_Dimorphism_ttest.rds", stats_path))
 
 ###############################################
 #                                             #
-#Question 2 Adelie and Chinstrap Distinction  #
+#Question 3 Adelie and Chinstrap Distinction  #
 #                                             #
 ###############################################
 
@@ -304,35 +342,38 @@ b1 <- droplevels(b1)
 
 #Run a summary to get a quick look at the data means for each species
 
- b1 %>%
+c1 <- b1 %>%
 select(-starts_with("Delta")) %>%
 group_by(Species) %>%
 report(exclude = "b1$Gentoo") %>%
 summary()
+c1
 
-#Before I star plotting each variable, I wanted to get a broad graphical look at the interspecific variation in the variables I hadn't yet tested. 
+## ---- SaveTable6 --------
 
-#This task was accomplished by installing the GGally package 
+saveRDS(c1, file = addpath("Ad_Cs_summary_data.rds", stats_path))
 
 ## ---- Ad~Cs1 ---------
 
 require(GGally)
 
-# Using GGally, I established that I wanted to create bivariate plots for all of the variables ending with "th". These include Culmen Length, Culmen Depth, and Flipper Length. 
+# Select the factor and continuous variables to plot. 
 
-b1 %>%
+c2 <- b1 %>%
   select(Species, ends_with("th")) %>% 
   GGally::ggpairs(aes(color = Species)) +
   scale_color_brewer(palette="Dark2") +
   scale_fill_brewer(palette="Dark2")
+c2
+  
+## ---- SaveImage7 --------
+
+ggsave(filename=addpath("GGally.png", dimorphism_path), plot=c2)
   
 ## ----Ad~Cs2 --------
 
-#From this set of images it looks like the starkest difference between the two penguin species is represented by Culmen length
-
-#I should be able to test this against the other variables by running a principal components analysis.
-
-#I omit Body Mass as a variable because I am more interested in shape based data at the moment.
+#Remove Body Mass by selecting for other variables only.
+#Run Principal Components analysis with princomp function. 
 
 b2 <- b1 %>%
 select("Culmen Length", "Culmen Depth", "Flipper Length") 
@@ -343,6 +384,10 @@ pcsum <- summary(b2.pc)
 
 print(pcsum)
 
+## ---- SaveTable7 --------
+
+saveRDS(pcsum, file = addpath("pcsum.rds", PC_path))
+
 ## ---- Ad~Cs3 ---------
 
 #Shows pretty clearly that the most variation is found in pc1 (~77%) with a fairly steep drop with pc2 (~22%) and negligable scores for pc3.
@@ -352,6 +397,9 @@ loadings(b2.pc)
 pcload <- loadings(b2.pc)
 print(pcload)
 
+## ---- SaveTable8 --------
+
+saveRDS(pcload, file = addpath("pcload.rds", PC_path))
 
 ## ---- Ad~Cs4 ---------
 #PC1 illustrates that most of the variation with the sample is found in Flipper Length. Second to that is the distribution of Culmen Length Values. Importantly, it does not seem from this that Culmen Depth factors into the variation within this population. 
@@ -364,4 +412,7 @@ pc2 <- b2.pc$scores[,2]
 pc3 <- b2.pc$scores[,3]
 plot(pc2 ~ pc1, col=b1$Species, cex=2, pch=16)
 
+##----SaveImage8 --------
+
+ANOVA
 
