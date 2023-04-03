@@ -4,36 +4,36 @@ author: "Daniel Cusimano"
 date: "03/30/2023"
 output: html_document
 ---
-This is going to be a working process that will ultimately trim a lot of fat along the way (including this explanation). The goal is for me to set up the webpage with the needed stats and images and then to edit by adding text content and removing the template content. 
-  
-All of the original content will be below my workstream until I am ready to remove it. 
-  
-This Quarto file loads the cleaned Palmer Penguins data and does some initial analysis. I find this step very helpful for seeing what results you have to work with for your talk or paper/final report. 
 
-Some of what is written below is for you. I would like you to modify this quarto file to produce a document customized for your analysis and written to explain your thinking in your data analysis so feel free to modify as much as you wish. 
+## Introduction
+### Source Data and Code
 
-It is worth taking a minute to reflect on where we are in the data analysis workflow. The purpose of the previous processing document was to document data cleaning and processing in preparation for analysis. You saw that as part of the cleaning and processing step, we already had to explore the data somewhat to understand how to clean it. In general, as you explore, you find more things that need cleaning. As you clean, you find more to explore. 
+This Quarto file loads the results of a multivariate morphological analysis of the Palmer Penguins dataset. The data used for this project was previous cleaned by the author and can be accessed through https://github.com/cusisom/cusimano-rclass-project. In addition to the original data and r code for cleaning and analysis, this github site contains all of the figures and tables used in this summary as well as the finished manuscript for the project. For more information on the associated repo, follow the link provided above and refer to the site README.  
 
-# The need to document your workflow
-
-Although we broke our workflow in this project into cleaning and analysis steps, depending on your project, it may be more logical to divide the scripts in other ways. The organization should naturally reflect the workflow. 
-
-In rather clean datasets at times it might make more sense to combine the cleaning and exploring code parts into a single R or Quarto file. _But if you do have real errors to fix, you will want to carefully document cleaning steps_, and probably not redo the cleaning each time you want to get a bit further on your data exploration and analysis. Itʻs a lot of baggage to carry around and also errors might creep in if you are keeping code in your script that you are not actively working on. 
-
-When there are natural breaks in the workflow (i.e., when you close the door on cleaning or on a first analysis), it can be a good idea to have start a new script because once you clean your data, you will have a new starting point for all of your downstream analyses (and not look back at the really raw data, unless you want to change your mind about some of the cleaning - thus the need for keeping an original raw data file and documenting all the steps).  
-
-This can also come up when you have a multi-stage analysis. In very complex analyses, it can make a lot of sense to have separate scripts for major analyses or workflow steps. As always, use your jugement, and be intentional about your organization. Clean organization = clear thinking.  
+While the script for used by this Quarto file contains all of the analysis, the analysis script has also been segmented into four distinct sections in the `Code_sections` folder for individual review (Data Summary, Body Mass Analysis, Sexual Dimorphism, and Analysis of Variance). These sections are also clearly delineated in the primary analysis code (analysiscode.R). 
 
 
-# Analysis 
+## Analysis 
 
-If you did a good job in the previous step, you should have a pretty good idea of the structure of the data. 
+The focus of this study is one morphological variation in the three penguin species reviewed in the dataset. While the first section of this overview details a summary of all of the Palmer Penguins data, the following sections omit information which pertains to Carbon 13 and Nitrogen 15. 
 
-For this part of the project, develop three questions and use your R skills to answer them. Begin by producing a summary table of the data that could be included in a future paper. You should produce plots or tables and/or statistics or model fits to address your questions. 
+The primary sections of this review pertain to three interrelated research questions. These sections/questions are as follows:
+	
+	I. Body Mass Distribution: Identifying areaas of Interspecific and Intraspecific Variation
+	
+	II. Analysis of Sexual Dimorphism
+	
+	III. Differentiating between Adelie and Chinstrap penguins. Shape Profile Analysis
+
+####*Note about statistics
+
+Much of the difficulty experienced throughout this project comes from the author's lack of statistical training. I opted to take this course this term instead of a statistics course due to unlikely event of it being offered again during my time at UH. While I did my best to apply the necessary statistical analyses and appropriately interpret the results, I am not currently confident in my application.* 
 
 # Setup
 
-The setup has mostly remained the same except that I am adding dplyr and various new files paths
+To run this R script, users must install and require a variety of packages. Our template for this project included some of what is seen below but packages such as `report()`, `patchwork()`, and `Ggally()` were added by the author. There are many new file paths also developed by the author to funnel the various analysis products to the right location. 
+
+Finally, as was done for the data cleaning output, this quarto makes use of code chunks and therefore required the use of the knitr read chunk function. 
 
 ```{r }
 #| cache = FALSE
@@ -47,7 +47,7 @@ Load needed packages and filepaths.
 #| warning: FALSE
 ```
 
-Load custom functions. I haven't messed with this mostly because I don't fully understand it. 
+Load custom function to facilitat efficient path funneling. 
 
 ```{r functions}
 ```
@@ -57,22 +57,24 @@ Load the data.
 ```{r loaddata}
 ```
 
-# Create a summary table
+# Summary Table
 
-In any paper you should always report a summary of the data. This includes basic statsistics for your data including sample size, counts, and means and standard errors for continuous data. 
+With the data cleaned in the last project, it is worth displying here the information that is being worked with in this analysis. For ease of access and brief review, I am utilizing the skimr function but setting the information up in a dataframe ratherr than a tibble. With this I can more easily illustrate different chunks of information. 
 
-Here we will use skimr which produces a summary table, but with more than we want. Letʻs save it as an object so we can grab the elements we want. 
-
-It turns out that the `skim()` function returns a tibble. We can coerce it to a dataframe and use `head()` to see what the column names are and what the data look like. 
 
 ```{r, summarize}
 ```
 
-## Select columns for a final summary table
+## Publishing Summary Table
 
-Letʻs retain only the variable, N, mean, sd, and category counts, but letʻs rename them. Since we will use the SD to compute the stadard error letʻs just rename it as SE now and save a step later.  (Remember the standard error is just the standard deviation/ square root(sample size)). 
+While the above summary data is informative and useful for this overview, it is not in a format that is ready for publication. Using the following code, I am able to specify the summary statistics that are most useful for quick reference, rename the columns, and, using `knitr`, transform the table into a presentation format. This will be combined with the `results=asis` command to maintain a polished format when applicable. 
 
-Note: The `results="asis"` is an option for `knitr` to layout the the results without the code formatting. Normally output from code chunks has the look of R output. `"asis"` (as in "as is", lol) removes that behavior, so we can lay it out as a typeset table for print. 
+*Note-
+
+I tried applying the knitr.kable method for some of my analytical results but it would change some of the values. I'm sure there is some coding trick to make this work better, I couldn't quite figure it out.*
+
+
+
 
 ```{r summary.table, results="asis"}
 ```
@@ -84,6 +86,7 @@ Note: The `results="asis"` is an option for `knitr` to layout the the results wi
 We closed out our first project by creating bivariate plots for all of the continuous variables in our dataset. Each of the morhpological data was specifically plotted against body mass to develop an idea of how these features correlated with overall size. This series of plots is designed to summarize that data.
 
 ```{r, summary_plots}
+#| message: FALSE
 ```
 
 I am first interested in the size distribution of the Palmer Penguins. I begin by examining the inter- and intraspecific variation in body mass. This is represented in the histogram in the bottom right of the above figure. 
@@ -203,6 +206,7 @@ Before plotting each variable, I wanted to get a broad graphical look at the int
 This task was accomplished by installing the GGally package. Using GGally, I generated bivariate plots for all morphological variables other than Body Mass.
 
 ```{r, Ad~Cs1}
+#| message: FALSE
 ```
 From this set of images it looks like the starkest differences between the two penguin species are the Culmen Length and the Flipper Length, with Culmen Depth being fairly negligable. I want to be sure that these figures represent statistically powerful data though and so I run the Principal Components analysis to determine which variables are most significant.
 
@@ -242,10 +246,12 @@ The next step was to differentiate the mean Culmen Length value for each species
 I first plot the data for the whole assemblage. Especially when embedding the variance lines, there is a pretty distinct difference in how the data is clustered. 
 
 ```{r, anovaCL3}
+#| warning: FALSE
 ```
 The next step was to illustrate the species differences. I was successful in showing where the different species lie on the plot but, again, I could not illustrate the differences in Culmen Length mean for each species. 
 
 ```{r, anovaCL4}
+#| warning: FALSE
 ```
 
 While my plot did not work out quite the way I wanted it to, I was successful in illustrating that the Adelie and Chinstrap penguins significantly differ in the distribution of Culmen Length values.
@@ -272,21 +278,21 @@ Once again, the means map the same (same for the larger dataset mean) for each s
 I run through the same plotting process for Flipper Length as I did for Culmen Length. 
 
 ```{r, anovaFL3}
+#| warning: FALSE
 ```
 Despite getting the above warning on all of these plots, the analysis in r does not work if I follow the suggestion. Thus, I have to keep the y$"FLipper Length" syntax.
 
 By differentiating the species by line color in the below plot, I could again illustrate each species' relationship with the mean value of Flipper Length. This analysis, however, looks much different than the prior one. While there is a noticable difference in where the species means would lie if differentiated, it is a much smaller difference than with Culmen Length. 
 
 ```{r, anovaFL4}
+#| warning: FALSE
 ```
 
 I run the ANOVA and still see a significant statistical difference. I need to brush up on my chops a bit and figure out how to interpret this in a way that corroborates my interpretation from the plots. Saying that both of these variables are significantly different in each species is fine, but one variable seems to be clearly more meaningful.
 
-# Conclusion
-
-I would end this analysis by suggesting that besides Sexual Size Dimorphism, the Adelie and Chinstrap penguins can be differentiated through morphometric data by means of examining the Culmen Length. I am assuming here that the difference in flipper length between the two species is more a product of overall size difference (Flipper Length correlating with Body Mass). I know there are additional ways of testing this but that will be a goal for further research.  
-
-
 ```{r, anovaFL5}
 ```
 
+# Conclusion
+
+I would end this analysis by suggesting that besides Sexual Size Dimorphism, the Adelie and Chinstrap penguins can be differentiated through morphometric data by means of examining the Culmen Length. I am assuming here that the difference in flipper length between the two species is more a product of overall size difference (Flipper Length correlating with Body Mass). I know there are additional ways of testing this but that will be a goal for further research.  

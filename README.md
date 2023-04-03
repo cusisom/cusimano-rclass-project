@@ -9,6 +9,10 @@ I am intentionally keeping most of the original content in here until the projec
 
 2023-03-13 Data cleaning submitted to satsify Project 1. Results can be seen in the Data/Processed Data folder and the Code/Processing Code folder. 
 
+2023-04-02 Palmer Penguins analysis submitted to satisfy Project 2. Results can be seen in the `Code/Analysis_code` folder. Tables and figures can be found in the `Results/Figures` and `Results/Statistics` folders. The Manuscript for this analysis can be found in the `Products/Manuscript` folder.
+
+-For easy overview of the project and r code, refer to the exploratory_analysis.html file.
+
 # Acknowledgement
 
  This template was cloned and modified from <https://github.com/andreashandel/dataanalysis-template>

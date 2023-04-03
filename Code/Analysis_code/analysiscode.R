@@ -40,6 +40,15 @@ addpath <- function( filename, path=data_path ) {
 # load data. 
 dat <- readRDS( addpath("penguins.rds", data_path) )
 
+## ---- Break --------
+
+########################################################
+#                                                      #
+################ Data Summary ##########################
+#                                                      #
+########################################################
+
+
 
 ## ---- summarize ----
 # create summary table of the data using skimr to use in paper
@@ -66,26 +75,19 @@ knitr::kable(sk.table, digits=2)
 # save summary table
 saveRDS(sk.table, file = addpath("summary_table.rds", results_path))
 
+## ---- Break --------
 
-## ---- header ----
-######################################
-# Data fitting/statistical analysis
-######################################
-
-############################
-#### First model fit
-#
-#
-# Distribution of Body Mass by Species
-#
-#
-#We closed out our first project by creating bivariate plots for all of the continuous variables in our dataset.
-
-#Each of the morhpological data was specifically plotted against body mass to develop an idea of how these features correlated with overall size.
-
-#This series of plots is designed to summarize that data. 
+############################################################
+#                                                          #
+#          Distribution of Body Mass by Species            #
+#                                                          #
+############################################################
 
 ## ---- summary_plots --------
+
+# Generate bivariate plot of Culmen Depth~Body Mass
+# Use geom_smooth to add in the correlation line
+#Subtitle instead of title for easier small font
 
 x <- dat |> ggplot(aes(dat$'Body Mass', dat$'Culmen Depth', color=Species, fill=Species)) +
  geom_point() +
@@ -96,6 +98,8 @@ labs(
  ) +
   scale_color_brewer(palette="Dark2")
 
+# Generate bivariate plot of Culmen Length~Body Mass
+
 x1 <- dat |> ggplot(aes(dat$'Body Mass', dat$'Culmen Length', color=Species, fill=Species)) +
  geom_point() +
  geom_smooth(method=lm, se = FALSE) +
@@ -104,6 +108,8 @@ labs(
  x='Body mass (mm)', y='Culmen Length (mm)',
  ) +
   scale_color_brewer(palette="Dark2")
+
+# Generate bivariate plot of Flipper Length~Body Mass
 
 x2 <- dat |> ggplot(aes(dat$'Body Mass', dat$'Flipper Length', color=Species, fill=Species)) +
  geom_point() +
@@ -114,6 +120,8 @@ labs(
  ) +
   scale_color_brewer(palette="Dark2")
 
+# Generate histogram showing the distribution of Body Mass for each species
+
 x3 <- ggplot(data = dat, aes(x = dat$'Body Mass')) +
 geom_histogram( aes(fill=Species), alpha=.3) +
   labs(
@@ -122,19 +130,28 @@ geom_histogram( aes(fill=Species), alpha=.3) +
   color='Species'
  ) 
 
+#Show these plots in a single grid.
+#Allows them to be considered together.
+#Need specific package to create this layout
+
 require(patchwork)
 
+#With patchwork I can use the plus sign (+) to combine the plots in a grid
+#Specify the number of column you want
+#Use "collect" to gather the common key for the plots and display it independantly instead of with each. 
 cor_plots <- x + x1 + x2 + x3 + plot_layout(ncol=2, guides = "collect")
 
 cor_plots
 
-ggsave(filename=addpath("cor_plots.png", dimorphism_path), plot= cor_plots)
+## ---- SaveImage --------
 
-# The following plot shows the distribution of Body Mass across Penguin Species. 
-#
-# I Begin with a density plot to show Species distribution of Body Mass.
+ggsave(filename=addpath("cor_plots.png", figures_path), plot= cor_plots)
+
+#Narrow in on Body Mass distribution 
+#Violin plot shows mirrored bell curves and visually accentuates the data range
+#Add geom_jitter to illustrate how individual data points align
+
 ## ---- Dimorphism1 --------
-
 
 p2 <- dat %>%
   ggplot( aes(x=Species, y=dat$'Body Mass', col=Species)) +
@@ -148,35 +165,28 @@ p2 <- dat %>%
  scale_color_brewer(palette="Dark2")
 
 p2
-ggsave(filename=addpath("penguins_MassV.png", dimorphism_path), plot=p2)
+
+## ---- SaveImage1 --------
+
+#I'm choosing to keep the code for saving images and tables hidden. Not sure if this is okay for the assignment but I think it makes the quarto file cleaner. 
+
+ggsave(filename=addpath("penguins_MassV.png", figures_path), plot=p2)
 
 ## ---- saveImage2 --------
-#Save Image 
 
 ggsave(filename=addpath("Penguins_Body_Mass_~Species_violin.png", dimorphism_path), plot=p2)
 
-# I like this plot. It illustrates that Adelie and Gentoo penguins have a wider range in Body Mass than do Chinstrap Penguins.
-#My question is whether these wider ranges in Body Mass reflect stronger Sexual Size Dimorphism in Adelie and Gentoo Penguins than in Chinstrap Penguins. 
-
+#
 #Create a plot that differentiates sample by sex and species
-
-## ---- Dimorphism3 --------
-p3 <- dat %>%
-ggplot(aes(x=Sex, y=dat$'Body Mass', fill=Species)) +
-geom_violin(trim=FALSE) +
-labs(
-title="Body Mass by Species and Sex",
-x='Species', y='Body Mass (g)',
-color='Species'
-) +
-scale_fill_brewer(palette="Dark2")
-p3
+# Basic Violin plot 
+#First attempt include NA values and added another dimension to plot
+#Be sure to remove NA values when plotting data like this
 
 ## ---- subsetting1 --------
 #The NA values add an extra variable that complicates the image. Subset out NA's.
 d1 <- dat[ !is.na(dat$"Sex"), ]
 
-#Redo same plot with subset data
+#Plot the data without NA values to see distribution.
 
 ## ---- Dimorphism4 ---------
 
@@ -191,17 +201,18 @@ color='Species'
 scale_fill_brewer(palette="Dark2")
 p4
 
-# Plot shows clear dimorphism with Gentoo Penguins. It also illustrates stronger dimorphism in Adelie than Chinstrap populations but it is more subtle. 
-
 ## ---- SaveImage3 --------
 
-ggsave(filename=addpath("Dimorphism_violin.png", dimorphism_path), plot=p4)
+ggsave(filename=addpath("Dimorphism_violin.png", figures_path), plot=p4)
 
-#
-#I need to represent this Sexual Size Dimorphism statistically.
-#This can be done by means of a Welch's Two Sample T-test
-# I run the test for each species
-# For the Adelie Penguins I first subset the species and remove NA values
+#################################################################
+#                                                               #
+#                    Sexual Dimorphism                          #
+#                                                               #
+#################################################################
+
+
+#Run statistical analysis for sexual dimorphism
 
 ## ---- Adelie_T-test1 --------
 
@@ -225,7 +236,7 @@ saveRDS(Adelie_report, file = addpath("Adelie_Dimorphism_Report.rds", stats_path
 
 ## ---- comment1 --------
 
-#To test the means of each population (Male and Female) I need to filter the population into individual vectors
+# filter the population into individual vectors
 
 ## ---- Adelie_T-test2 --------
 
@@ -257,11 +268,9 @@ Gentoo_report <- report_sample(d3, group_by = "Sex", select = "Body Mass")
 
 print(Gentoo_report)
 
-
 ## ---- SaveTable3 --------
 
 saveRDS(Gentoo_report, file = addpath("Gentoo_Dimorphism_Report.rds", stats_path))
-
 
 ## ---- Gentoo_T-test2 --------
 
@@ -322,13 +331,13 @@ print(t.test.Cs)
 
 saveRDS(t.test.Cs, file = addpath("Chinstrap_Dimorphism_ttest.rds", stats_path))
 
-###############################################
-#                                             #
-#Question 3 Adelie and Chinstrap Distinction  #
-#                                             #
-###############################################
+###########################################################
+#                                                         #
+#               Adelie and Chinstrap Distinction          #
+#                                                         #
+###########################################################
 
-# Start by removing Gentoo Penguins from your analysis
+# Start by removing Gentoo Penguins from analysis
 
 ## ---- nogentoo --------
 
@@ -368,7 +377,7 @@ c2
   
 ## ---- SaveImage7 --------
 
-ggsave(filename=addpath("GGally.png", dimorphism_path), plot=c2)
+ggsave(filename=addpath("GGally.png", figures_path), plot=c2)
   
 ## ----Ad~Cs2 --------
 
@@ -390,7 +399,7 @@ saveRDS(pcsum, file = addpath("pcsum.rds", PC_path))
 
 ## ---- Ad~Cs3 ---------
 
-#Shows pretty clearly that the most variation is found in pc1 (~77%) with a fairly steep drop with pc2 (~22%) and negligable scores for pc3.
+#Illustrate PC Loadings
 
 loadings(b2.pc)
 
@@ -402,10 +411,10 @@ print(pcload)
 saveRDS(pcload, file = addpath("pcload.rds", PC_path))
 
 ## ---- Ad~Cs4 ---------
-#PC1 illustrates that most of the variation with the sample is found in Flipper Length. Second to that is the distribution of Culmen Length Values. Importantly, it does not seem from this that Culmen Depth factors into the variation within this population. 
+ 
 
 #Because Culmen Depth is a negligable variable in this analysis, I focus on pc1 and pc2.
-#The plot shows variation and when demarcating the species, shows distinct groupings.  
+#Plot PC1~PC2
 
 pc1 <- b2.pc$scores[,1]
 pc2 <- b2.pc$scores[,2]
@@ -415,9 +424,8 @@ plot(pc2 ~ pc1, col=b1$Species, cex=2, pch=16)
 
 #ANOVA
 
-#Last step, illustrate variance in Flipper Length and Culmen Length for the two species
-#First represent this with scatter plot
-
+#Illustrate variance in Culmen Length
+#Generate dataset mean value and specific species means
 
 ## ---- anovaCL1 --------
 #Scale by individual data points by assigning IDs to each.
@@ -430,7 +438,7 @@ yhat <- mean(b1$'Culmen Length')
 
 ## ---- anovaCL2 --------
 
-#This is supposed to differentiate the means
+#This is supposed to differentiate the species means
 #CAN'T GET TO WORK
 
 spmeans  <- b1 %>% group_by(Species) %>% 
@@ -458,6 +466,9 @@ s <- z + geom_point( size=2) +
   geom_segment( data=l, aes( x = l$id, y = l$'Culmen Length', xend = id, yend = sl), color="red", lty = 3)
 
 s  
+## ---- SaveImage8 --------
+
+ggsave(filename=addpath("Cul_Len_Var1.png", figures_path), plot=s)
 
 ## ---- anovaCL4 --------
 #Highlight the species differences in variance from mean
@@ -467,15 +478,16 @@ geom_segment(data=spmeans, aes(x = minid, y = sl, xend = maxid, yend = sl, group
 geom_segment( data=l, aes( x = id, y = l$"Culmen Length", xend = id, yend = sl, color=Species), lty = 3) 
 r
 
-## ---- SaveImage8 --------
+## ---- SaveImage9 --------
 
-ggsave(filename=addpath("Cul_Len_Var.png", dimorphism_path), plot=r)
+ggsave(filename=addpath("Cul_Len_Var.png", figures_path), plot=r)
 
 ## ---- anovaCL5 --------
 
 #Run ANOVA to establish statistical difference
 lm.fit.c <- lm(b1$'Culmen Length' ~ b1$Species, data=b1)
 anova.table.c <- anova(lm.fit.c)
+rownames(anova.table.c) = c("Species", "Residuals")
 print(anova.table.c)
 
 ## ---- SaveTable9 --------
@@ -515,6 +527,10 @@ t <- o + geom_point( size=2) +
 
 t  
 
+## ---- SaveImage10 --------
+
+ggsave(filename=addpath("Flipper_Var1.png", figures_path), plot=t)
+
 ## ---- anovaFL4 --------
 
 #Highligh the species differences in variance from mean
@@ -528,16 +544,20 @@ x= "ID", y = "Flipper Length")
 
 g
 
-## ---- SaveImage9 --------
+## ---- SaveImage11 --------
 
-ggsave(filename=addpath("Flipper_Var.png", dimorphism_path), plot=g)
+ggsave(filename=addpath("Flipper_Var.png", figures_path), plot=g)
 
 ## ---- anovaFL5 --------
 #Run anova to establish statistical significance
 
-lm.fit.f <- lm(d1$'Flipper Length' ~ d1$Species, data=d1)
+lm.fit.f <- lm(b1$'Flipper Length' ~ b1$Species, data=d1)
 anova.table.f <- anova(lm.fit.f)
+rownames(anova.table.f) = c("Species", "Residuals")
 print(anova.table.f)
+
 
 ## ---- SaveTable10 --------
 saveRDS(anova.table.f, file = addpath("anova.table.f", PC_path))
+
+
