@@ -412,7 +412,132 @@ pc2 <- b2.pc$scores[,2]
 pc3 <- b2.pc$scores[,3]
 plot(pc2 ~ pc1, col=b1$Species, cex=2, pch=16)
 
-##----SaveImage8 --------
 
-ANOVA
+#ANOVA
 
+#Last step, illustrate variance in Flipper Length and Culmen Length for the two species
+#First represent this with scatter plot
+
+
+## ---- anovaCL1 --------
+#Scale by individual data points by assigning IDs to each.
+b1 <- cbind(b1, id = 1:length(b1$Species))
+
+#Establish group mean
+
+yhat <- mean(b1$'Culmen Length')  
+
+
+## ---- anovaCL2 --------
+
+#This is supposed to differentiate the means
+#CAN'T GET TO WORK
+
+spmeans  <- b1 %>% group_by(Species) %>% 
+        summarise(
+          sl = mean(b1$'Culmen Length'),
+          n = length(id),
+          minid = min(id),
+          maxid = max(id)
+        )
+
+spmeans
+
+#Species means are only representing the entire sample. Can't get it to differentiate.
+#Proceed anyways
+#Merge the means into the original dataset
+
+## ---- anovaCL3 --------
+
+l <- merge(b1, spmeans)
+
+#Plot data with means
+z <- b1 %>% ggplot(aes( x = b1$id, y = b1$'Culmen Length', group=Species)) 
+s <- z + geom_point( size=2) + 
+  geom_hline( aes(yintercept = mean(b1$'Culmen Length')) ) + 
+  geom_segment( data=l, aes( x = l$id, y = l$'Culmen Length', xend = id, yend = sl), color="red", lty = 3)
+
+s  
+
+## ---- anovaCL4 --------
+#Highlight the species differences in variance from mean
+
+r <- z + geom_point(size=2) +
+geom_segment(data=spmeans, aes(x = minid, y = sl, xend = maxid, yend = sl, group=Species)) +
+geom_segment( data=l, aes( x = id, y = l$"Culmen Length", xend = id, yend = sl, color=Species), lty = 3) 
+r
+
+## ---- SaveImage8 --------
+
+ggsave(filename=addpath("Cul_Len_Var.png", dimorphism_path), plot=r)
+
+## ---- anovaCL5 --------
+
+#Run ANOVA to establish statistical difference
+lm.fit.c <- lm(b1$'Culmen Length' ~ b1$Species, data=b1)
+anova.table.c <- anova(lm.fit.c)
+print(anova.table.c)
+
+## ---- SaveTable9 --------
+saveRDS(anova.table.c, file = addpath("anova.table.c", PC_path))
+
+## ---- anovaFL1 --------
+
+#Using the data IDs from above. Didn't use the yhat mean. No need to bring it back. 
+
+#Establish species mean differences
+#CAN'T GET TO WORK
+spmeans2 <- b1 %>% group_by(b1$Species) %>%
+  summarise(
+  sl = mean(b1$"Flipper Length"),
+  n = length(id),
+  minid = min(id),
+  maxid = max(id),
+  )
+spmeans2
+
+#Species means are only representing the entire sample. Can't get it to differentiate.
+#Proceed anyways
+
+## ---- anovaFL2 --------
+
+#Merge the means into the original dataset
+y <- merge(b1, spmeans2)
+
+## ---- anovaFL3 --------
+
+#Plot data with means.
+
+o <- b1 %>% ggplot(aes( x = b1$id, y = b1$'Flipper Length')) 
+t <- o + geom_point( size=2) + 
+  geom_hline( aes(yintercept = mean(b1$'Flipper Length')) ) + 
+  geom_segment( data=y, aes( x = id, y = y$'Flipper Length', xend = id, yend = sl), color="red", lty = 3)
+
+t  
+
+## ---- anovaFL4 --------
+
+#Highligh the species differences in variance from mean
+
+g <- o + geom_point(size=2) +
+geom_segment(data=spmeans2, aes(x = minid, y = sl, xend = maxid, yend = sl)) +
+geom_segment( data=y, aes( x = id, y = y$"Flipper Length", xend = id, yend = sl, color=Species), lty = 3) +
+labs(
+title = "Flipper Variation",
+x= "ID", y = "Flipper Length")
+
+g
+
+## ---- SaveImage9 --------
+
+ggsave(filename=addpath("Flipper_Var.png", dimorphism_path), plot=g)
+
+## ---- anovaFL5 --------
+#Run anova to establish statistical significance
+
+lm.fit.f <- lm(d1$'Flipper Length' ~ d1$Species, data=d1)
+anova.table.f <- anova(lm.fit.f)
+print(anova.table.f)
+
+## ---- SaveTable10 --------
+saveRDS(anova.table.f, file = addpath("anova.table.f", PC_path))

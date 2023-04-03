@@ -206,6 +206,8 @@ This task was accomplished by installing the GGally package. Using GGally, I gen
 ```
 From this set of images it looks like the starkest differences between the two penguin species are the Culmen Length and the Flipper Length, with Culmen Depth being fairly negligable. I want to be sure that these figures represent statistically powerful data though and so I run the Principal Components analysis to determine which variables are most significant.
 
+### Principal Components Analysis
+
 ```{r, Ad~Cs2}
 ```
 
@@ -221,4 +223,70 @@ The plot shows variation and when demarcating the species, shows distinct groupi
 ```{r, Ad~Cs4}
 ```
 This illustrates that there are distinct proportional differences in Culmen Length and Flipper Length between the two species. Finally, I will run an ANOVA for these variables. 
+
+### Analysis of Variance
+
+My last step is to investigate how much these variables (Culmen Length and Flipper Length) vary by species. I begin with Culmen Length.
+
+#### Culmen Length Variance
+
+My goal is to identify whether the two species are significantly different in Culmen Length. I start by generating an index column for the data. I calculate the mean of the scores for the whole dataset as well. 
+
+```{r, anovaCL1}
+```
+
+The next step was to differentiate the mean Culmen Length value for each species under investigation. I worked on this for A LONG time and could not get it to work. I followed the example given in the Univariate Stats lecture, followed notes from an in person meeting with the professor, and followed the instructions from multiple online sources. I altered the code below in many ways but could never get r to generate separate species means. At the end of the day, I had to move forward. This ultimately changes how my plots turned out. 
+
+```{r, anovaCL2}
+```
+I first plot the data for the whole assemblage. Especially when embedding the variance lines, there is a pretty distinct difference in how the data is clustered. 
+
+```{r, anovaCL3}
+```
+The next step was to illustrate the species differences. I was successful in showing where the different species lie on the plot but, again, I could not illustrate the differences in Culmen Length mean for each species. 
+
+```{r, anovaCL4}
+```
+
+While my plot did not work out quite the way I wanted it to, I was successful in illustrating that the Adelie and Chinstrap penguins significantly differ in the distribution of Culmen Length values.
+
+This is highlighted statistically through the ANOVA below. 
+
+```{r, anovaCL5}
+```
+I need a lot of work on my statistics knowledge, but it looks like the pr(>F) value supports a statistically significant difference between the two groups. 
+
+#### Flipper Length Variance
+
+The above analysis aligns with what I was expecting from the bivariate plots above and the Principal Components Analysis. The next variable highlighted by the PCA is Flipper Length. This value was said to represnt the most variation in the two species as a singular data set. My goal here is to determine whether the species can be easily differentiated along this range of variation.
+
+I start by attempting to parse out the mean values for Flipper Length for each species. This effort, as in the above analysis, did not work out...and I can't figure out why. 
+
+```{r, anovaFL1}
+```
+
+Once again, the means map the same (same for the larger dataset mean) for each species. It believe this is why my plots below will not segment along species means. 
+
+```{r, anovaFL2}
+```
+I run through the same plotting process for Flipper Length as I did for Culmen Length. 
+
+```{r, anovaFL3}
+```
+Despite getting the above warning on all of these plots, the analysis in r does not work if I follow the suggestion. Thus, I have to keep the y$"FLipper Length" syntax.
+
+By differentiating the species by line color in the below plot, I could again illustrate each species' relationship with the mean value of Flipper Length. This analysis, however, looks much different than the prior one. While there is a noticable difference in where the species means would lie if differentiated, it is a much smaller difference than with Culmen Length. 
+
+```{r, anovaFL4}
+```
+
+I run the ANOVA and still see a significant statistical difference. I need to brush up on my chops a bit and figure out how to interpret this in a way that corroborates my interpretation from the plots. Saying that both of these variables are significantly different in each species is fine, but one variable seems to be clearly more meaningful.
+
+# Conclusion
+
+I would end this analysis by suggesting that besides Sexual Size Dimorphism, the Adelie and Chinstrap penguins can be differentiated through morphometric data by means of examining the Culmen Length. I am assuming here that the difference in flipper length between the two species is more a product of overall size difference (Flipper Length correlating with Body Mass). I know there are additional ways of testing this but that will be a goal for further research.  
+
+
+```{r, anovaFL5}
+```
 
