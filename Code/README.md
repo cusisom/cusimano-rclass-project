@@ -8,6 +8,8 @@ Users exploring this data are encouraged to follow the structure of the assignme
 
 ## `processingcode.R` - cleans raw data, outputs clean data
 
+## Project 1
+
 ### Inputs
 		reads in the following files from `../../Data/Raw_data/`
 		`penguins_raw_dirty.csv` - Raw data
@@ -19,3 +21,12 @@ Users exploring this data are encouraged to follow the structure of the assignme
 		`penguins.csv` - clean data in .csv format
 		`datadictionary2.0.csv` - Updated data dictionary 
 
+## Project 2
+
+### Inputs
+		reads in the following files from `../../Data/Processed_data/`
+		`penguins.rds` - Cleaned data from project 1
+		
+### Outputs
+		Various data paths created
+		
