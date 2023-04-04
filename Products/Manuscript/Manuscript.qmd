@@ -12,20 +12,6 @@ bibliography: ../references.bib
 csl: ../evolution.csl
 ---
 
-# Project Instructions
-
-_The structure below is one possible setup for a data analysis project (including the course project). For a manuscript, adjust as needed. You don't need to have exactly these sections, but the content covering those sections should be addressed._
-
-_This uses MS Word as output format as specified in the YAML header. [See here](https://quarto.org/docs/output-formats/ms-word.html) for more information. You can switch to other formats, like html or pdf. See [the Quarto documentation](https://quarto.org/) for other formats._
-
-
-_For Project 2, it is fine to have very brief sections, just to practice the structure of the manuscript and get a feel for how you would set it up. The data cleaning should have been documented carefully in Project 1. Project 2 should focus on reporting the analysis, so you might have a few sentences for the data and results sections, and maybe just a sentence for the other sections like the intro, etc._ 
-
-_For Project 3 on your own data, I hope youʻll write a few more words, if it helps you think through your research project._ 
-
-
-_Note on strategy: _Whereas in the `exploratory_analysis.qmd` we read in __code chunks__ to produce the figures and tables de novo, here we will read in the saved figures and tables. This is because in order to use code chunks, you generally have to run the whole script. This is good to do in the first case, where you are going through all of the steps but with more commentary. But here, were we are writing up the final manuscript, we will only include the best finished products and it can be cumbersome to rerun the entire analysis every time you want to see what the paper looks after each edit. It is more efficient to just read in __graphics files__ (.pdf, .png, .jpg, etc.) for the figures and __.rds__ files for the tables, both from the Results directory._ 
-
 # Summary/Abstract
 _Write a summary of your project._
 
@@ -36,41 +22,53 @@ _Write a summary of your project._
 # Introduction 
 
 ## General Background Information
-_Provide enough background on your topic that others can understand the why and how of your analysis_ 
 
-## Description of data and data source
-_Describe what the data is, what it contains, where it is from, etc. Eventually this might be part of a methods section._
+Penguins of the genus *Pygoscelis*, commonly known as "brush-tailed 
+penguins", occupy areas across Antartica and the surrounding islands. There 
+are currently three known extant species within this genus: the Gentoo 
+Penguin (*Pygoscelis papus*), the Chinstrap Penguin (*Pygoscelis 
+antarctica*), and the Adelie Penguin (*Pygoscelis adeliae*). As 
+environmentally sensitve species living in the Southern Pole, these penguins 
+have become of interest to research studying the rate and effects of climate 
+change as well as marine ecology and avian ecology. With such research 
+potential, the *Pygoscelis* penguins have become key in our understanding of environmental, ecological, and evolutionary change in the South Pole. 
 
-_To cite other work (usually done in the introduction, methods, and discussion), make sure your references are in the bibtex file specified in the YAML header above (here `references.bib`) and have the right bibtex key. Then you can include like below. Remember that enclosing the reference key in [ ] will make a parenthetical citation:_
+For any productive research to occur by way of studying the brush-tailed penguins, it is first important to gather baseline data on behavior, ecology, and morphology. Such analyses then allow researchers to track changes in these qualities and discern potential influences thereof. The purpose of the current project is to focus on morphology and interspecific variation within the genus. We believe that such data will not only allow for an understanding of contemporary impacts of climate and ecological change on polar avian species but will also provide insight into the evolutionary mechanisms involved in the history of these species.   
 
-Here we describe an analysis of the Palmer Penguins dataset [@Horst:2020], which contains data on three species of penguins from the Palmer Archipelago, Antarctica. Data were collected and made available by Dr. Kristen Gorman and the Palmer Station, Antarctica LTER, a member of the Long Term Ecological Research Network [@Gorman:2014].
+## Data and data source
+
+Data for this research comes from and was collected as a part of the Palmer Long-Term Ecological Research (LTER) study [@Horst:2020, @Gorman: 2014]. The LTER is stationed West of the Antarctic Peninusla and extends North to South along the Palmer Basin. 
+
+The data collected from the LTER was produced by Dr. Kristen Gorman and made accessible by Andrea Shandel via the Palmer Penguins dataset (github.com/andreashandel/dataanalysis-template).
+
 
 ## Questions/Hypotheses to be addressed
-_State the research questions you plan to answer with this analysis. To get you started:_
 
-Our research questions are:
+In this analysis, the research aims to investigate the distribution of size and shape across Pygoscelis penguins in Antarctica. Given the sympatric nature of different species within this genus, it is pertintent to consider questions of their evolution and divergence. Such investigations will potentially allow for predictive models of species response to environmental change. Prior to theoretical analyses, however, the current plan is to consider the extant morphological differnces. 
 
-1. Are the species different in size? 
+Question to be addressed throughout this analysis consider:
+ 
+1. How Body mass varies across the different species.
 
-{{< pagebreak >}}
+2. The role that sexual dimorphism plays in a species size variation.
+
+3. Ways in which sympatric populations of Adelie and Chinstrap penguins      differ.
+
 
 
 # Methods 
 
-_Describe your methods. Breifly describe the data, the cleaning processes, and the analysis approaches. You might want to provide a shorter description here and all the details in the supplement (which could be a copy of your code or your .qmd)._
+The information used for this analysis was processed through the R statistical software. It was cleaned and organized prior to this work and through a process separate from this. The processing code used to clean and check the data can be found in the Supplement material accessible through the author's open access github repository (https://github.com/cusisom/cusimano-rclass-project). 
 
 
-## Data acquisition
-_As applicable, explain where and how you got the data. If you directly import the data from an online source, you can combine this section with the next._
+## Data acquisition, import, and cleaning
 
+Original data was imported from the Palmer Penguins dataset. The file used for this analysis was originally altered by Dr. Marguerite Butler and published as the `penguins_raw_dirty.r` script. After cleaning a separate script was generated for analysis. This processed data was imported through the `penguins.rds` file. All materials are accessible through the author's repository for this project (https://github.com/cusisom/cusimano-rclass-project). 
 
-## Data import and cleaning
-_Code that reads in the file and cleans it so it's ready for analysis. Since this will be fairly long code for most datasets, it might be a good idea to have it in one or several R scripts. If that is the case, explain here briefly what kind of cleaning/processing you do, and provide more details and well documented code somewhere (e.g. in the supplement). All materials, including files that contain code, should be commented well so everyone can follow along._
-
-_For project 2, you will want to write a brief description of your cleaning and processing steps and include a reference (link to) to your cleaning script or quarto document (or both)._ 
 
 ## Statistical analysis
-_Explain anything related to your statistical analyses._
+
+Statistal analyses performed for this project include Welch's T-test for examination of Sexual Size Dimorphism, and Principal Components analysis and ANOVA tests for investigation into interspecific shape variation between sympatric species. All analyses were performed through the R statistical software. 
 
 
 {{< pagebreak >}}
@@ -80,12 +78,9 @@ _Explain anything related to your statistical analyses._
 
 ## Exploratory/Descriptive analysis
 
-_Use a combination of text/tables/figures to explore and describe your data. Show the most important descriptive results here. Additional ones should go in the supplement. Even more can be in the R and Quarto files that are part of your project._
+The cleaned dataset used for this investigation focused on four morphological variables (Culmen Length, Culmen Depth, Flipper Length, and Body Mass) and two demographic variables (Species and Sex). It thus omitted information included in the original dataset pertaining to isotopic analysis and geographic categories. Table 1 summarizes the original dataset used. Visible here are all variables provided for this project. 
 
-
-@tbl-summary_table shows a summary of the data.
-
-_Note the data is loaded using a **relative** path indicated by the `../../` notation. (Two dots means a folder up). You never want to specify an **absolute** path like `C:\user\myproject\results\` because if you share this with someone, it won't work for them since they don't have that path._ 
+@tbl-summary_table shows a summary of the processed data.
 
 ```{r , results="asis"}
 #| label: tbl-summary_table
@@ -96,42 +91,48 @@ resulttable=readRDS("../../Results/summary_table.rds")
 knitr::kable(resulttable, digits=2)
 ```
 
+This data was compared in earlier analyses to show the correlation of the different morphological variables available for investigation. These correlations, as well as depiction of Body Mass distribution, are illustrated in @fig-cor_plots. The data is separated by species to show the relative distributions. 
+
+## Body Mass Distribution
+
+The first goal of this analysis was to determine factors contributing to body mass distribution in each species given that this variable seemed showed the greatest range in the dataset. The histogram above (Figure 1) highlights not only a significant range in body mass but considerable overlap in each of the three species. Replotted, however, this data clearly establishes differences in body mass range (@fig-penguins_MassV). 
+
+{{< pagebreak >}}
+
 ```{r}
-#| label: cor_plots
+#| label: fig-cor_plots
 #| fig-cap: "Body Mass Correlations"
 #| echo: FALSE
-knitr::include_graphics("../../Results/Figures/Dimorphism/cor_plots.png")
+knitr::include_graphics("../../Results/Figures/cor_plots.png")
 ```
-
+Beyond the stark separation of Gentoo penguins from Adelie and Chinstrap penguins, it is interesting to notice the relatively narrow range in body mass of Chinstrap populations. Despite overlapping in overall size with Adelie, this pattern clearly differs from the others. While it is possible the the narrower range in body mass is a consequence of geography, the Adelie penguins (with a much greater range in mass) are sympatric with Chinstrap penguins. With this in mind, an alternative explanation may reflect differences in the degree of sexual dimorphism. 
 
 
 ```{r}
-#| label: penguins_MassV
+#| label: fig-penguins_MassV
 #| fig-cap: "Species Body Mass Distribution"
 #| echo: FALSE
-knitr::include_graphics("../../Results/Figures/Dimorphism/penguins_MassV.png")
+knitr::include_graphics("../../Results/Figures/penguins_MassV.png")
 ```
+
+Sexual size dimorphism, reflecting significant differences in the size of males and females of a species, theoretically account for a greater range of body mass across a species. Species with minimal dimorphism, therefore should reflect narrow ranges. @fig-Dimorphism_violin illustrates the body mass distributions for each species as separated by sex. The image suggests that 1) sexual size dimorphism exists in each species and 2) that the Chinstrap Penguins reflect relatively less dimorphism than Adelie and Gentoo Penguins. 
+   
 
 ```{r}
-#| label: Dimorphism_violin
+#| label: fig-Dimorphism_violin
 #| fig-cap: "Body Mass Dimorphism~Species"
 #| echo: FALSE
-knitr::include_graphics("../../Results/Figures/Dimorphism/Dimorphism_violin.png")
+knitr::include_graphics("../../Results/Figures/Dimorphism_violin.png")
 ```
 
-## Size
+## Sexual Dimorphism
 
 _As an example, here is an analysis of size by species and island.  You may leave this if you wish, but do edit it to make it your own._
 
 We found that Gentoo penguins are substantially larger than both Adelie and Chinstrap penguins, which are similar in size
 (@fig-mass_species_bars, ANOVA P-value < 0.001 ).
 
-```{r}
-#| label: fig-mass_species_bars
-#| fig-cap: "Body mass distributions of the three species of penguin."
-#| echo: FALSE
-knitr::include_graphics("../../Results/mass_species_bars.png")
-```
+
 
 ```{r , results="asis"}
 #| label: tbl-mass_species_anova

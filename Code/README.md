@@ -29,4 +29,8 @@ Users exploring this data are encouraged to follow the structure of the assignme
 		
 ### Outputs
 		Various data paths created
-		
+		data_path <- `../../Data/Processed_data/`
+		results_path <- `../../Results/`
+		figures_path <- `../../Results/Figures/`
+		stats_path <- `../../Results/Statistics/`
+		PC_path <- `../../Results/Statistics/Princomp/`

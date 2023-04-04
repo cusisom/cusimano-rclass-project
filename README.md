@@ -1,6 +1,6 @@
 # Overview
 
-The information found in this repository relates to a two-part assignment issued in Zoology 710, Spring 2023, at UH Manoa. The files used here originate from the Palmer Penguins dataset (see `Acknowledgement` below. 
+The information found in this repository relates to a two-part assignment issued in Zoology 710, Spring 2023, at UH Manoa. The files used here originate from the Palmer Penguins dataset (see `Acknowledgement` below). 
 
 
 # History
