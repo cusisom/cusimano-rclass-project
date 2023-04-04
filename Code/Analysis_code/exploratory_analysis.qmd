@@ -25,9 +25,9 @@ The primary sections of this review pertain to three interrelated research quest
 	
 	III. Differentiating between Adelie and Chinstrap penguins. Shape Profile Analysis
 
-####*Note about statistics
+####*Note about statistics*
 
-Much of the difficulty experienced throughout this project comes from the author's lack of statistical training. I opted to take this course this term instead of a statistics course due to unlikely event of it being offered again during my time at UH. While I did my best to apply the necessary statistical analyses and appropriately interpret the results, I am not currently confident in my application.* 
+*Much of the difficulty experienced throughout this project comes from the author's lack of statistical training. I opted to take this course this term instead of a statistics course due to unlikely event of it being offered again during my time at UH. While I did my best to apply the necessary statistical analyses and appropriately interpret the results, I am not currently confident in my application.* 
 
 # Setup
 
@@ -69,9 +69,9 @@ With the data cleaned in the last project, it is worth displying here the inform
 
 While the above summary data is informative and useful for this overview, it is not in a format that is ready for publication. Using the following code, I am able to specify the summary statistics that are most useful for quick reference, rename the columns, and, using `knitr`, transform the table into a presentation format. This will be combined with the `results=asis` command to maintain a polished format when applicable. 
 
-*Note-
+*Note-*
 
-I tried applying the knitr.kable method for some of my analytical results but it would change some of the values. I'm sure there is some coding trick to make this work better, I couldn't quite figure it out.*
+*I tried applying the knitr.kable method for some of my analytical results but it would change some of the values. I'm sure there is some coding trick to make this work better, I couldn't quite figure it out.*
 
 
 
