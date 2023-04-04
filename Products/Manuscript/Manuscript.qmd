@@ -127,7 +127,12 @@ knitr::include_graphics("../../Results/Figures/Dimorphism_violin.png")
 
 ## Sexual Dimorphism
 
-_As an example, here is an analysis of size by species and island.  You may leave this if you wish, but do edit it to make it your own._
+To determine the significance of sexual size dimorphism and the degree by which each varied by sex, I ran individual tests for each species. 
+
+
+A quick glimpse at Body Mass mean differences in male and female the palmer Penguins suggested that dimorphism was significant . This was confirmed by reviewing the t-tests for each species.
+
+ 
 
 We found that Gentoo penguins are substantially larger than both Adelie and Chinstrap penguins, which are similar in size
 (@fig-mass_species_bars, ANOVA P-value < 0.001 ).
@@ -135,22 +140,54 @@ We found that Gentoo penguins are substantially larger than both Adelie and Chin
 
 
 ```{r , results="asis"}
-#| label: tbl-mass_species_anova
-#| tbl-cap: "Size differences between species."
+#| label: tbl-Adelie_report
+#| tbl-cap: "Mean body mass by sex: Adelie"
 #| echo: FALSE
 options(knitr.kable.NA = "")
-resulttable=readRDS("../../Results/mass_species_anova.rds")
+resulttable=readRDS("../../Results/Adelie_Dimorphism_Report.rds")
+knitr::kable(resulttable, digits=2)
+```
+```{r , results="asis"}
+#| label: tbl-Gentoo_report
+#| tbl-cap: "Mean body mass by sex: Gentoo"
+#| echo: FALSE
+options(knitr.kable.NA = "")
+resulttable=readRDS("../../Results/Gentoo_Dimorphism_Report.rds")
+knitr::kable(resulttable, digits=2)
+```
+```{r , results="asis"}
+#| label: tbl-Chinstrap_report
+#| tbl-cap: "Mean body mass by sex: Chinstrap"
+#| echo: FALSE
+options(knitr.kable.NA = "")
+resulttable=readRDS("../../Results/Chinstrap_Dimorphism_Report.rds")
 knitr::kable(resulttable, digits=2)
 ```
 
-There does not seem to be any intrinsic island effect. Differences in mass across islands are related to the species which happen to reside on each island (@fig-mass_species_island_density, @tbl-mass_species_island_anova).
+The reported mean mass differences support the notion that Gentoo and Adelie Penguins reflect stronger Sexual Size Dimorphism but need to be confirmed statistically. Tables 5-7 present the results of individual t-tests for each species. In support of my hypothesis, Chinstrap Penguins show much lower t-values (-5.2077) than Adelie(-13.126) and Gentoo (-14.638) Penguins.
 
 ```{r}
-#| label: fig-mass_species_island_density
-#| fig-cap: "Body mass distributions of the three species of penguin."
+#| label: tbl-Adelie_ttest
+#| tbl-cap: "Adelie Sexual Dimorphism T-test"
 #| echo: FALSE
-knitr::include_graphics("../../Results/mass_species_island_density.png")
+resulttable=readRDS("../../Results/Adelie_Dimorphism_ttest.rds")
 ```
+```{r}
+#| label: tbl-Gentoo_ttest
+#| tbl-cap: "Gentoo Sexual Dimorphism T-test"
+#| echo: FALSE
+resulttable=readRDS("../../Results/Gentoo_Dimorphism_ttest.rds")
+```
+```{r}
+#| label: tbl-Chinstrap_ttest
+#| tbl-cap: "Chinstrap Sexual Dimorphism T-test"
+#| echo: FALSE
+resulttable=readRDS("../../Results/Chinstrap_Dimorphism_ttest.rds")
+```
+
+
+
+
 
 ```{r , results="asis"}
 #| label: tbl-mass_species_island_anova
