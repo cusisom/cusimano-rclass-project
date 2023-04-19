@@ -39,7 +39,7 @@ For any productive research to occur by way of studying the brush-tailed penguin
 
 Data for this research comes from and was collected as a part of the Palmer Long-Term Ecological Research (LTER) study [@Horst:2020, @Gorman: 2014]. The LTER is stationed West of the Antarctic Peninusla and extends North to South along the Palmer Basin. 
 
-The data collected from the LTER was produced by Dr. Kristen Gorman and made accessible by Andrea Shandel via the Palmer Penguins dataset (github.com/andreashandel/dataanalysis-template).
+The data collected from the LTER was produced by Dr. Kristen Gorman and made accessible as part of the project template provided by Dr. Margurite Butler (https://github.com/mbutler808/Project-template).  
 
 
 ## Questions/Hypotheses to be addressed
@@ -178,7 +178,7 @@ resulttable=readRDS("../../Results/Adelie_Dimorphism_ttest.rds")
 #| echo: FALSE
 resulttable=readRDS("../../Results/Gentoo_Dimorphism_ttest.rds")
 ```
-```{r}
+```{r, results="asis"}
 #| label: tbl-Chinstrap_ttest
 #| tbl-cap: "Chinstrap Sexual Dimorphism T-test"
 #| echo: FALSE
@@ -200,14 +200,9 @@ knitr::kable(resulttable, digits=2)
 
 
 
-## Further analyses (use subheaders as you wish)
+## Variance between Adelie and Chinstrap
 
-_Develop and explore three additional questions by any combination of figures and statistical or modeling methods to analyze your data and to produce meaningful figures, tables, etc. Make it look like a draft scientific paper or project report, appropriate for your career goals._
-
-_(Reminder: it is now common practice to provide code that fully reproduces the analysis with any publication. This would be your analysis scripts or .qmd, and is provided with supplementary information.  Here we are writing a nice document that could be a manuscript, so we want the full analysis code to produce figures and data ready for display as tables, which are loaded here.)_
-
-
-{{< pagebreak >}}
+The next goal was to see, besides by body mass and dimorphism, how to differentiate the Adelie and Chinstrap Penguins.
 
 
 # Discussion
