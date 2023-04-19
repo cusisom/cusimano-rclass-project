@@ -23,7 +23,6 @@ require(GGally)
 data_path <- "../../Data/Processed_data/"
 results_path <- "../../Results/"
 figures_path <- "../../Results/Figures/"
-dimorphism_path <- "../../Results/Figures/Dimorphism/"
 stats_path <- "../../Results/Statistics/"
 PC_path <- "../../Results/Statistics/Princomp/"
 
@@ -443,7 +442,7 @@ yhat <- mean(b1$'Culmen Length')
 
 spmeans  <- b1 %>% group_by(Species) %>% 
         summarise(
-          sl = mean(b1$'Culmen Length'),
+          sl = mean(`Culmen Length`),
           n = length(id),
           minid = min(id),
           maxid = max(id)
@@ -501,7 +500,7 @@ saveRDS(anova.table.c, file = addpath("anova.table.c", PC_path))
 #CAN'T GET TO WORK
 spmeans2 <- b1 %>% group_by(b1$Species) %>%
   summarise(
-  sl = mean(b1$"Flipper Length"),
+  sl = mean(`Flipper Length`),
   n = length(id),
   minid = min(id),
   maxid = max(id),
