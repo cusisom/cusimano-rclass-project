@@ -1,45 +1,5 @@
 
 
-###############################
-# Penguin analysis script
-#
-# This script loads the processed, cleaned data, 
-# does a simple analysis and saves the results
-# to the results folder
-###############################
-
-## ---- setup -----
-#load needed packages. make sure they are installed.
-require(ggplot2) #for plotting
-require(magrittr) #for piping
-require(knitr) #for formatting output
-require(dplyr) 
-require(report)
-require(patchwork) #for grouping plots together
-require(GGally)
-
-
-#path to data and results 
-data_path <- "../../Data/Processed_data/"
-results_path <- "../../Results/"
-figures_path <- "../../Results/Figures/"
-dimorphism_path <- "../../Results/Figures/Dimorphism/"
-stats_path <- "../../Results/Statistics/"
-PC_path <- "../../Results/Statistics/Princomp/"
-
-
-## ---- functions ----
-# function to paste path to output filenames
-
-addpath <- function( filename, path=data_path ) {
-    location <- paste( path, filename, sep="")
-	return( location )
-}
-
-## ---- loaddata ----
-# load data. 
-dat <- readRDS( addpath("penguins.rds", data_path) )
-
 ###########################################################
 #                                                         #
 #               Adelie and Chinstrap Distinction          #
@@ -86,7 +46,7 @@ c2
   
 ## ---- SaveImage7 --------
 
-ggsave(filename=addpath("GGally.png", dimorphism_path), plot=c2)
+ggsave(filename=addpath("GGally.png", figures_path), plot=c2)
   
 ## ----Ad~Cs2 --------
 
@@ -186,7 +146,7 @@ r
 
 ## ---- SaveImage8 --------
 
-ggsave(filename=addpath("Cul_Len_Var.png", dimorphism_path), plot=r)
+ggsave(filename=addpath("Cul_Len_Var.png", figures_path), plot=r)
 
 ## ---- anovaCL5 --------
 
@@ -248,7 +208,7 @@ g
 
 ## ---- SaveImage9 --------
 
-ggsave(filename=addpath("Flipper_Var.png", dimorphism_path), plot=g)
+ggsave(filename=addpath("Flipper_Var.png", figures_path), plot=g)
 
 ## ---- anovaFL5 --------
 #Run anova to establish statistical significance
