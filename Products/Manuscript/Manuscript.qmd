@@ -170,34 +170,24 @@ The reported mean mass differences support the notion that Gentoo and Adelie Pen
 #| label: tbl-Adelie_ttest
 #| tbl-cap: "Adelie Sexual Dimorphism T-test"
 #| echo: FALSE
-resulttable=readRDS("../../Results/Adelie_Dimorphism_ttest.rds")
+resulttable=readRDS("../../Results/Statistics/Adelie_Dimorphism_ttest.rds")
+knitr::kable(resulttable, digits=2)
+
 ```
 ```{r}
 #| label: tbl-Gentoo_ttest
 #| tbl-cap: "Gentoo Sexual Dimorphism T-test"
 #| echo: FALSE
-resulttable=readRDS("../../Results/Gentoo_Dimorphism_ttest.rds")
+resulttable=readRDS("../../Results/Statistics/Gentoo_Dimorphism_ttest.rds")
+knitr::kable(resulttable, digits=2)
 ```
 ```{r, results="asis"}
 #| label: tbl-Chinstrap_ttest
 #| tbl-cap: "Chinstrap Sexual Dimorphism T-test"
 #| echo: FALSE
-resulttable=readRDS("../../Results/Chinstrap_Dimorphism_ttest.rds")
-```
-
-
-
-
-
-```{r , results="asis"}
-#| label: tbl-mass_species_island_anova
-#| tbl-cap: "Size differences between species by island."
-#| echo: FALSE
-options(knitr.kable.NA = "")
-resulttable=readRDS("../../Results/mass_species_island_anova.rds")
+resulttable=readRDS("../../Results/Statistics/Chinstrap_Dimorphism_ttest.rds")
 knitr::kable(resulttable, digits=2)
 ```
-
 
 
 ## Variance between Adelie and Chinstrap

@@ -1,45 +1,5 @@
 
 
-###############################
-# Penguin analysis script
-#
-# This script loads the processed, cleaned data, 
-# does a simple analysis and saves the results
-# to the results folder
-###############################
-
-## ---- setup -----
-#load needed packages. make sure they are installed.
-require(ggplot2) #for plotting
-require(magrittr) #for piping
-require(knitr) #for formatting output
-require(dplyr) 
-require(report)
-require(patchwork) #for grouping plots together
-require(GGally)
-
-
-#path to data and results 
-data_path <- "../../Data/Processed_data/"
-results_path <- "../../Results/"
-figures_path <- "../../Results/Figures/"
-dimorphism_path <- "../../Results/Figures/Dimorphism/"
-stats_path <- "../../Results/Statistics/"
-PC_path <- "../../Results/Statistics/Princomp/"
-
-
-## ---- functions ----
-# function to paste path to output filenames
-
-addpath <- function( filename, path=data_path ) {
-    location <- paste( path, filename, sep="")
-	return( location )
-}
-
-## ---- loaddata ----
-# load data. 
-dat <- readRDS( addpath("penguins.rds", data_path) )
-
 ############################################################
 #                                                          #
 #          Distribution of Body Mass by Species            #
@@ -108,7 +68,7 @@ cor_plots
 
 ## ---- SaveImage --------
 
-ggsave(filename=addpath("cor_plots.png", dimorphism_path), plot= cor_plots)
+ggsave(filename=addpath("cor_plots.png", figures_path), plot= cor_plots)
 
 #Narrow in on Body Mass distribution 
 #Violin plot shows mirrored bell curves and visually accentuates the data range
@@ -133,11 +93,11 @@ p2
 
 #I'm choosing to keep the code for saving images and tables hidden. Not sure if this is okay for the assignment but I think it makes the quarto file cleaner. 
 
-ggsave(filename=addpath("penguins_MassV.png", dimorphism_path), plot=p2)
+ggsave(filename=addpath("penguins_MassV.png", figures_path), plot=p2)
 
 ## ---- saveImage2 --------
 
-ggsave(filename=addpath("Penguins_Body_Mass_~Species_violin.png", dimorphism_path), plot=p2)
+ggsave(filename=addpath("Penguins_Body_Mass_~Species_violin.png", figures_path), plot=p2)
 
 #
 #Create a plot that differentiates sample by sex and species
@@ -166,4 +126,4 @@ p4
 
 ## ---- SaveImage3 --------
 
-ggsave(filename=addpath("Dimorphism_violin.png", dimorphism_path), plot=p4)
+ggsave(filename=addpath("Dimorphism_violin.png", figures_path), plot=p4)

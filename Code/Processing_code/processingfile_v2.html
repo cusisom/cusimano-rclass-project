@@ -523,17 +523,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p>To solve this problem I used the gsub() and sub() functions.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>d1 <span class="ot">&lt;-</span> rawdata</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>d1<span class="sc">$</span>Species <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">"ngufn"</span>, <span class="st">"nguin"</span>, <span class="fu">gsub</span>(<span class="st">"eKie"</span>, <span class="st">"elie"</span>, <span class="fu">gsub</span>(<span class="st">"gTin"</span>, <span class="st">"guin"</span>, d1<span class="sc">$</span>Species)))</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co">#By examining the unique objects in Species, it is clear that their are typos to fix</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co">#I funnel rawdata into an easier to operate name </span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>d1 <span class="ot">&lt;-</span> rawdata</span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>d1<span class="sc">$</span>Species <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">"Peog"</span>, <span class="st">"peng"</span>, <span class="fu">gsub</span>(<span class="st">"Peng"</span>, <span class="st">"peng"</span>, <span class="fu">gsub</span>(<span class="st">"Vent"</span>, <span class="st">"Gent"</span>, <span class="fu">gsub</span>(<span class="st">"eOg"</span>, <span class="st">"eog"</span>, d1<span class="sc">$</span>Species))))</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co">#My third step was a single sub event</span></span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co">#For some reason, subing a space for the "M" would not work as a part of my group sub.</span></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>d1<span class="sc">$</span>Species <span class="ot">&lt;-</span> <span class="fu">sub</span>(<span class="st">"AdelieMp"</span>, <span class="st">"Adelie p"</span>, d1<span class="sc">$</span>Species)</span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(d1<span class="sc">$</span>Species)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co">#gsub allows me to substitute out the typos for correct spelling in groups</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co">#sub would allow me to do this one-by-one</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co">#I opt for gsub to shorten the length of the code</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co">#I do this in two steps</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>d1<span class="sc">$</span>Species <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">"ngufn"</span>, <span class="st">"nguin"</span>, <span class="fu">gsub</span>(<span class="st">"eKie"</span>, <span class="st">"elie"</span>, <span class="fu">gsub</span>(<span class="st">"gTin"</span>, <span class="st">"guin"</span>, d1<span class="sc">$</span>Species)))</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>d1<span class="sc">$</span>Species <span class="ot">&lt;-</span> <span class="fu">gsub</span>(<span class="st">"Peog"</span>, <span class="st">"peng"</span>, <span class="fu">gsub</span>(<span class="st">"Peng"</span>, <span class="st">"peng"</span>, <span class="fu">gsub</span>(<span class="st">"Vent"</span>, <span class="st">"Gent"</span>, <span class="fu">gsub</span>(<span class="st">"eOg"</span>, <span class="st">"eog"</span>, d1<span class="sc">$</span>Species))))</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="co">#My third step was a single sub event</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="co">#For some reason, subing a space for the "M" would not work as a part of my group sub.</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>d1<span class="sc">$</span>Species <span class="ot">&lt;-</span> <span class="fu">sub</span>(<span class="st">"AdelieMp"</span>, <span class="st">"Adelie p"</span>, d1<span class="sc">$</span>Species)</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="fu">unique</span>(d1<span class="sc">$</span>Species)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "Adelie penguin (Pygoscelis adeliae)"      
 [2] "Gentoo penguin (Pygoscelis papua)"        
@@ -854,17 +861,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>After a couple rounds of skimr I decided to cut down on some of the unnecessary variables for this analysis. This cleaned things up a bit and saved space.</p>
 <p>For this task I first shortened the variable names followed by subsetting out columns that were not needed. I also decided to change Species, Island, and Sex to Factors here instead of later. This not only really cleaned up the data summary but highlighted the misdesignation of Culmen Length as a character value.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(d1)[<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"study"</span>, <span class="st">"sample"</span>, <span class="st">"Species"</span>, <span class="st">"Region"</span>)</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(d1)[<span class="dv">5</span><span class="sc">:</span><span class="dv">10</span>] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Island"</span>, <span class="st">"stage"</span>, <span class="st">"ID"</span>, <span class="st">"Clutch"</span>, <span class="st">"Date"</span>, <span class="st">"Culmen Length"</span>)</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(d1)[<span class="dv">11</span><span class="sc">:</span><span class="dv">17</span>] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Culmen Depth"</span>, <span class="st">"Flipper Length"</span>, <span class="st">"Body Mass"</span>, <span class="st">"Sex"</span>, <span class="st">"Delta 15 N"</span>, <span class="st">"Delta 13 C"</span>, <span class="st">"Comments"</span>)</span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="co">#Here I decided to remove information (columns) that were not useful. </span></span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>d1 <span class="ot">&lt;-</span> <span class="fu">subset</span>(d1, <span class="at">select =</span> <span class="sc">-</span><span class="fu">c</span>(study, ID, sample, stage, Date, Comments, Region, Clutch))</span>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">#I change the names of each variable by using their position in the names vector</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co">#I did this in groups by setting smaller ranges (1-4, 5-10, and 11-17)</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(d1)[<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"study"</span>, <span class="st">"sample"</span>, <span class="st">"Species"</span>, <span class="st">"Region"</span>)</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(d1)[<span class="dv">5</span><span class="sc">:</span><span class="dv">10</span>] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Island"</span>, <span class="st">"stage"</span>, <span class="st">"ID"</span>, <span class="st">"Clutch"</span>, <span class="st">"Date"</span>, <span class="st">"Culmen Length"</span>)</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(d1)[<span class="dv">11</span><span class="sc">:</span><span class="dv">17</span>] <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Culmen Depth"</span>, <span class="st">"Flipper Length"</span>, <span class="st">"Body Mass"</span>, <span class="st">"Sex"</span>, <span class="st">"Delta 15 N"</span>, <span class="st">"Delta 13 C"</span>, <span class="st">"Comments"</span>)</span>
 <span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>d1<span class="sc">$</span>Species <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(d1<span class="sc">$</span>Species)</span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>d1<span class="sc">$</span>Sex <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(d1<span class="sc">$</span>Sex)</span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>d1<span class="sc">$</span>Island <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(d1<span class="sc">$</span>Island)  </span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="fu">skim</span>(d1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="co">#Here I decided to remove information (columns) that were not useful.</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="co">#I do this by subsetting the columns I don't want with the (-) sign. </span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>d1 <span class="ot">&lt;-</span> <span class="fu">subset</span>(d1, <span class="at">select =</span> <span class="sc">-</span><span class="fu">c</span>(study, ID, sample, stage, Date, Comments, Region, Clutch))</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a><span class="co">#Here I set up my categorical variables as factors. </span></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>d1<span class="sc">$</span>Species <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(d1<span class="sc">$</span>Species)</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>d1<span class="sc">$</span>Sex <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(d1<span class="sc">$</span>Sex)</span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>d1<span class="sc">$</span>Island <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(d1<span class="sc">$</span>Island)  </span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a><span class="fu">skim</span>(d1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="table table-sm table-striped">
 <caption>Data summary</caption>
@@ -1102,18 +1115,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3 class="anchored" data-anchor-id="culmen-length">Culmen Length</h3>
 <p>The next apparent issue is the classification of Culmen Length as a character value. I first examined the Culmen Length dataset to see why this might be listed as such.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>cl <span class="ot">&lt;-</span> d1<span class="sc">$</span><span class="st">`</span><span class="at">Culmen Length</span><span class="st">`</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co">#I'm just showing the head of Culmen Length here to save space. Since the error shows up in first row, the head is all that is needed. </span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(cl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">#I funnel Culmen Length into an easier name to operate</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>cl <span class="ot">&lt;-</span> d1<span class="sc">$</span><span class="st">`</span><span class="at">Culmen Length</span><span class="st">`</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co">#I'm just showing the head of Culmen Length here to save space. Since the error shows up in first row, the head is all that is needed. </span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(cl)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "39.1"    "39.5"    "40.3"    "missing" "36.7"    "39.3"   </code></pre>
 </div>
 </div>
 <p>The issue appeared to be the value designated as “missing”. This transformed the value (and all others) into character values. The solution was to change “missing” to NA and then coerce all values for Culmen Length to numeric.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>cl[ cl <span class="sc">==</span> <span class="st">"missing"</span> ] <span class="ot">&lt;-</span> <span class="cn">NA</span>  </span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>cl <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(cl)  </span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>d1<span class="sc">$</span><span class="st">`</span><span class="at">Culmen Length</span><span class="st">`</span> <span class="ot">&lt;-</span> cl</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">#I subset the "missing" value and change to NA</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>cl[ cl <span class="sc">==</span> <span class="st">"missing"</span> ] <span class="ot">&lt;-</span> <span class="cn">NA</span>  </span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Since NA is not read as a character string I can now set Culmen Length as a numeric variable</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>cl <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(cl)  </span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>d1<span class="sc">$</span><span class="st">`</span><span class="at">Culmen Length</span><span class="st">`</span> <span class="ot">&lt;-</span> cl</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>When I skimr again it is clear that this value is now classified appropriately. In the data summary, however, something seemed strange about the distribution of values within Culmen Length. I examined this distribution with a histogram and a bivariate plot with Body Mass.</p>
 <div class="cell">
@@ -1331,21 +1348,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>There are two noticable issues with the bivariate plot. When examining both plots, it is apparent that there are three major outliers in Culmen Length. Additionally, the bivariate plot shows Body Mass outliers. I tackled the issues with Culmen Length first. In handling the problematic data, I am told that the outliers represent a missed decimal point. Thus, my goal is to remedy the data points instead of removing them.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>d2 <span class="ot">&lt;-</span> d1 </span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="co">#I needed to exclude NAs while indexing </span></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co">#if I was going to fix the numeric values.</span></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>cl[ <span class="sc">!</span><span class="fu">is.na</span>(cl) <span class="sc">&amp;</span> cl<span class="sc">&gt;</span><span class="dv">300</span> ]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="co">#I need to exclude NAs while indexing </span></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co">#if I am going to fix the numeric values.</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a><span class="co">#excluding the NAs is done with !is.na</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a><span class="co">#the outlier data is over 300 and so I include these values in the subset #(cl&gt;300)</span></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>cl[ <span class="sc">!</span><span class="fu">is.na</span>(cl) <span class="sc">&amp;</span> cl<span class="sc">&gt;</span><span class="dv">300</span> ]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 429 511 457</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Since the typo is a missed decimal point, </span></span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="co">#I simply divided the values by 10. </span></span>
 <span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>cl[ <span class="sc">!</span><span class="fu">is.na</span>(cl) <span class="sc">&amp;</span> cl<span class="sc">&gt;</span><span class="dv">300</span> ] <span class="ot">&lt;-</span> cl[ <span class="sc">!</span><span class="fu">is.na</span>(cl) <span class="sc">&amp;</span> cl<span class="sc">&gt;</span><span class="dv">300</span> ]<span class="sc">/</span><span class="dv">10</span>  </span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>d2<span class="sc">$</span><span class="st">`</span><span class="at">Culmen Length</span><span class="st">`</span> <span class="ot">&lt;-</span> cl</span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="co">#This tells R to replace all numeric values over 300 with those values divided by 10</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="co">#Funnel this edit back into the original data</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>d2<span class="sc">$</span><span class="st">`</span><span class="at">Culmen Length</span><span class="st">`</span> <span class="ot">&lt;-</span> cl</span>
 <span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a><span class="co">#culmen length values seem ok now</span></span>
-<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(d2<span class="sc">$</span><span class="st">`</span><span class="at">Culmen Length</span><span class="st">`</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a><span class="co">#culmen length values seem ok now</span></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(d2<span class="sc">$</span><span class="st">`</span><span class="at">Culmen Length</span><span class="st">`</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="processingfile_v2_files/figure-html/cleandata3-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -1373,7 +1393,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="co">#In order to remove the NAs, </span></span>
 <span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="co">#I first needed to identify their positions. </span></span>
 <span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>nas <span class="ot">&lt;-</span> <span class="fu">which</span>( <span class="fu">is.na</span>(mm) )</span>
-<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="co">#Then subset the data without the NAs and funnel back into the original data</span></span>
 <span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>d3 <span class="ot">&lt;-</span> d3[ <span class="sc">-</span>nas, ] </span>
 <span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(d3<span class="sc">$</span><span class="st">`</span><span class="at">Body Mass</span><span class="st">`</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -1392,7 +1412,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1>Culmen Depth</h1>
 <p>The next variable I looked at was Culmen Depth. I start here with a histogram.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(d3<span class="sc">$</span><span class="st">'Culmen Depth'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co">#RUnning through the rest of the variables</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(d3<span class="sc">$</span><span class="st">'Culmen Depth'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="processingfile_v2_files/figure-html/Culmendepth-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -1406,8 +1427,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <p>This is an interesting distribution. It didn’t strike me as an error, but I decided to check why the data looks this way. To do so, my first instinct was to differentiate between the species. For this I used ggplot.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Cumen Depth by Body Mass</span></span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(ggplot2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Culmen Depth by Body Mass</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="co">#I use ggplot because I know how to use this to highlight the species</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(ggplot2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Loading required package: ggplot2</code></pre>
 </div>
@@ -1421,33 +1443,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>My instincts were on point. The distribution makes much more sense when you can see the groups. I don’t believe there is anything that needs editing here.</p>
 <p>Though not surprising, it is also interesting to see that this distribution correlates with species diversity on different islands.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> d3 <span class="sc">|&gt;</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x=</span> d3<span class="sc">$</span><span class="st">'Body Mass'</span>, <span class="at">y =</span> d3<span class="sc">$</span><span class="st">'Culmen Depth'</span>, <span class="at">col=</span>Island))</span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>p</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="processingfile_v2_files/figure-html/Culmendepth3-1.png" class="img-fluid" width="672"></p>
-</div>
+
 </div>
 </section>
 <section id="flipper-length" class="level1">
 <h1>Flipper Length</h1>
 <p>The last morphological variable is Flipper Length. I began again with a histogram and bivariate plot with Body Mass to check the distribution.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Check distribution</span></span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(d3<span class="sc">$</span><span class="st">'Flipper Length'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Check distribution</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(d3<span class="sc">$</span><span class="st">'Flipper Length'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="processingfile_v2_files/figure-html/Flipperlength-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(d3<span class="sc">$</span><span class="st">'Body Mass'</span>, d3<span class="sc">$</span><span class="st">'Flipper Length'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(d3<span class="sc">$</span><span class="st">'Body Mass'</span>, d3<span class="sc">$</span><span class="st">'Flipper Length'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="processingfile_v2_files/figure-html/Flipperlength-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>This data shows a pretty normal scaling of Flipper Length with Body Mass. There is no need to investigate any further. That said, the histogram does show an interesting dip in the median range. This again can be explained by mapping the species distribution for these values.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> d3 <span class="sc">|&gt;</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
-<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x=</span> d3<span class="sc">$</span><span class="st">'Body Mass'</span>, <span class="at">y =</span> d3<span class="sc">$</span><span class="st">'Flipper Length'</span>, <span class="at">col=</span>Species))</span>
-<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>p</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> d3 <span class="sc">|&gt;</span> <span class="fu">ggplot</span>() <span class="sc">+</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x=</span> d3<span class="sc">$</span><span class="st">'Body Mass'</span>, <span class="at">y =</span> d3<span class="sc">$</span><span class="st">'Flipper Length'</span>, <span class="at">col=</span>Species))</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>p</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="processingfile_v2_files/figure-html/Flipperlength2-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -1461,18 +1478,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The last sets of continuous data in the Palmer Penguins dataset compiles isotopic measures from the three species.</p>
 <p>Beginning with the Nitrogen data, I set a histogram to observe the distribution. Though I didn’t expect this metric to scale with Body Mass like the morphological data, I set the bivariate plot to check. This plot, interestingly, revealed a negative correlation with Body Mass.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(d3<span class="sc">$</span><span class="st">'Delta 15 N'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(d3<span class="sc">$</span><span class="st">'Delta 15 N'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="processingfile_v2_files/figure-html/Nitrogen-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(d3<span class="sc">$</span><span class="st">'Body Mass'</span>, d3<span class="sc">$</span><span class="st">'Delta 15 N'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(d3<span class="sc">$</span><span class="st">'Body Mass'</span>, d3<span class="sc">$</span><span class="st">'Delta 15 N'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="processingfile_v2_files/figure-html/Nitrogen-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>My next thought was that this correlation will more strongly reflect habitat/dietary differences in the populations. Thus, I decided to plot the data with Species instead of Mass.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(d3<span class="sc">$</span><span class="st">'Species'</span>, d3<span class="sc">$</span><span class="st">'Delta 15 N'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(d3<span class="sc">$</span><span class="st">'Species'</span>, d3<span class="sc">$</span><span class="st">'Delta 15 N'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="processingfile_v2_files/figure-html/Nitrogen2-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -1483,21 +1500,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1>Carbon</h1>
 <p>Finally, I ran the same set of tests with the Carbon data as I did the Nitrogen data.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(d3<span class="sc">$</span><span class="st">'Delta 13 C'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(d3<span class="sc">$</span><span class="st">'Delta 13 C'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="processingfile_v2_files/figure-html/Carbon-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(d3<span class="sc">$</span><span class="st">'Body Mass'</span>, d3<span class="sc">$</span><span class="st">'Delta 13 C'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(d3<span class="sc">$</span><span class="st">'Body Mass'</span>, d3<span class="sc">$</span><span class="st">'Delta 13 C'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="processingfile_v2_files/figure-html/Carbon-2.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>With the last of the variables tested, I believe this data is good to go.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Final review of data and edited data dictionary</span></span>
-<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>processeddata <span class="ot">&lt;-</span> d3</span>
-<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a><span class="fu">skim</span>(processeddata)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Final review of data and edited data dictionary</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>processeddata <span class="ot">&lt;-</span> d3</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a><span class="fu">skim</span>(processeddata)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="table table-sm table-striped">
 <caption>Data summary</caption>
@@ -1699,8 +1716,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tbody>
 </table>
 </div>
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>dictionary <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">paste</span>(data_path, <span class="st">"datadictionary2.0.csv"</span>, <span class="at">sep=</span><span class="st">""</span>))</span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(dictionary)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>dictionary <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="fu">paste</span>(data_path, <span class="st">"datadictionary2.0.csv"</span>, <span class="at">sep=</span><span class="st">""</span>)) </span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(dictionary)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>         variable
 1         Species
@@ -1725,11 +1742,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 9                     "a number denoting the measure of the ratio of stable isotopes 15N:14N"
 10                    "a number denoting the measure of the ratio of stable isotopes 13C:12C"</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>save_data_location <span class="ot">&lt;-</span> <span class="st">"../../Data/Processed_data/penguins.rds"</span></span>
-<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(processeddata, <span class="at">file =</span> save_data_location)</span>
-<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>save_data_location_csv <span class="ot">&lt;-</span> <span class="st">"../../Data/Processed_data/penguins.csv"</span></span>
-<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(processeddata, <span class="at">file =</span> save_data_location_csv, <span class="at">row.names=</span><span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>save_data_location_csv <span class="ot">&lt;-</span> <span class="st">"../../Data/Processed_data/datadictionary2.0.csv"</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(dictionary, <span class="at">file =</span> save_data_location_csv, <span class="at">row.names=</span><span class="cn">FALSE</span>)</span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>save_data_location <span class="ot">&lt;-</span> <span class="st">"../../Data/Processed_data/penguins.rds"</span></span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(processeddata, <span class="at">file =</span> save_data_location)</span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a>save_data_location_csv <span class="ot">&lt;-</span> <span class="st">"../../Data/Processed_data/penguins.csv"</span></span>
+<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a><span class="fu">write.csv</span>(processeddata, <span class="at">file =</span> save_data_location_csv, <span class="at">row.names=</span><span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 

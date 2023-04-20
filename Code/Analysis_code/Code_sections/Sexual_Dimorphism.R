@@ -1,45 +1,3 @@
-
-
-###############################
-# Penguin analysis script
-#
-# This script loads the processed, cleaned data, 
-# does a simple analysis and saves the results
-# to the results folder
-###############################
-
-## ---- setup -----
-#load needed packages. make sure they are installed.
-require(ggplot2) #for plotting
-require(magrittr) #for piping
-require(knitr) #for formatting output
-require(dplyr) 
-require(report)
-require(patchwork) #for grouping plots together
-require(GGally)
-
-
-#path to data and results 
-data_path <- "../../Data/Processed_data/"
-results_path <- "../../Results/"
-figures_path <- "../../Results/Figures/"
-dimorphism_path <- "../../Results/Figures/Dimorphism/"
-stats_path <- "../../Results/Statistics/"
-PC_path <- "../../Results/Statistics/Princomp/"
-
-
-## ---- functions ----
-# function to paste path to output filenames
-
-addpath <- function( filename, path=data_path ) {
-    location <- paste( path, filename, sep="")
-	return( location )
-}
-
-## ---- loaddata ----
-# load data. 
-dat <- readRDS( addpath("penguins.rds", data_path) )
-
 #################################################################
 #                                                               #
 #                    Sexual Dimorphism                          #
@@ -84,11 +42,20 @@ male <- d2 %>%
 
 t.test.Ad <- t.test(female$'Body Mass', male$'Body Mass') 
 
-print(t.test.Ad)
+readttest <- function( x = t.test.Ad ){
+  tval <- x$statistic
+  pval <- x$p.value
+  fmean <- x$estimate[1]
+  mmean <- x$estimate[2]
+  return(data.frame("Females"= fmean, "Males"= mmean, "T-value" = tval, "P-value"=pval))
+}
+Ad.table <- readttest()
+print(Ad.table)
+
 
 ## ---- SaveTable2 --------
 
-saveRDS(t.test.Ad, file = addpath("Adelie_Dimorphism_ttest.rds", stats_path))
+saveRDS(Ad.table, file = addpath("Adelie_Dimorphism_ttest.rds", stats_path))
 
 ## ---- Gentoo_T-test1 --------
 
@@ -117,13 +84,17 @@ male <- d3 %>%
 
 # Run the analysis
 
-t.test.Gt <- t.test(female$'Body Mass', male$'Body Mass') 
 
-print(t.test.Gt)
+t.test.Gt <- t.test(female$'Body Mass', male$'Body Mass') 
+readttest(t.test.Gt)
+
+Gt.table <- readttest(t.test.Gt)
+print(Gt.table)
+
 
 ## ---- SaveTable4 --------
 
-saveRDS(t.test.Gt, file = addpath("Gentoo_Dimorphism_ttest.rds", stats_path))
+saveRDS(Gt.table, file = addpath("Gentoo_Dimorphism_ttest.rds", stats_path))
 
 ## ---- Chinstrap_T-test1 --------
 
@@ -159,9 +130,12 @@ male <- d4 %>%
 # Run the analysis
 
 t.test.Cs <- t.test(female$'Body Mass', male$'Body Mass') 
+readttest(t.test.Cs)
 
-print(t.test.Cs)
+Cs.table <- readttest(t.test.Cs)
+print(Cs.table)
+
 
 ## ---- SaveTable6 --------
 
-saveRDS(t.test.Cs, file = addpath("Chinstrap_Dimorphism_ttest.rds", stats_path))
+saveRDS(Cs.table, file = addpath("Chinstrap_Dimorphism_ttest.rds", stats_path))
