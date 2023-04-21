@@ -47,7 +47,7 @@ Load needed packages and filepaths.
 #| warning: FALSE
 ```
 
-Load custom function to facilitat efficient path funneling. 
+Load custom function to facilitate efficient path funneling. 
 
 ```{r functions}
 ```
@@ -61,7 +61,10 @@ Load the data.
 
 With the data cleaned in the last project, it is worth displying here the information that is being worked with in this analysis. For ease of access and brief review, I am utilizing the skimr function but setting the information up in a dataframe ratherr than a tibble. With this I can more easily illustrate different chunks of information. 
 
-
+```{r }
+#| cache = FALSE
+knitr::read_chunk('Data_Summary.R')
+```
 ```{r, summarize}
 ```
 
@@ -78,7 +81,10 @@ While the above summary data is informative and useful for this overview, it is 
 
 ```{r summary.table, results="asis"}
 ```
-
+```{r }
+#| cache = FALSE
+knitr::read_chunk('Body_Mass_Analysis.R')
+```
 
 # Body Mass Distribution
 ## Interspecific and Intraspecific Varition
@@ -112,7 +118,10 @@ The plot shows clear dimorphism with Gentoo Penguins. It also illustrates strong
 
 # Analysis of Sexual Size Dimorphism
 
-
+```{r }
+#| cache = FALSE
+knitr::read_chunk('Sexual_Dimorphism.R')
+```
 To get a better idea of this discrepancy in Body Mass, I want to test the degree of sexual size dimorphism statistically. The goals here are to 1) illustrate that each of these three penguin species is significantly Sexually Dimorphic in body mass and 2) illustrate the relatively lower degree of dimorphism in the Chinstrap penguins. This second point will support the idea of the narrower body mass distribution in Chinstrap penguins reflecting reduced sexual size dimorphism. While this point might be self-evident, it is still interesting to note the correlation between sexual size dimorphism within a species and overall range in body mass.
 
 To support my hypotheses, I first illustrate summary data on the differences in Body Mass and then test the significance of this difference with a Welch's T-test. I replicate this process for each species.
@@ -180,6 +189,11 @@ The Chinstrap data represented here, while still showing a significance in dimor
 It looks like the data supports my assumptions. The Chinstrap Penguins present much differently than the other species in terms of Sexual Dimorphism. Both the p- and t- values noticebly differed. I wanted to test the statistical difference between the t-test results, but I am not sure how to do that and I am too short on time for this assignment to figure it out. Regardless, suggesting that the overall reduced body mass range in Chinstrap Penguins relative to Adelie and Gentoo Penguins as an outcome of reduced sexual dimorphism seems like a plausible explanation. 
 
 # Differentiating between Adelie and Chinstrap penguins on Dream Island
+
+```{r }
+#| cache = FALSE
+knitr::read_chunk('Analysis_of_Variance.R')
+```
 
 Despite the differences in sexual dimorphism, the Chinstrap and Adelie Penguins seem to cluster closely in body mass. With their geographic overlap on Dream island, my next question concerns the morphological distinction between the two species. I consider whether, with the current available data, I can see the justification for differentiating the two populations as different species. 
 

@@ -112,7 +112,7 @@ yhat <- mean(b1$'Culmen Length')
 
 spmeans  <- b1 %>% group_by(Species) %>% 
         summarise(
-          sl = mean(b1$'Culmen Length'),
+          sl = mean(`Culmen Length`),
           n = length(id),
           minid = min(id),
           maxid = max(id)
@@ -141,7 +141,10 @@ s
 
 r <- z + geom_point(size=2) +
 geom_segment(data=spmeans, aes(x = minid, y = sl, xend = maxid, yend = sl, group=Species)) +
-geom_segment( data=l, aes( x = id, y = l$"Culmen Length", xend = id, yend = sl, color=Species), lty = 3) 
+geom_segment( data=l, aes( x = id, y = l$"Culmen Length", xend = id, yend = sl, color=Species), lty = 3) +
+labs(
+title = "Culmen Variation",
+x= "ID", y = "Culmen Length") 
 r
 
 ## ---- SaveImage8 --------
@@ -167,7 +170,7 @@ saveRDS(anova.table.c, file = addpath("anova.table.c", PC_path))
 #CAN'T GET TO WORK
 spmeans2 <- b1 %>% group_by(b1$Species) %>%
   summarise(
-  sl = mean(b1$"Flipper Length"),
+  sl = mean(`Flipper Length`),
   n = length(id),
   minid = min(id),
   maxid = max(id),

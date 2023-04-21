@@ -183,7 +183,7 @@ III. Differentiating between Adelie and Chinstrap penguins. Shape Profile Analys
 <span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>stats_path <span class="ot">&lt;-</span> <span class="st">"../../Results/Statistics/"</span></span>
 <span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>PC_path <span class="ot">&lt;-</span> <span class="st">"../../Results/Statistics/Princomp/"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>Load custom function to facilitat efficient path funneling.</p>
+<p>Load custom function to facilitate efficient path funneling.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># function to paste path to output filenames</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -202,12 +202,15 @@ III. Differentiating between Adelie and Chinstrap penguins. Shape Profile Analys
 <h1>Summary Table</h1>
 <p>With the data cleaned in the last project, it is worth displying here the information that is being worked with in this analysis. For ease of access and brief review, I am utilizing the skimr function but setting the information up in a dataframe ratherr than a tibble. With this I can more easily illustrate different chunks of information.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create summary table of the data using skimr to use in paper</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># variables, sample size, mean, standard error</span></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>sk <span class="ot">&lt;-</span> skimr<span class="sc">::</span><span class="fu">skim</span>(dat)  <span class="co"># save skim object</span></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>sk <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(sk) <span class="co"># save as data.frame</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(sk)  <span class="co"># see the variable names</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">read_chunk</span>(<span class="st">'Data_Summary.R'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create summary table of the data using skimr to use in paper</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co"># variables, sample size, mean, standard error</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>sk <span class="ot">&lt;-</span> skimr<span class="sc">::</span><span class="fu">skim</span>(dat)  <span class="co"># save skim object</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>sk <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(sk) <span class="co"># save as data.frame</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(sk)  <span class="co"># see the variable names</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  skim_type  skim_variable n_missing complete_rate factor.ordered
 1    factor        Species         0     1.0000000          FALSE
@@ -231,22 +234,22 @@ III. Differentiating between Adelie and Chinstrap penguins. Shape Profile Analys
 5       13.1       15.65        17.3        18.7         21.5        ▅▅▇▇▂
 6      172.0      190.00       197.0       213.0        231.0        ▂▇▃▅▂</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>nrows <span class="ot">&lt;-</span> <span class="fu">dim</span>(dat)[<span class="dv">1</span>] <span class="co"># total number of rows</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>sk<span class="sc">$</span>N <span class="ot">&lt;-</span> nrows <span class="sc">-</span> sk<span class="sc">$</span>n_missing  <span class="co"># sample size of each variable</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>nrows <span class="ot">&lt;-</span> <span class="fu">dim</span>(dat)[<span class="dv">1</span>] <span class="co"># total number of rows</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>sk<span class="sc">$</span>N <span class="ot">&lt;-</span> nrows <span class="sc">-</span> sk<span class="sc">$</span>n_missing  <span class="co"># sample size of each variable</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="publishing-summary-table" class="level2">
 <h2 class="anchored" data-anchor-id="publishing-summary-table">Publishing Summary Table</h2>
 <p>While the above summary data is informative and useful for this overview, it is not in a format that is ready for publication. Using the following code, I am able to specify the summary statistics that are most useful for quick reference, rename the columns, and, using <code>knitr</code>, transform the table into a presentation format. This will be combined with the <code>results=asis</code> command to maintain a polished format when applicable.</p>
 <p><em>Note-</em></p>
 <p><em>I tried applying the knitr.kable method for some of my analytical results but it would change some of the values. I’m sure there is some coding trick to make this work better, I couldn’t quite figure it out.</em></p>
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># select only the variable, N, mean, sd, and category counts</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>sk.table <span class="ot">&lt;-</span> sk[<span class="fu">c</span>(<span class="st">"skim_variable"</span>, <span class="st">"N"</span>, <span class="st">"numeric.mean"</span>, <span class="st">"numeric.sd"</span>, <span class="st">"factor.top_counts"</span>)]</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(sk.table) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Variable"</span>, <span class="st">"N"</span>, <span class="st">"Mean"</span>, <span class="st">"SE"</span>, <span class="st">"Counts"</span>) <span class="co"># rename SD as SE</span></span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>sk.table<span class="sc">$</span>SE <span class="ot">&lt;-</span> sk.table<span class="sc">$</span>SE<span class="sc">/</span><span class="fu">sqrt</span>(sk.table<span class="sc">$</span>N) <span class="co"># calculate SE</span></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">knitr.kable.NA =</span> <span class="st">""</span>)</span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(sk.table, <span class="at">digits=</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># select only the variable, N, mean, sd, and category counts</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>sk.table <span class="ot">&lt;-</span> sk[<span class="fu">c</span>(<span class="st">"skim_variable"</span>, <span class="st">"N"</span>, <span class="st">"numeric.mean"</span>, <span class="st">"numeric.sd"</span>, <span class="st">"factor.top_counts"</span>)]</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(sk.table) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"Variable"</span>, <span class="st">"N"</span>, <span class="st">"Mean"</span>, <span class="st">"SE"</span>, <span class="st">"Counts"</span>) <span class="co"># rename SD as SE</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>sk.table<span class="sc">$</span>SE <span class="ot">&lt;-</span> sk.table<span class="sc">$</span>SE<span class="sc">/</span><span class="fu">sqrt</span>(sk.table<span class="sc">$</span>N) <span class="co"># calculate SE</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">knitr.kable.NA =</span> <span class="st">""</span>)</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>(sk.table, <span class="at">digits=</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <table class="table">
 <thead>
@@ -325,8 +328,11 @@ III. Differentiating between Adelie and Chinstrap penguins. Shape Profile Analys
 </tbody>
 </table>
 </div>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># save summary table</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(sk.table, <span class="at">file =</span> <span class="fu">addpath</span>(<span class="st">"summary_table.rds"</span>, results_path))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># save summary table</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">saveRDS</span>(sk.table, <span class="at">file =</span> <span class="fu">addpath</span>(<span class="st">"summary_table.rds"</span>, results_path))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">read_chunk</span>(<span class="st">'Body_Mass_Analysis.R'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
 </section>
 <section id="body-mass-distribution" class="level1">
@@ -335,63 +341,63 @@ III. Differentiating between Adelie and Chinstrap penguins. Shape Profile Analys
 <h2 class="anchored" data-anchor-id="interspecific-and-intraspecific-varition">Interspecific and Intraspecific Varition</h2>
 <p>We closed out our first project by creating bivariate plots for all of the continuous variables in our dataset. Each of the morhpological data was specifically plotted against body mass to develop an idea of how these features correlated with overall size. This series of plots is designed to summarize that data.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate bivariate plot of Culmen Depth~Body Mass</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Use geom_smooth to add in the correlation line</span></span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Subtitle instead of title for easier small font</span></span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> dat <span class="sc">|&gt;</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(dat<span class="sc">$</span><span class="st">'Body Mass'</span>, dat<span class="sc">$</span><span class="st">'Culmen Depth'</span>, <span class="at">color=</span>Species, <span class="at">fill=</span>Species)) <span class="sc">+</span></span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a> <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a> <span class="fu">geom_smooth</span>(<span class="at">method=</span>lm, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="fu">labs</span>(</span>
-<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a> <span class="at">subtitle=</span><span class="st">"Body Mass by Culmen Depth"</span>,</span>
-<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a> <span class="at">x=</span><span class="st">'Body mass (mm)'</span>, <span class="at">y=</span><span class="st">'Culmen Depth (mm)'</span>,</span>
-<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a> ) <span class="sc">+</span></span>
-<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette=</span><span class="st">"Dark2"</span>)</span>
-<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate bivariate plot of Culmen Length~Body Mass</span></span>
-<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>x1 <span class="ot">&lt;-</span> dat <span class="sc">|&gt;</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(dat<span class="sc">$</span><span class="st">'Body Mass'</span>, dat<span class="sc">$</span><span class="st">'Culmen Length'</span>, <span class="at">color=</span>Species, <span class="at">fill=</span>Species)) <span class="sc">+</span></span>
-<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a> <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a> <span class="fu">geom_smooth</span>(<span class="at">method=</span>lm, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a><span class="fu">labs</span>(</span>
-<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a> <span class="at">subtitle=</span><span class="st">"Body Mass by Culmen Length"</span>,</span>
-<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a> <span class="at">x=</span><span class="st">'Body mass (mm)'</span>, <span class="at">y=</span><span class="st">'Culmen Length (mm)'</span>,</span>
-<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a> ) <span class="sc">+</span></span>
-<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette=</span><span class="st">"Dark2"</span>)</span>
-<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate bivariate plot of Flipper Length~Body Mass</span></span>
-<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a>x2 <span class="ot">&lt;-</span> dat <span class="sc">|&gt;</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(dat<span class="sc">$</span><span class="st">'Body Mass'</span>, dat<span class="sc">$</span><span class="st">'Flipper Length'</span>, <span class="at">color=</span>Species, <span class="at">fill=</span>Species)) <span class="sc">+</span></span>
-<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a> <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a> <span class="fu">geom_smooth</span>(<span class="at">method=</span>lm, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a><span class="fu">labs</span>(</span>
-<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a> <span class="at">subtitle=</span><span class="st">"Body Mass by Flipper Length"</span>,</span>
-<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a> <span class="at">x=</span><span class="st">'Body mass (mm)'</span>, <span class="at">y=</span><span class="st">'Flipper Length (mm)'</span>,</span>
-<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a> ) <span class="sc">+</span></span>
-<span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette=</span><span class="st">"Dark2"</span>)</span>
-<span id="cb11-35"><a href="#cb11-35" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-36"><a href="#cb11-36" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate histogram showing the distribution of Body Mass for each species</span></span>
-<span id="cb11-37"><a href="#cb11-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-38"><a href="#cb11-38" aria-hidden="true" tabindex="-1"></a>x3 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> dat, <span class="fu">aes</span>(<span class="at">x =</span> dat<span class="sc">$</span><span class="st">'Body Mass'</span>)) <span class="sc">+</span></span>
-<span id="cb11-39"><a href="#cb11-39" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_histogram</span>( <span class="fu">aes</span>(<span class="at">fill=</span>Species), <span class="at">alpha=</span>.<span class="dv">3</span>) <span class="sc">+</span></span>
-<span id="cb11-40"><a href="#cb11-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb11-41"><a href="#cb11-41" aria-hidden="true" tabindex="-1"></a>  <span class="at">subtitle=</span><span class="st">"Body Mass"</span>,</span>
-<span id="cb11-42"><a href="#cb11-42" aria-hidden="true" tabindex="-1"></a>  <span class="at">x=</span><span class="st">'Body Mass (g)'</span>, <span class="at">y=</span><span class="st">'Count'</span>,</span>
-<span id="cb11-43"><a href="#cb11-43" aria-hidden="true" tabindex="-1"></a>  <span class="at">color=</span><span class="st">'Species'</span></span>
-<span id="cb11-44"><a href="#cb11-44" aria-hidden="true" tabindex="-1"></a> ) </span>
-<span id="cb11-45"><a href="#cb11-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-46"><a href="#cb11-46" aria-hidden="true" tabindex="-1"></a><span class="co">#Show these plots in a single grid.</span></span>
-<span id="cb11-47"><a href="#cb11-47" aria-hidden="true" tabindex="-1"></a><span class="co">#Allows them to be considered together.</span></span>
-<span id="cb11-48"><a href="#cb11-48" aria-hidden="true" tabindex="-1"></a><span class="co">#Need specific package to create this layout</span></span>
-<span id="cb11-49"><a href="#cb11-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-50"><a href="#cb11-50" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(patchwork)</span>
-<span id="cb11-51"><a href="#cb11-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-52"><a href="#cb11-52" aria-hidden="true" tabindex="-1"></a><span class="co">#With patchwork I can use the plus sign (+) to combine the plots in a grid</span></span>
-<span id="cb11-53"><a href="#cb11-53" aria-hidden="true" tabindex="-1"></a><span class="co">#Specify the number of column you want</span></span>
-<span id="cb11-54"><a href="#cb11-54" aria-hidden="true" tabindex="-1"></a><span class="co">#Use "collect" to gather the common key for the plots and display it independantly instead of with each. </span></span>
-<span id="cb11-55"><a href="#cb11-55" aria-hidden="true" tabindex="-1"></a>cor_plots <span class="ot">&lt;-</span> x <span class="sc">+</span> x1 <span class="sc">+</span> x2 <span class="sc">+</span> x3 <span class="sc">+</span> <span class="fu">plot_layout</span>(<span class="at">ncol=</span><span class="dv">2</span>, <span class="at">guides =</span> <span class="st">"collect"</span>)</span>
-<span id="cb11-56"><a href="#cb11-56" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb11-57"><a href="#cb11-57" aria-hidden="true" tabindex="-1"></a>cor_plots</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate bivariate plot of Culmen Depth~Body Mass</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Use geom_smooth to add in the correlation line</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Subtitle instead of title for easier small font</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> dat <span class="sc">|&gt;</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(dat<span class="sc">$</span><span class="st">'Body Mass'</span>, dat<span class="sc">$</span><span class="st">'Culmen Depth'</span>, <span class="at">color=</span>Species, <span class="at">fill=</span>Species)) <span class="sc">+</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a> <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a> <span class="fu">geom_smooth</span>(<span class="at">method=</span>lm, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="fu">labs</span>(</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a> <span class="at">subtitle=</span><span class="st">"Body Mass by Culmen Depth"</span>,</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a> <span class="at">x=</span><span class="st">'Body mass (mm)'</span>, <span class="at">y=</span><span class="st">'Culmen Depth (mm)'</span>,</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a> ) <span class="sc">+</span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette=</span><span class="st">"Dark2"</span>)</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate bivariate plot of Culmen Length~Body Mass</span></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>x1 <span class="ot">&lt;-</span> dat <span class="sc">|&gt;</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(dat<span class="sc">$</span><span class="st">'Body Mass'</span>, dat<span class="sc">$</span><span class="st">'Culmen Length'</span>, <span class="at">color=</span>Species, <span class="at">fill=</span>Species)) <span class="sc">+</span></span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a> <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a> <span class="fu">geom_smooth</span>(<span class="at">method=</span>lm, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a><span class="fu">labs</span>(</span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a> <span class="at">subtitle=</span><span class="st">"Body Mass by Culmen Length"</span>,</span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true" tabindex="-1"></a> <span class="at">x=</span><span class="st">'Body mass (mm)'</span>, <span class="at">y=</span><span class="st">'Culmen Length (mm)'</span>,</span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true" tabindex="-1"></a> ) <span class="sc">+</span></span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette=</span><span class="st">"Dark2"</span>)</span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-25"><a href="#cb13-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate bivariate plot of Flipper Length~Body Mass</span></span>
+<span id="cb13-26"><a href="#cb13-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-27"><a href="#cb13-27" aria-hidden="true" tabindex="-1"></a>x2 <span class="ot">&lt;-</span> dat <span class="sc">|&gt;</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>(dat<span class="sc">$</span><span class="st">'Body Mass'</span>, dat<span class="sc">$</span><span class="st">'Flipper Length'</span>, <span class="at">color=</span>Species, <span class="at">fill=</span>Species)) <span class="sc">+</span></span>
+<span id="cb13-28"><a href="#cb13-28" aria-hidden="true" tabindex="-1"></a> <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb13-29"><a href="#cb13-29" aria-hidden="true" tabindex="-1"></a> <span class="fu">geom_smooth</span>(<span class="at">method=</span>lm, <span class="at">se =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb13-30"><a href="#cb13-30" aria-hidden="true" tabindex="-1"></a><span class="fu">labs</span>(</span>
+<span id="cb13-31"><a href="#cb13-31" aria-hidden="true" tabindex="-1"></a> <span class="at">subtitle=</span><span class="st">"Body Mass by Flipper Length"</span>,</span>
+<span id="cb13-32"><a href="#cb13-32" aria-hidden="true" tabindex="-1"></a> <span class="at">x=</span><span class="st">'Body mass (mm)'</span>, <span class="at">y=</span><span class="st">'Flipper Length (mm)'</span>,</span>
+<span id="cb13-33"><a href="#cb13-33" aria-hidden="true" tabindex="-1"></a> ) <span class="sc">+</span></span>
+<span id="cb13-34"><a href="#cb13-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette=</span><span class="st">"Dark2"</span>)</span>
+<span id="cb13-35"><a href="#cb13-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-36"><a href="#cb13-36" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate histogram showing the distribution of Body Mass for each species</span></span>
+<span id="cb13-37"><a href="#cb13-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-38"><a href="#cb13-38" aria-hidden="true" tabindex="-1"></a>x3 <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> dat, <span class="fu">aes</span>(<span class="at">x =</span> dat<span class="sc">$</span><span class="st">'Body Mass'</span>)) <span class="sc">+</span></span>
+<span id="cb13-39"><a href="#cb13-39" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_histogram</span>( <span class="fu">aes</span>(<span class="at">fill=</span>Species), <span class="at">alpha=</span>.<span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb13-40"><a href="#cb13-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb13-41"><a href="#cb13-41" aria-hidden="true" tabindex="-1"></a>  <span class="at">subtitle=</span><span class="st">"Body Mass"</span>,</span>
+<span id="cb13-42"><a href="#cb13-42" aria-hidden="true" tabindex="-1"></a>  <span class="at">x=</span><span class="st">'Body Mass (g)'</span>, <span class="at">y=</span><span class="st">'Count'</span>,</span>
+<span id="cb13-43"><a href="#cb13-43" aria-hidden="true" tabindex="-1"></a>  <span class="at">color=</span><span class="st">'Species'</span></span>
+<span id="cb13-44"><a href="#cb13-44" aria-hidden="true" tabindex="-1"></a> ) </span>
+<span id="cb13-45"><a href="#cb13-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-46"><a href="#cb13-46" aria-hidden="true" tabindex="-1"></a><span class="co">#Show these plots in a single grid.</span></span>
+<span id="cb13-47"><a href="#cb13-47" aria-hidden="true" tabindex="-1"></a><span class="co">#Allows them to be considered together.</span></span>
+<span id="cb13-48"><a href="#cb13-48" aria-hidden="true" tabindex="-1"></a><span class="co">#Need specific package to create this layout</span></span>
+<span id="cb13-49"><a href="#cb13-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-50"><a href="#cb13-50" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(patchwork)</span>
+<span id="cb13-51"><a href="#cb13-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-52"><a href="#cb13-52" aria-hidden="true" tabindex="-1"></a><span class="co">#With patchwork I can use the plus sign (+) to combine the plots in a grid</span></span>
+<span id="cb13-53"><a href="#cb13-53" aria-hidden="true" tabindex="-1"></a><span class="co">#Specify the number of column you want</span></span>
+<span id="cb13-54"><a href="#cb13-54" aria-hidden="true" tabindex="-1"></a><span class="co">#Use "collect" to gather the common key for the plots and display it independantly instead of with each. </span></span>
+<span id="cb13-55"><a href="#cb13-55" aria-hidden="true" tabindex="-1"></a>cor_plots <span class="ot">&lt;-</span> x <span class="sc">+</span> x1 <span class="sc">+</span> x2 <span class="sc">+</span> x3 <span class="sc">+</span> <span class="fu">plot_layout</span>(<span class="at">ncol=</span><span class="dv">2</span>, <span class="at">guides =</span> <span class="st">"collect"</span>)</span>
+<span id="cb13-56"><a href="#cb13-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-57"><a href="#cb13-57" aria-hidden="true" tabindex="-1"></a>cor_plots</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="exploratory_analysis_files/figure-html/summary_plots-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -400,41 +406,41 @@ III. Differentiating between Adelie and Chinstrap penguins. Shape Profile Analys
 <p>This distribution becomes much clearer with the violin plot below. Besides following the pattern seen in the summary plots where the Gentoo Penguins appear to be outliers, it is interesting to observe a seemingly smaller range in body mass for the Chinstrap relative to the Gentoo and Adelie Penguins. My first question concerns this apparent difference in body mass variation for each species. I explore this question by considering the role of sexual dimorphism.</p>
 <p>A reasonable explanation for the narrower range in body mass for Chinstrap Penguins would that they reflect less sexual size dimorphism than the other two species. To first test the hypothesis that these three species are indeed sexually dimorphic in body mass I replot the data and distribute it by Sex.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> dat <span class="sc">%&gt;%</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>( <span class="fu">aes</span>(<span class="at">x=</span>Species, <span class="at">y=</span>dat<span class="sc">$</span><span class="st">'Body Mass'</span>, <span class="at">col=</span>Species)) <span class="sc">+</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_violin</span>(<span class="at">trim=</span><span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>() <span class="sc">+</span></span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">title=</span><span class="st">"Body Mass by Species"</span>,</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">x=</span><span class="st">'Species'</span>, <span class="at">y=</span><span class="st">'Body Mass (g)'</span>,</span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">color=</span><span class="st">'Species'</span></span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a> ) <span class="sc">+</span></span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a> <span class="fu">scale_color_brewer</span>(<span class="at">palette=</span><span class="st">"Dark2"</span>)</span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>p2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>p2 <span class="ot">&lt;-</span> dat <span class="sc">%&gt;%</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>( <span class="fu">aes</span>(<span class="at">x=</span>Species, <span class="at">y=</span>dat<span class="sc">$</span><span class="st">'Body Mass'</span>, <span class="at">col=</span>Species)) <span class="sc">+</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_violin</span>(<span class="at">trim=</span><span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>() <span class="sc">+</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">title=</span><span class="st">"Body Mass by Species"</span>,</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">x=</span><span class="st">'Species'</span>, <span class="at">y=</span><span class="st">'Body Mass (g)'</span>,</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">color=</span><span class="st">'Species'</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a> ) <span class="sc">+</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a> <span class="fu">scale_color_brewer</span>(<span class="at">palette=</span><span class="st">"Dark2"</span>)</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>p2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="exploratory_analysis_files/figure-html/Dimorphism1-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>First I need to remove the NA values.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co">#The NA values add an extra variable that complicates the image. Subset out NA's.</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>d1 <span class="ot">&lt;-</span> dat[ <span class="sc">!</span><span class="fu">is.na</span>(dat<span class="sc">$</span><span class="st">"Sex"</span>), ]</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Plot the data without NA values to see distribution.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">#The NA values add an extra variable that complicates the image. Subset out NA's.</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>d1 <span class="ot">&lt;-</span> dat[ <span class="sc">!</span><span class="fu">is.na</span>(dat<span class="sc">$</span><span class="st">"Sex"</span>), ]</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Plot the data without NA values to see distribution.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Now I can plot.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>p4 <span class="ot">&lt;-</span> d1 <span class="sc">%&gt;%</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Species, <span class="at">y=</span>d1<span class="sc">$</span><span class="st">'Body Mass'</span>, <span class="at">fill=</span>Sex)) <span class="sc">+</span></span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_violin</span>(<span class="at">trim=</span><span class="cn">FALSE</span>) <span class="sc">+</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="fu">labs</span>(</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="at">title=</span><span class="st">"Body Mass by Species and Sex"</span>,</span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="at">x=</span><span class="st">'Sex'</span>, <span class="at">y=</span><span class="st">'Body Mass (g)'</span>,</span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="at">color=</span><span class="st">'Species'</span></span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span></span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="fu">scale_fill_brewer</span>(<span class="at">palette=</span><span class="st">"Dark2"</span>)</span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>p4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>p4 <span class="ot">&lt;-</span> d1 <span class="sc">%&gt;%</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>Species, <span class="at">y=</span>d1<span class="sc">$</span><span class="st">'Body Mass'</span>, <span class="at">fill=</span>Sex)) <span class="sc">+</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_violin</span>(<span class="at">trim=</span><span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="fu">labs</span>(</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="at">title=</span><span class="st">"Body Mass by Species and Sex"</span>,</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="at">x=</span><span class="st">'Sex'</span>, <span class="at">y=</span><span class="st">'Body Mass (g)'</span>,</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="at">color=</span><span class="st">'Species'</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="fu">scale_fill_brewer</span>(<span class="at">palette=</span><span class="st">"Dark2"</span>)</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>p4</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="exploratory_analysis_files/figure-html/Dimorphism4-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -444,6 +450,9 @@ III. Differentiating between Adelie and Chinstrap penguins. Shape Profile Analys
 </section>
 <section id="analysis-of-sexual-size-dimorphism" class="level1">
 <h1>Analysis of Sexual Size Dimorphism</h1>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">read_chunk</span>(<span class="st">'Sexual_Dimorphism.R'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>To get a better idea of this discrepancy in Body Mass, I want to test the degree of sexual size dimorphism statistically. The goals here are to 1) illustrate that each of these three penguin species is significantly Sexually Dimorphic in body mass and 2) illustrate the relatively lower degree of dimorphism in the Chinstrap penguins. This second point will support the idea of the narrower body mass distribution in Chinstrap penguins reflecting reduced sexual size dimorphism. While this point might be self-evident, it is still interesting to note the correlation between sexual size dimorphism within a species and overall range in body mass.</p>
 <p>To support my hypotheses, I first illustrate summary data on the differences in Body Mass and then test the significance of this difference with a Welch’s T-test. I replicate this process for each species.</p>
 <section id="adelie-penguins" class="level3">
@@ -453,18 +462,18 @@ III. Differentiating between Adelie and Chinstrap penguins. Shape Profile Analys
 <h4 class="anchored" data-anchor-id="summary">Summary</h4>
 <p>With the NA values removed, I first get an idea of the mean size differences between females and males. I installed the <em>report</em> package to help me summarize the data.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Subset the Species</span></span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>d2 <span class="ot">&lt;-</span> dat[dat<span class="sc">$</span>Species<span class="sc">==</span><span class="st">"Adelie"</span>, ]</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Remove the NA values</span></span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>d2 <span class="ot">&lt;-</span> d2[ <span class="sc">!</span><span class="fu">is.na</span>(d2<span class="sc">$</span><span class="st">"Sex"</span>), ]</span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="co">#report data grouping by Sex and Body Mass</span></span>
-<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>Adelie_report <span class="ot">&lt;-</span> <span class="fu">report_sample</span>(d2, <span class="at">group_by =</span> <span class="st">"Sex"</span>, <span class="at">select =</span> <span class="st">"Body Mass"</span>)</span>
-<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(Adelie_report)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Subset the Species</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>d2 <span class="ot">&lt;-</span> dat[dat<span class="sc">$</span>Species<span class="sc">==</span><span class="st">"Adelie"</span>, ]</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Remove the NA values</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>d2 <span class="ot">&lt;-</span> d2[ <span class="sc">!</span><span class="fu">is.na</span>(d2<span class="sc">$</span><span class="st">"Sex"</span>), ]</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="co">#report data grouping by Sex and Body Mass</span></span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>Adelie_report <span class="ot">&lt;-</span> <span class="fu">report_sample</span>(d2, <span class="at">group_by =</span> <span class="st">"Sex"</span>, <span class="at">select =</span> <span class="st">"Body Mass"</span>)</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(Adelie_report)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># Descriptive Statistics
 
@@ -479,28 +488,27 @@ Mean Body Mass (SD) | 3368.84 (269.38) | 4043.49 (346.81) | 3706.16 (458.62)</co
 <h4 class="anchored" data-anchor-id="t-test">T-test</h4>
 <p>To test the means of each population (Male and Female) I need to filter the population into individual vectors. From there I can test the means through a t-test.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>female <span class="ot">&lt;-</span> d2 <span class="sc">%&gt;%</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">filter</span>(Sex <span class="sc">==</span> <span class="st">"FEMALE"</span>)</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>male <span class="ot">&lt;-</span> d2 <span class="sc">%&gt;%</span></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a> <span class="fu">filter</span>(Sex <span class="sc">==</span> <span class="st">"MALE"</span>)</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Run a two sample t-test after filtering the data</span></span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>t.test.Ad <span class="ot">&lt;-</span> <span class="fu">t.test</span>(female<span class="sc">$</span><span class="st">'Body Mass'</span>, male<span class="sc">$</span><span class="st">'Body Mass'</span>) </span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(t.test.Ad)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>female <span class="ot">&lt;-</span> d2 <span class="sc">%&gt;%</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a> <span class="fu">filter</span>(Sex <span class="sc">==</span> <span class="st">"FEMALE"</span>)</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>male <span class="ot">&lt;-</span> d2 <span class="sc">%&gt;%</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a> <span class="fu">filter</span>(Sex <span class="sc">==</span> <span class="st">"MALE"</span>)</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Run a two sample t-test after filtering the data</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>t.test.Ad <span class="ot">&lt;-</span> <span class="fu">t.test</span>(female<span class="sc">$</span><span class="st">'Body Mass'</span>, male<span class="sc">$</span><span class="st">'Body Mass'</span>) </span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>readttest <span class="ot">&lt;-</span> <span class="cf">function</span>( <span class="at">x =</span> t.test.Ad ){</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>  tval <span class="ot">&lt;-</span> x<span class="sc">$</span>statistic</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>  pval <span class="ot">&lt;-</span> x<span class="sc">$</span>p.value</span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>  fmean <span class="ot">&lt;-</span> x<span class="sc">$</span>estimate[<span class="dv">1</span>]</span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>  mmean <span class="ot">&lt;-</span> x<span class="sc">$</span>estimate[<span class="dv">2</span>]</span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(<span class="fu">data.frame</span>(<span class="st">"Females"</span><span class="ot">=</span> fmean, <span class="st">"Males"</span><span class="ot">=</span> mmean, <span class="st">"T-value"</span> <span class="ot">=</span> tval, <span class="st">"P-value"</span><span class="ot">=</span>pval))</span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>Ad.table <span class="ot">&lt;-</span> <span class="fu">readttest</span>()</span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(Ad.table)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>
-    Welch Two Sample t-test
-
-data:  female$"Body Mass" and male$"Body Mass"
-t = -13.126, df = 135.69, p-value &lt; 2.2e-16
-alternative hypothesis: true difference in means is not equal to 0
-95 percent confidence interval:
- -776.3012 -573.0139
-sample estimates:
-mean of x mean of y 
- 3368.836  4043.493 </code></pre>
+<pre><code>           Females    Males   T.value     P.value
+mean of x 3368.836 4043.493 -13.12629 6.40232e-26</code></pre>
 </div>
 </div>
 <p>The p-value supports the significance of Sexual Size Dimorphism in Adelie Penguins. I will pay attention to the t-value (-13.126) for comparison with the other species’.</p>
@@ -512,16 +520,16 @@ mean of x mean of y
 <section id="summary-1" class="level4">
 <h4 class="anchored" data-anchor-id="summary-1">Summary</h4>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Subset the Species and remove NA values </span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>d3 <span class="ot">&lt;-</span> dat[dat<span class="sc">$</span>Species<span class="sc">==</span><span class="st">"Gentoo"</span>, ]</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>d3 <span class="ot">&lt;-</span> d3[ <span class="sc">!</span><span class="fu">is.na</span>(d3<span class="sc">$</span><span class="st">"Sex"</span>), ]</span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="co">#Same process as above</span></span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>Gentoo_report <span class="ot">&lt;-</span> <span class="fu">report_sample</span>(d3, <span class="at">group_by =</span> <span class="st">"Sex"</span>, <span class="at">select =</span> <span class="st">"Body Mass"</span>)</span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(Gentoo_report)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Subset the Species and remove NA values </span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>d3 <span class="ot">&lt;-</span> dat[dat<span class="sc">$</span>Species<span class="sc">==</span><span class="st">"Gentoo"</span>, ]</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>d3 <span class="ot">&lt;-</span> d3[ <span class="sc">!</span><span class="fu">is.na</span>(d3<span class="sc">$</span><span class="st">"Sex"</span>), ]</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="co">#Same process as above</span></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>Gentoo_report <span class="ot">&lt;-</span> <span class="fu">report_sample</span>(d3, <span class="at">group_by =</span> <span class="st">"Sex"</span>, <span class="at">select =</span> <span class="st">"Body Mass"</span>)</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(Gentoo_report)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># Descriptive Statistics
 
@@ -535,29 +543,26 @@ Mean Body Mass (SD) | 4671.36 (285.39) | 5484.84 (313.16) | 5099.14 (505.80)</co
 <section id="t-test-1" class="level4">
 <h4 class="anchored" data-anchor-id="t-test-1">T-test</h4>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter the data</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>female <span class="ot">&lt;-</span> d3 <span class="sc">%&gt;%</span></span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a> <span class="fu">filter</span>(Sex <span class="sc">==</span> <span class="st">"FEMALE"</span>)</span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>male <span class="ot">&lt;-</span> d3 <span class="sc">%&gt;%</span></span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a> <span class="fu">filter</span>(Sex <span class="sc">==</span> <span class="st">"MALE"</span>)</span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the analysis</span></span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>t.test.Gt <span class="ot">&lt;-</span> <span class="fu">t.test</span>(female<span class="sc">$</span><span class="st">'Body Mass'</span>, male<span class="sc">$</span><span class="st">'Body Mass'</span>) </span>
-<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(t.test.Gt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Filter the data</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>female <span class="ot">&lt;-</span> d3 <span class="sc">%&gt;%</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a> <span class="fu">filter</span>(Sex <span class="sc">==</span> <span class="st">"FEMALE"</span>)</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>male <span class="ot">&lt;-</span> d3 <span class="sc">%&gt;%</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a> <span class="fu">filter</span>(Sex <span class="sc">==</span> <span class="st">"MALE"</span>)</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the analysis</span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>t.test.Gt <span class="ot">&lt;-</span> <span class="fu">t.test</span>(female<span class="sc">$</span><span class="st">'Body Mass'</span>, male<span class="sc">$</span><span class="st">'Body Mass'</span>) </span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a><span class="fu">readttest</span>(t.test.Gt)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>
-    Welch Two Sample t-test
-
-data:  female$"Body Mass" and male$"Body Mass"
-t = -14.638, df = 113.98, p-value &lt; 2.2e-16
-alternative hypothesis: true difference in means is not equal to 0
-95 percent confidence interval:
- -923.5647 -703.3802
-sample estimates:
-mean of x mean of y 
- 4671.364  5484.836 </code></pre>
+<pre><code>           Females    Males   T.value      P.value
+mean of x 4671.364 5484.836 -14.63759 6.078451e-28</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>Gt.table <span class="ot">&lt;-</span> <span class="fu">readttest</span>(t.test.Gt)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(Gt.table)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>           Females    Males   T.value      P.value
+mean of x 4671.364 5484.836 -14.63759 6.078451e-28</code></pre>
 </div>
 </div>
 <p>Just as above, the p-value corroborates the violin plot distribution for Sexual Size Dimorphism. The t-value here (-14.638) is greater than that of Adelie (-13.126).</p>
@@ -570,14 +575,14 @@ mean of x mean of y
 <section id="summary-2" class="level4">
 <h4 class="anchored" data-anchor-id="summary-2">Summary</h4>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Subset the Species</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>d4 <span class="ot">&lt;-</span> dat[dat<span class="sc">$</span>Species<span class="sc">==</span><span class="st">"Chinstrap"</span>, ]</span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="co">#There is no need to remove NA values for this species</span></span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="co">#Check by:</span></span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>d4<span class="sc">$</span>Sex</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Subset the Species</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>d4 <span class="ot">&lt;-</span> dat[dat<span class="sc">$</span>Species<span class="sc">==</span><span class="st">"Chinstrap"</span>, ]</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="co">#There is no need to remove NA values for this species</span></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a><span class="co">#Check by:</span></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>d4<span class="sc">$</span>Sex</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] FEMALE MALE   MALE   FEMALE MALE   FEMALE FEMALE MALE   FEMALE MALE  
 [11] FEMALE MALE   FEMALE MALE   FEMALE MALE   MALE   FEMALE FEMALE MALE  
@@ -588,11 +593,11 @@ mean of x mean of y
 [61] MALE   FEMALE FEMALE MALE   FEMALE MALE   MALE   FEMALE
 Levels: FEMALE MALE</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Report on the data</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>Chinstrap_report <span class="ot">&lt;-</span> <span class="fu">report_sample</span>(d4, <span class="at">group_by =</span> <span class="st">"Sex"</span>, <span class="at">select =</span> <span class="st">"Body Mass"</span>)</span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(Chinstrap_report)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Report on the data</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>Chinstrap_report <span class="ot">&lt;-</span> <span class="fu">report_sample</span>(d4, <span class="at">group_by =</span> <span class="st">"Sex"</span>, <span class="at">select =</span> <span class="st">"Body Mass"</span>)</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(Chinstrap_report)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># Descriptive Statistics
 
@@ -607,30 +612,26 @@ Mean Body Mass (SD) | 3527.21 (285.33) | 3938.97 (362.14) | 3733.09 (384.34)</co
 <section id="t-test-2" class="level3">
 <h3 class="anchored" data-anchor-id="t-test-2">T-test</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Filter the data</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>female <span class="ot">&lt;-</span> d4 <span class="sc">%&gt;%</span></span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a> <span class="fu">filter</span>(Sex <span class="sc">==</span> <span class="st">"FEMALE"</span>)</span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>male <span class="ot">&lt;-</span> d4 <span class="sc">%&gt;%</span></span>
-<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a> <span class="fu">filter</span>(Sex <span class="sc">==</span> <span class="st">"MALE"</span>)</span>
-<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the analysis</span></span>
-<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>t.test.Cs <span class="ot">&lt;-</span> <span class="fu">t.test</span>(female<span class="sc">$</span><span class="st">'Body Mass'</span>, male<span class="sc">$</span><span class="st">'Body Mass'</span>) </span>
-<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(t.test.Cs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Filter the data</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>female <span class="ot">&lt;-</span> d4 <span class="sc">%&gt;%</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a> <span class="fu">filter</span>(Sex <span class="sc">==</span> <span class="st">"FEMALE"</span>)</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>male <span class="ot">&lt;-</span> d4 <span class="sc">%&gt;%</span></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a> <span class="fu">filter</span>(Sex <span class="sc">==</span> <span class="st">"MALE"</span>)</span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Run the analysis</span></span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>t.test.Cs <span class="ot">&lt;-</span> <span class="fu">t.test</span>(female<span class="sc">$</span><span class="st">'Body Mass'</span>, male<span class="sc">$</span><span class="st">'Body Mass'</span>) </span>
+<span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a><span class="fu">readttest</span>(t.test.Cs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>
-    Welch Two Sample t-test
-
-data:  female$"Body Mass" and male$"Body Mass"
-t = -5.2077, df = 62.575, p-value = 2.264e-06
-alternative hypothesis: true difference in means is not equal to 0
-95 percent confidence interval:
- -569.7903 -253.7391
-sample estimates:
-mean of x mean of y 
- 3527.206  3938.971 </code></pre>
+<pre><code>           Females    Males   T.value      P.value
+mean of x 3527.206 3938.971 -5.207734 2.264432e-06</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>Cs.table <span class="ot">&lt;-</span> <span class="fu">readttest</span>(t.test.Cs)</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(Cs.table)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>           Females    Males   T.value      P.value
+mean of x 3527.206 3938.971 -5.207734 2.264432e-06</code></pre>
 </div>
 </div>
 <p>The Chinstrap data represented here, while still showing a significance in dimorphism, shows a much lower t-value (-5.2077) than the two other species tested.</p>
@@ -642,6 +643,9 @@ mean of x mean of y
 </section>
 <section id="differentiating-between-adelie-and-chinstrap-penguins-on-dream-island" class="level1">
 <h1>Differentiating between Adelie and Chinstrap penguins on Dream Island</h1>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">read_chunk</span>(<span class="st">'Analysis_of_Variance.R'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <p>Despite the differences in sexual dimorphism, the Chinstrap and Adelie Penguins seem to cluster closely in body mass. With their geographic overlap on Dream island, my next question concerns the morphological distinction between the two species. I consider whether, with the current available data, I can see the justification for differentiating the two populations as different species.</p>
 <p>In examining photos of the two birds, the phenotypic differences are distinct. As a paleontologists, however, I do not often have the ability to examine soft tissue. Thus, for my own purposes, I’d like to see just how vague physical measurements can be in phylogenetic pursuits. I will acknowledge here that the measurements provided to us here were taken from specimens in the flesh, and so the results of this inquiry will not directly translate to my interests, but it is a starting point.</p>
 <p>This final question seeks to determin if there are proportional differences in Flipper and Culmen dimensions for the two penguin species that might help to differentiate them.</p>
@@ -670,22 +674,22 @@ mean of x mean of y
 <h2 class="anchored" data-anchor-id="summary-data-for-adelie-and-chinstrap-penguins">Summary Data for Adelie and Chinstrap Penguins</h2>
 <p>I begin this process by removing Gentoo Penguins from the analysis.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Subset out Gentoo</span></span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>b1 <span class="ot">&lt;-</span> dat[<span class="sc">!</span>dat<span class="sc">$</span>Species <span class="sc">==</span> <span class="st">"Gentoo"</span>, ] </span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="co">#Drop unused levels from analysis (otherwise Gentoo continues to appear, just with no data)</span></span>
-<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>b1 <span class="ot">&lt;-</span> <span class="fu">droplevels</span>(b1)</span>
-<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a><span class="co">#Run a summary to get a quick look at the data means for each species</span></span>
-<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>c1 <span class="ot">&lt;-</span> b1 <span class="sc">%&gt;%</span></span>
-<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(<span class="sc">-</span><span class="fu">starts_with</span>(<span class="st">"Delta"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a><span class="fu">group_by</span>(Species) <span class="sc">%&gt;%</span></span>
-<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a><span class="fu">report</span>(<span class="at">exclude =</span> <span class="st">"b1$Gentoo"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>()</span>
-<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a>c1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Subset out Gentoo</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>b1 <span class="ot">&lt;-</span> dat[<span class="sc">!</span>dat<span class="sc">$</span>Species <span class="sc">==</span> <span class="st">"Gentoo"</span>, ] </span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a><span class="co">#Drop unused levels from analysis (otherwise Gentoo continues to appear, just with no data)</span></span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>b1 <span class="ot">&lt;-</span> <span class="fu">droplevels</span>(b1)</span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a><span class="co">#Run a summary to get a quick look at the data means for each species</span></span>
+<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a>c1 <span class="ot">&lt;-</span> b1 <span class="sc">%&gt;%</span></span>
+<span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(<span class="sc">-</span><span class="fu">starts_with</span>(<span class="st">"Delta"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb37-13"><a href="#cb37-13" aria-hidden="true" tabindex="-1"></a><span class="fu">group_by</span>(Species) <span class="sc">%&gt;%</span></span>
+<span id="cb37-14"><a href="#cb37-14" aria-hidden="true" tabindex="-1"></a><span class="fu">report</span>(<span class="at">exclude =</span> <span class="st">"b1$Gentoo"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb37-15"><a href="#cb37-15" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>()</span>
+<span id="cb37-16"><a href="#cb37-16" aria-hidden="true" tabindex="-1"></a>c1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>The data contains 219 observations, grouped by Species, of the following 7
 variables:
@@ -711,16 +715,16 @@ variables:
 <p>Before plotting each variable, I wanted to get a broad graphical look at the interspecific variation in the variables I hadn’t yet tested.</p>
 <p>This task was accomplished by installing the GGally package. Using GGally, I generated bivariate plots for all morphological variables other than Body Mass.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(GGally)</span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Select the factor and continuous variables to plot. </span></span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>c2 <span class="ot">&lt;-</span> b1 <span class="sc">%&gt;%</span></span>
-<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Species, <span class="fu">ends_with</span>(<span class="st">"th"</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>  GGally<span class="sc">::</span><span class="fu">ggpairs</span>(<span class="fu">aes</span>(<span class="at">color =</span> Species)) <span class="sc">+</span></span>
-<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette=</span><span class="st">"Dark2"</span>) <span class="sc">+</span></span>
-<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette=</span><span class="st">"Dark2"</span>)</span>
-<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>c2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="fu">require</span>(GGally)</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Select the factor and continuous variables to plot. </span></span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>c2 <span class="ot">&lt;-</span> b1 <span class="sc">%&gt;%</span></span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Species, <span class="fu">ends_with</span>(<span class="st">"th"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>  GGally<span class="sc">::</span><span class="fu">ggpairs</span>(<span class="fu">aes</span>(<span class="at">color =</span> Species)) <span class="sc">+</span></span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette=</span><span class="st">"Dark2"</span>) <span class="sc">+</span></span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_brewer</span>(<span class="at">palette=</span><span class="st">"Dark2"</span>)</span>
+<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a>c2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="exploratory_analysis_files/figure-html/Ad~Cs1-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -729,13 +733,13 @@ variables:
 <section id="principal-components-analysis" class="level3">
 <h3 class="anchored" data-anchor-id="principal-components-analysis">Principal Components Analysis</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Remove Body Mass by selecting for other variables only.</span></span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="co">#Run Principal Components analysis with princomp function. </span></span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>b2 <span class="ot">&lt;-</span> b1 <span class="sc">%&gt;%</span></span>
-<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(<span class="st">"Culmen Length"</span>, <span class="st">"Culmen Depth"</span>, <span class="st">"Flipper Length"</span>) </span>
-<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>b2.pc <span class="ot">&lt;-</span> <span class="fu">princomp</span>(b2, <span class="at">scores=</span>T)</span>
-<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(b2.pc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Remove Body Mass by selecting for other variables only.</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="co">#Run Principal Components analysis with princomp function. </span></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>b2 <span class="ot">&lt;-</span> b1 <span class="sc">%&gt;%</span></span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a><span class="fu">select</span>(<span class="st">"Culmen Length"</span>, <span class="st">"Culmen Depth"</span>, <span class="st">"Flipper Length"</span>) </span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>b2.pc <span class="ot">&lt;-</span> <span class="fu">princomp</span>(b2, <span class="at">scores=</span>T)</span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(b2.pc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Importance of components:
                           Comp.1    Comp.2     Comp.3
@@ -743,9 +747,9 @@ Standard deviation     8.0077579 4.2638789 1.09283532
 Proportion of Variance 0.7679623 0.2177347 0.01430301
 Cumulative Proportion  0.7679623 0.9856970 1.00000000</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>pcsum <span class="ot">&lt;-</span> <span class="fu">summary</span>(b2.pc)</span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(pcsum)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>pcsum <span class="ot">&lt;-</span> <span class="fu">summary</span>(b2.pc)</span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(pcsum)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Importance of components:
                           Comp.1    Comp.2     Comp.3
@@ -756,9 +760,9 @@ Cumulative Proportion  0.7679623 0.9856970 1.00000000</code></pre>
 </div>
 <p>This analysis shows pretty clearly that the most variation is found in pc1 (~77%) with a fairly steep drop with pc2 (~22%) and negligable scores for pc3.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Illustrate PC Loadings</span></span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="fu">loadings</span>(b2.pc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Illustrate PC Loadings</span></span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="fu">loadings</span>(b2.pc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Loadings:
@@ -772,8 +776,8 @@ SS loadings     1.000  1.000  1.000
 Proportion Var  0.333  0.333  0.333
 Cumulative Var  0.333  0.667  1.000</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>pcload <span class="ot">&lt;-</span> <span class="fu">loadings</span>(b2.pc)</span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(pcload)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>pcload <span class="ot">&lt;-</span> <span class="fu">loadings</span>(b2.pc)</span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(pcload)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>
 Loadings:
@@ -791,20 +795,20 @@ Cumulative Var  0.333  0.667  1.000</code></pre>
 <p>PC1 illustrates that most of the variation with the sample is found in Flipper Length. Second to that is the distribution of Culmen Length Values. Importantly, it does not seem from this that Culmen Depth factors into the variation within this population.</p>
 <p>Because Culmen Depth is a negligable variable in this analysis, I focus on pc1 and pc2. The plot shows variation and when demarcating the species, shows distinct groupings.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Because Culmen Depth is a negligable variable in this analysis, I focus on pc1 and pc2.</span></span>
-<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="co">#Plot PC1~PC2</span></span>
-<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>pc1 <span class="ot">&lt;-</span> b2.pc<span class="sc">$</span>scores[,<span class="dv">1</span>]</span>
-<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>pc2 <span class="ot">&lt;-</span> b2.pc<span class="sc">$</span>scores[,<span class="dv">2</span>]</span>
-<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>pc3 <span class="ot">&lt;-</span> b2.pc<span class="sc">$</span>scores[,<span class="dv">3</span>]</span>
-<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pc2 <span class="sc">~</span> pc1, <span class="at">col=</span>b1<span class="sc">$</span>Species, <span class="at">cex=</span><span class="dv">2</span>, <span class="at">pch=</span><span class="dv">16</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Because Culmen Depth is a negligable variable in this analysis, I focus on pc1 and pc2.</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a><span class="co">#Plot PC1~PC2</span></span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a>pc1 <span class="ot">&lt;-</span> b2.pc<span class="sc">$</span>scores[,<span class="dv">1</span>]</span>
+<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a>pc2 <span class="ot">&lt;-</span> b2.pc<span class="sc">$</span>scores[,<span class="dv">2</span>]</span>
+<span id="cb48-6"><a href="#cb48-6" aria-hidden="true" tabindex="-1"></a>pc3 <span class="ot">&lt;-</span> b2.pc<span class="sc">$</span>scores[,<span class="dv">3</span>]</span>
+<span id="cb48-7"><a href="#cb48-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(pc2 <span class="sc">~</span> pc1, <span class="at">col=</span>b1<span class="sc">$</span>Species, <span class="at">cex=</span><span class="dv">2</span>, <span class="at">pch=</span><span class="dv">16</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="exploratory_analysis_files/figure-html/Ad~Cs4-1.png" class="img-fluid" width="672"></p>
 </div>
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co">#ANOVA</span></span>
-<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Illustrate variance in Culmen Length</span></span>
-<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Generate dataset mean value and specific species means</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="co">#ANOVA</span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Illustrate variance in Culmen Length</span></span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Generate dataset mean value and specific species means</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>This illustrates that there are distinct proportional differences in Culmen Length and Flipper Length between the two species. Finally, I will run an ANOVA for these variables.</p>
 </section>
@@ -815,27 +819,27 @@ Cumulative Var  0.333  0.667  1.000</code></pre>
 <h4 class="anchored" data-anchor-id="culmen-length-variance">Culmen Length Variance</h4>
 <p>My goal is to identify whether the two species are significantly different in Culmen Length. I start by generating an index column for the data. I calculate the mean of the scores for the whole dataset as well.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Scale by individual data points by assigning IDs to each.</span></span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>b1 <span class="ot">&lt;-</span> <span class="fu">cbind</span>(b1, <span class="at">id =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(b1<span class="sc">$</span>Species))</span>
-<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Establish group mean</span></span>
-<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>yhat <span class="ot">&lt;-</span> <span class="fu">mean</span>(b1<span class="sc">$</span><span class="st">'Culmen Length'</span>)  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Scale by individual data points by assigning IDs to each.</span></span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>b1 <span class="ot">&lt;-</span> <span class="fu">cbind</span>(b1, <span class="at">id =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(b1<span class="sc">$</span>Species))</span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a><span class="co">#Establish group mean</span></span>
+<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a>yhat <span class="ot">&lt;-</span> <span class="fu">mean</span>(b1<span class="sc">$</span><span class="st">'Culmen Length'</span>)  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The next step was to differentiate the mean Culmen Length value for each species under investigation. I worked on this for A LONG time and could not get it to work. I followed the example given in the Univariate Stats lecture, followed notes from an in person meeting with the professor, and followed the instructions from multiple online sources. I altered the code below in many ways but could never get r to generate separate species means. At the end of the day, I had to move forward. This ultimately changes how my plots turned out.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="co">#This is supposed to differentiate the species means</span></span>
-<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a><span class="co">#CAN'T GET TO WORK</span></span>
-<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>spmeans  <span class="ot">&lt;-</span> b1 <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Species) <span class="sc">%&gt;%</span> </span>
-<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>        <span class="fu">summarise</span>(</span>
-<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>          <span class="at">sl =</span> <span class="fu">mean</span>(<span class="st">`</span><span class="at">Culmen Length</span><span class="st">`</span>),</span>
-<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a>          <span class="at">n =</span> <span class="fu">length</span>(id),</span>
-<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a>          <span class="at">minid =</span> <span class="fu">min</span>(id),</span>
-<span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a>          <span class="at">maxid =</span> <span class="fu">max</span>(id)</span>
-<span id="cb43-10"><a href="#cb43-10" aria-hidden="true" tabindex="-1"></a>        )</span>
-<span id="cb43-11"><a href="#cb43-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-12"><a href="#cb43-12" aria-hidden="true" tabindex="-1"></a>spmeans</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co">#This is supposed to differentiate the species means</span></span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a><span class="co">#CAN'T GET TO WORK</span></span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>spmeans  <span class="ot">&lt;-</span> b1 <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Species) <span class="sc">%&gt;%</span> </span>
+<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a>        <span class="fu">summarise</span>(</span>
+<span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a>          <span class="at">sl =</span> <span class="fu">mean</span>(<span class="st">`</span><span class="at">Culmen Length</span><span class="st">`</span>),</span>
+<span id="cb51-7"><a href="#cb51-7" aria-hidden="true" tabindex="-1"></a>          <span class="at">n =</span> <span class="fu">length</span>(id),</span>
+<span id="cb51-8"><a href="#cb51-8" aria-hidden="true" tabindex="-1"></a>          <span class="at">minid =</span> <span class="fu">min</span>(id),</span>
+<span id="cb51-9"><a href="#cb51-9" aria-hidden="true" tabindex="-1"></a>          <span class="at">maxid =</span> <span class="fu">max</span>(id)</span>
+<span id="cb51-10"><a href="#cb51-10" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb51-11"><a href="#cb51-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-12"><a href="#cb51-12" aria-hidden="true" tabindex="-1"></a>spmeans</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 5
   Species      sl     n minid maxid
@@ -843,33 +847,36 @@ Cumulative Var  0.333  0.667  1.000</code></pre>
 1 Adelie     38.8   151     1   151
 2 Chinstrap  48.8    68   152   219</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Species means are only representing the entire sample. Can't get it to differentiate.</span></span>
-<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a><span class="co">#Proceed anyways</span></span>
-<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Merge the means into the original dataset</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Species means are only representing the entire sample. Can't get it to differentiate.</span></span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a><span class="co">#Proceed anyways</span></span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Merge the means into the original dataset</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>I first plot the data for the whole assemblage. Especially when embedding the variance lines, there is a pretty distinct difference in how the data is clustered.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>l <span class="ot">&lt;-</span> <span class="fu">merge</span>(b1, spmeans)</span>
-<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Plot data with means</span></span>
-<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> b1 <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>( <span class="at">x =</span> b1<span class="sc">$</span>id, <span class="at">y =</span> b1<span class="sc">$</span><span class="st">'Culmen Length'</span>, <span class="at">group=</span>Species)) </span>
-<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> z <span class="sc">+</span> <span class="fu">geom_point</span>( <span class="at">size=</span><span class="dv">2</span>) <span class="sc">+</span> </span>
-<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>( <span class="fu">aes</span>(<span class="at">yintercept =</span> <span class="fu">mean</span>(b1<span class="sc">$</span><span class="st">'Culmen Length'</span>)) ) <span class="sc">+</span> </span>
-<span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>( <span class="at">data=</span>l, <span class="fu">aes</span>( <span class="at">x =</span> l<span class="sc">$</span>id, <span class="at">y =</span> l<span class="sc">$</span><span class="st">'Culmen Length'</span>, <span class="at">xend =</span> id, <span class="at">yend =</span> sl), <span class="at">color=</span><span class="st">"red"</span>, <span class="at">lty =</span> <span class="dv">3</span>)</span>
-<span id="cb46-8"><a href="#cb46-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb46-9"><a href="#cb46-9" aria-hidden="true" tabindex="-1"></a>s  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>l <span class="ot">&lt;-</span> <span class="fu">merge</span>(b1, spmeans)</span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Plot data with means</span></span>
+<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> b1 <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>( <span class="at">x =</span> b1<span class="sc">$</span>id, <span class="at">y =</span> b1<span class="sc">$</span><span class="st">'Culmen Length'</span>, <span class="at">group=</span>Species)) </span>
+<span id="cb54-5"><a href="#cb54-5" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> z <span class="sc">+</span> <span class="fu">geom_point</span>( <span class="at">size=</span><span class="dv">2</span>) <span class="sc">+</span> </span>
+<span id="cb54-6"><a href="#cb54-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>( <span class="fu">aes</span>(<span class="at">yintercept =</span> <span class="fu">mean</span>(b1<span class="sc">$</span><span class="st">'Culmen Length'</span>)) ) <span class="sc">+</span> </span>
+<span id="cb54-7"><a href="#cb54-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>( <span class="at">data=</span>l, <span class="fu">aes</span>( <span class="at">x =</span> l<span class="sc">$</span>id, <span class="at">y =</span> l<span class="sc">$</span><span class="st">'Culmen Length'</span>, <span class="at">xend =</span> id, <span class="at">yend =</span> sl), <span class="at">color=</span><span class="st">"red"</span>, <span class="at">lty =</span> <span class="dv">3</span>)</span>
+<span id="cb54-8"><a href="#cb54-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-9"><a href="#cb54-9" aria-hidden="true" tabindex="-1"></a>s  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="exploratory_analysis_files/figure-html/anovaCL3-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>The next step was to illustrate the species differences. I was successful in showing where the different species lie on the plot but, again, I could not illustrate the differences in Culmen Length mean for each species.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Highlight the species differences in variance from mean</span></span>
-<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>r <span class="ot">&lt;-</span> z <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">size=</span><span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_segment</span>(<span class="at">data=</span>spmeans, <span class="fu">aes</span>(<span class="at">x =</span> minid, <span class="at">y =</span> sl, <span class="at">xend =</span> maxid, <span class="at">yend =</span> sl, <span class="at">group=</span>Species)) <span class="sc">+</span></span>
-<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_segment</span>( <span class="at">data=</span>l, <span class="fu">aes</span>( <span class="at">x =</span> id, <span class="at">y =</span> l<span class="sc">$</span><span class="st">"Culmen Length"</span>, <span class="at">xend =</span> id, <span class="at">yend =</span> sl, <span class="at">color=</span>Species), <span class="at">lty =</span> <span class="dv">3</span>) </span>
-<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a>r</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Highlight the species differences in variance from mean</span></span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>r <span class="ot">&lt;-</span> z <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">size=</span><span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_segment</span>(<span class="at">data=</span>spmeans, <span class="fu">aes</span>(<span class="at">x =</span> minid, <span class="at">y =</span> sl, <span class="at">xend =</span> maxid, <span class="at">yend =</span> sl, <span class="at">group=</span>Species)) <span class="sc">+</span></span>
+<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_segment</span>( <span class="at">data=</span>l, <span class="fu">aes</span>( <span class="at">x =</span> id, <span class="at">y =</span> l<span class="sc">$</span><span class="st">"Culmen Length"</span>, <span class="at">xend =</span> id, <span class="at">yend =</span> sl, <span class="at">color=</span>Species), <span class="at">lty =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb55-6"><a href="#cb55-6" aria-hidden="true" tabindex="-1"></a><span class="fu">labs</span>(</span>
+<span id="cb55-7"><a href="#cb55-7" aria-hidden="true" tabindex="-1"></a><span class="at">title =</span> <span class="st">"Culmen Variation"</span>,</span>
+<span id="cb55-8"><a href="#cb55-8" aria-hidden="true" tabindex="-1"></a><span class="at">x=</span> <span class="st">"ID"</span>, <span class="at">y =</span> <span class="st">"Culmen Length"</span>) </span>
+<span id="cb55-9"><a href="#cb55-9" aria-hidden="true" tabindex="-1"></a>r</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="exploratory_analysis_files/figure-html/anovaCL4-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -877,11 +884,11 @@ Cumulative Var  0.333  0.667  1.000</code></pre>
 <p>While my plot did not work out quite the way I wanted it to, I was successful in illustrating that the Adelie and Chinstrap penguins significantly differ in the distribution of Culmen Length values.</p>
 <p>This is highlighted statistically through the ANOVA below.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Run ANOVA to establish statistical difference</span></span>
-<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a>lm.fit.c <span class="ot">&lt;-</span> <span class="fu">lm</span>(b1<span class="sc">$</span><span class="st">'Culmen Length'</span> <span class="sc">~</span> b1<span class="sc">$</span>Species, <span class="at">data=</span>b1)</span>
-<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>anova.table.c <span class="ot">&lt;-</span> <span class="fu">anova</span>(lm.fit.c)</span>
-<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(anova.table.c) <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"Species"</span>, <span class="st">"Residuals"</span>)</span>
-<span id="cb48-5"><a href="#cb48-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(anova.table.c)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Run ANOVA to establish statistical difference</span></span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a>lm.fit.c <span class="ot">&lt;-</span> <span class="fu">lm</span>(b1<span class="sc">$</span><span class="st">'Culmen Length'</span> <span class="sc">~</span> b1<span class="sc">$</span>Species, <span class="at">data=</span>b1)</span>
+<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>anova.table.c <span class="ot">&lt;-</span> <span class="fu">anova</span>(lm.fit.c)</span>
+<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(anova.table.c) <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"Species"</span>, <span class="st">"Residuals"</span>)</span>
+<span id="cb56-5"><a href="#cb56-5" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(anova.table.c)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Analysis of Variance Table
 
@@ -900,18 +907,18 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <p>The above analysis aligns with what I was expecting from the bivariate plots above and the Principal Components Analysis. The next variable highlighted by the PCA is Flipper Length. This value was said to represnt the most variation in the two species as a singular data set. My goal here is to determine whether the species can be easily differentiated along this range of variation.</p>
 <p>I start by attempting to parse out the mean values for Flipper Length for each species. This effort, as in the above analysis, did not work out…and I can’t figure out why.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Using the data IDs from above. Didn't use the yhat mean. No need to bring it back. </span></span>
-<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Establish species mean differences</span></span>
-<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a><span class="co">#CAN'T GET TO WORK</span></span>
-<span id="cb50-5"><a href="#cb50-5" aria-hidden="true" tabindex="-1"></a>spmeans2 <span class="ot">&lt;-</span> b1 <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(b1<span class="sc">$</span>Species) <span class="sc">%&gt;%</span></span>
-<span id="cb50-6"><a href="#cb50-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb50-7"><a href="#cb50-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">sl =</span> <span class="fu">mean</span>(<span class="st">`</span><span class="at">Flipper Length</span><span class="st">`</span>),</span>
-<span id="cb50-8"><a href="#cb50-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> <span class="fu">length</span>(id),</span>
-<span id="cb50-9"><a href="#cb50-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">minid =</span> <span class="fu">min</span>(id),</span>
-<span id="cb50-10"><a href="#cb50-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">maxid =</span> <span class="fu">max</span>(id),</span>
-<span id="cb50-11"><a href="#cb50-11" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb50-12"><a href="#cb50-12" aria-hidden="true" tabindex="-1"></a>spmeans2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Using the data IDs from above. Didn't use the yhat mean. No need to bring it back. </span></span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb58-3"><a href="#cb58-3" aria-hidden="true" tabindex="-1"></a><span class="co">#Establish species mean differences</span></span>
+<span id="cb58-4"><a href="#cb58-4" aria-hidden="true" tabindex="-1"></a><span class="co">#CAN'T GET TO WORK</span></span>
+<span id="cb58-5"><a href="#cb58-5" aria-hidden="true" tabindex="-1"></a>spmeans2 <span class="ot">&lt;-</span> b1 <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(b1<span class="sc">$</span>Species) <span class="sc">%&gt;%</span></span>
+<span id="cb58-6"><a href="#cb58-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb58-7"><a href="#cb58-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">sl =</span> <span class="fu">mean</span>(<span class="st">`</span><span class="at">Flipper Length</span><span class="st">`</span>),</span>
+<span id="cb58-8"><a href="#cb58-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> <span class="fu">length</span>(id),</span>
+<span id="cb58-9"><a href="#cb58-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">minid =</span> <span class="fu">min</span>(id),</span>
+<span id="cb58-10"><a href="#cb58-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">maxid =</span> <span class="fu">max</span>(id),</span>
+<span id="cb58-11"><a href="#cb58-11" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb58-12"><a href="#cb58-12" aria-hidden="true" tabindex="-1"></a>spmeans2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 5
   `b1$Species`    sl     n minid maxid
@@ -919,24 +926,24 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 1 Adelie        190.   151     1   151
 2 Chinstrap     196.    68   152   219</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Species means are only representing the entire sample. Can't get it to differentiate.</span></span>
-<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a><span class="co">#Proceed anyways</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Species means are only representing the entire sample. Can't get it to differentiate.</span></span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a><span class="co">#Proceed anyways</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Once again, the means map the same (same for the larger dataset mean) for each species. It believe this is why my plots below will not segment along species means.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Merge the means into the original dataset</span></span>
-<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">merge</span>(b1, spmeans2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Merge the means into the original dataset</span></span>
+<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">merge</span>(b1, spmeans2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>I run through the same plotting process for Flipper Length as I did for Culmen Length.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Plot data with means.</span></span>
-<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>o <span class="ot">&lt;-</span> b1 <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>( <span class="at">x =</span> b1<span class="sc">$</span>id, <span class="at">y =</span> b1<span class="sc">$</span><span class="st">'Flipper Length'</span>)) </span>
-<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a>t <span class="ot">&lt;-</span> o <span class="sc">+</span> <span class="fu">geom_point</span>( <span class="at">size=</span><span class="dv">2</span>) <span class="sc">+</span> </span>
-<span id="cb54-5"><a href="#cb54-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>( <span class="fu">aes</span>(<span class="at">yintercept =</span> <span class="fu">mean</span>(b1<span class="sc">$</span><span class="st">'Flipper Length'</span>)) ) <span class="sc">+</span> </span>
-<span id="cb54-6"><a href="#cb54-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>( <span class="at">data=</span>y, <span class="fu">aes</span>( <span class="at">x =</span> id, <span class="at">y =</span> y<span class="sc">$</span><span class="st">'Flipper Length'</span>, <span class="at">xend =</span> id, <span class="at">yend =</span> sl), <span class="at">color=</span><span class="st">"red"</span>, <span class="at">lty =</span> <span class="dv">3</span>)</span>
-<span id="cb54-7"><a href="#cb54-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb54-8"><a href="#cb54-8" aria-hidden="true" tabindex="-1"></a>t  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Plot data with means.</span></span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a>o <span class="ot">&lt;-</span> b1 <span class="sc">%&gt;%</span> <span class="fu">ggplot</span>(<span class="fu">aes</span>( <span class="at">x =</span> b1<span class="sc">$</span>id, <span class="at">y =</span> b1<span class="sc">$</span><span class="st">'Flipper Length'</span>)) </span>
+<span id="cb62-4"><a href="#cb62-4" aria-hidden="true" tabindex="-1"></a>t <span class="ot">&lt;-</span> o <span class="sc">+</span> <span class="fu">geom_point</span>( <span class="at">size=</span><span class="dv">2</span>) <span class="sc">+</span> </span>
+<span id="cb62-5"><a href="#cb62-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>( <span class="fu">aes</span>(<span class="at">yintercept =</span> <span class="fu">mean</span>(b1<span class="sc">$</span><span class="st">'Flipper Length'</span>)) ) <span class="sc">+</span> </span>
+<span id="cb62-6"><a href="#cb62-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_segment</span>( <span class="at">data=</span>y, <span class="fu">aes</span>( <span class="at">x =</span> id, <span class="at">y =</span> y<span class="sc">$</span><span class="st">'Flipper Length'</span>, <span class="at">xend =</span> id, <span class="at">yend =</span> sl), <span class="at">color=</span><span class="st">"red"</span>, <span class="at">lty =</span> <span class="dv">3</span>)</span>
+<span id="cb62-7"><a href="#cb62-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb62-8"><a href="#cb62-8" aria-hidden="true" tabindex="-1"></a>t  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="exploratory_analysis_files/figure-html/anovaFL3-1.png" class="img-fluid" width="672"></p>
 </div>
@@ -944,28 +951,28 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <p>Despite getting the above warning on all of these plots, the analysis in r does not work if I follow the suggestion. Thus, I have to keep the y$“FLipper Length” syntax.</p>
 <p>By differentiating the species by line color in the below plot, I could again illustrate each species’ relationship with the mean value of Flipper Length. This analysis, however, looks much different than the prior one. While there is a noticable difference in where the species means would lie if differentiated, it is a much smaller difference than with Culmen Length.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Highligh the species differences in variance from mean</span></span>
-<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> o <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">size=</span><span class="dv">2</span>) <span class="sc">+</span></span>
-<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_segment</span>(<span class="at">data=</span>spmeans2, <span class="fu">aes</span>(<span class="at">x =</span> minid, <span class="at">y =</span> sl, <span class="at">xend =</span> maxid, <span class="at">yend =</span> sl)) <span class="sc">+</span></span>
-<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_segment</span>( <span class="at">data=</span>y, <span class="fu">aes</span>( <span class="at">x =</span> id, <span class="at">y =</span> y<span class="sc">$</span><span class="st">"Flipper Length"</span>, <span class="at">xend =</span> id, <span class="at">yend =</span> sl, <span class="at">color=</span>Species), <span class="at">lty =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
-<span id="cb55-6"><a href="#cb55-6" aria-hidden="true" tabindex="-1"></a><span class="fu">labs</span>(</span>
-<span id="cb55-7"><a href="#cb55-7" aria-hidden="true" tabindex="-1"></a><span class="at">title =</span> <span class="st">"Flipper Variation"</span>,</span>
-<span id="cb55-8"><a href="#cb55-8" aria-hidden="true" tabindex="-1"></a><span class="at">x=</span> <span class="st">"ID"</span>, <span class="at">y =</span> <span class="st">"Flipper Length"</span>)</span>
-<span id="cb55-9"><a href="#cb55-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb55-10"><a href="#cb55-10" aria-hidden="true" tabindex="-1"></a>g</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Highligh the species differences in variance from mean</span></span>
+<span id="cb63-2"><a href="#cb63-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-3"><a href="#cb63-3" aria-hidden="true" tabindex="-1"></a>g <span class="ot">&lt;-</span> o <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">size=</span><span class="dv">2</span>) <span class="sc">+</span></span>
+<span id="cb63-4"><a href="#cb63-4" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_segment</span>(<span class="at">data=</span>spmeans2, <span class="fu">aes</span>(<span class="at">x =</span> minid, <span class="at">y =</span> sl, <span class="at">xend =</span> maxid, <span class="at">yend =</span> sl)) <span class="sc">+</span></span>
+<span id="cb63-5"><a href="#cb63-5" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_segment</span>( <span class="at">data=</span>y, <span class="fu">aes</span>( <span class="at">x =</span> id, <span class="at">y =</span> y<span class="sc">$</span><span class="st">"Flipper Length"</span>, <span class="at">xend =</span> id, <span class="at">yend =</span> sl, <span class="at">color=</span>Species), <span class="at">lty =</span> <span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb63-6"><a href="#cb63-6" aria-hidden="true" tabindex="-1"></a><span class="fu">labs</span>(</span>
+<span id="cb63-7"><a href="#cb63-7" aria-hidden="true" tabindex="-1"></a><span class="at">title =</span> <span class="st">"Flipper Variation"</span>,</span>
+<span id="cb63-8"><a href="#cb63-8" aria-hidden="true" tabindex="-1"></a><span class="at">x=</span> <span class="st">"ID"</span>, <span class="at">y =</span> <span class="st">"Flipper Length"</span>)</span>
+<span id="cb63-9"><a href="#cb63-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb63-10"><a href="#cb63-10" aria-hidden="true" tabindex="-1"></a>g</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <p><img src="exploratory_analysis_files/figure-html/anovaFL4-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>I run the ANOVA and still see a significant statistical difference. I need to brush up on my chops a bit and figure out how to interpret this in a way that corroborates my interpretation from the plots. Saying that both of these variables are significantly different in each species is fine, but one variable seems to be clearly more meaningful.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Run anova to establish statistical significance</span></span>
-<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb56-3"><a href="#cb56-3" aria-hidden="true" tabindex="-1"></a>lm.fit.f <span class="ot">&lt;-</span> <span class="fu">lm</span>(b1<span class="sc">$</span><span class="st">'Flipper Length'</span> <span class="sc">~</span> b1<span class="sc">$</span>Species, <span class="at">data=</span>d1)</span>
-<span id="cb56-4"><a href="#cb56-4" aria-hidden="true" tabindex="-1"></a>anova.table.f <span class="ot">&lt;-</span> <span class="fu">anova</span>(lm.fit.f)</span>
-<span id="cb56-5"><a href="#cb56-5" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(anova.table.f) <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"Species"</span>, <span class="st">"Residuals"</span>)</span>
-<span id="cb56-6"><a href="#cb56-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(anova.table.f)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Run anova to establish statistical significance</span></span>
+<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb64-3"><a href="#cb64-3" aria-hidden="true" tabindex="-1"></a>lm.fit.f <span class="ot">&lt;-</span> <span class="fu">lm</span>(b1<span class="sc">$</span><span class="st">'Flipper Length'</span> <span class="sc">~</span> b1<span class="sc">$</span>Species, <span class="at">data=</span>b1)</span>
+<span id="cb64-4"><a href="#cb64-4" aria-hidden="true" tabindex="-1"></a>anova.table.f <span class="ot">&lt;-</span> <span class="fu">anova</span>(lm.fit.f)</span>
+<span id="cb64-5"><a href="#cb64-5" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(anova.table.f) <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"Species"</span>, <span class="st">"Residuals"</span>)</span>
+<span id="cb64-6"><a href="#cb64-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(anova.table.f)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Analysis of Variance Table
 
